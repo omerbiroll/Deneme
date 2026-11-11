@@ -53,13 +53,16 @@ Tarih: 11 Kasım 2026.
 ### Başlangıç yeri
 - Oyun 30 Ekim 1918'de İstanbul'da değil, Adana'da açılır (Yıldırım Orduları Grubu). Kaynakla doğrulanacak.
 
+## Hassas konular
+
+- Kullanıcı kararı (11 Kasım 2026): hassas ve tartışmalı konular kaynağın ifadesiyle olgu olarak aktarılır, işaretlenir, oyun yorum ve hüküm eklemez. Dışarıda bırakılmaz.
+
 ## Onaylanan mimari
 
 - `docs/mimari.md` içindeki teknik mimari 11 Kasım 2026'da onaylandı.
 
 ## Henüz onay bekleyenler
 
-- **Hassas konular:** `docs/veri-durumu.md` içindeki iki kaydın nasıl ele alınacağı.
 
 - **Metin üretimi:** Prototipte hazır yazılmış, duruma göre birleşen varyantlı metin; canlı yapay zekâ anlatımı sonraki aşamada. Kullanıcı koşullu kabul etti: metin tekrara düşmemeli, kısır döngü olmamalı.
 - **Hızlı mod kapsamı:** 30–60 dakikaya 1918'den ölüm sonrası 50 yıla kadar olan sürenin nasıl sığacağı ileride kararlaştırılacak.

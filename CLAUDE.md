@@ -9,7 +9,7 @@ Bu dosya her oturumda okunur. Buradaki kurallar bağlayıcıdır. Ayrıntı içi
 
 ## Proje durumu
 
-Mimari ve tasarım ilkeleri onaylandı (11 Kasım 2026). 1. dönemin ilk tarihsel verisi ve veri şeması hazır (`docs/veri-durumu.md`). Sıradaki iş: zaman, olay ve karar motoru.
+Mimari ve tasarım ilkeleri onaylandı (11 Kasım 2026). 1. dönemin ilk tarihsel verisi ve veri şeması hazır (`docs/veri-durumu.md`). Zaman, olay, karar ve nedensellik motoru hazır (`src/engine/`, test senaryosuyla). Sıradaki iş: 1. dönemin gerçek senaryosu (karar kartları, eylemler, karakter ilişkileri).
 
 ## Değişmez kurallar
 

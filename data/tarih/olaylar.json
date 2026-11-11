@@ -479,6 +479,23 @@
     "yer": "Paris"
   },
   {
+    "id": "ittihatcilar-divani-harp",
+    "tarih": "1919-01-30",
+    "tarihKesinligi": "gun",
+    "ad": "İttihat ve Terakki üyelerinin Divan-ı Harp'e sevki",
+    "aciklama": "İttihat ve Terakki Fırkası'nın 27 üyesi Divan-ı Harp'e sevk edildi.",
+    "yer": "İstanbul",
+    "ilgiliKisiler": [],
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1919"
+      }
+    ],
+    "dogrulama": "tam-metin",
+    "tartismali": false,
+    "hassasKonuNotu": "1915 olaylarıyla ilgili yargılamalara bağlı, tartışmalı bir konudur. Kullanıcı kararı (11 Kasım 2026): kaynağın ifadesiyle olgu olarak aktarılır, yorum ve hüküm eklenmez."
+  },
+  {
     "id": "venizelos-talepleri",
     "tarih": "1919-02-02",
     "tarihKesinligi": "gun",
@@ -628,6 +645,22 @@
     "dogrulama": "tam-metin",
     "tartismali": false,
     "yer": "Antalya"
+  },
+  {
+    "id": "bogazliyan-kaymakami-idam",
+    "tarih": "1919-04-10",
+    "tarihKesinligi": "gun",
+    "ad": "Boğazlıyan kaymakamının idamı",
+    "aciklama": "Boğazlıyan kaymakamı idam edildi.",
+    "ilgiliKisiler": [],
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1919"
+      }
+    ],
+    "dogrulama": "tam-metin",
+    "tartismali": false,
+    "hassasKonuNotu": "1915 olaylarıyla ilgili yargılamalara bağlı, tartışmalı bir konudur. Kullanıcı kararı (11 Kasım 2026): kaynağın ifadesiyle olgu olarak aktarılır, yorum ve hüküm eklenmez."
   },
   {
     "id": "kars-isgali",

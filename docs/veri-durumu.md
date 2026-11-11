@@ -4,7 +4,7 @@ Son güncelleme: 11 Kasım 2026. Kapsam: 1. dönem (30 Ekim 1918 – 19 Mayıs 1
 
 ## Veride olanlar
 
-- `data/tarih/olaylar.json`: 47 olay
+- `data/tarih/olaylar.json`: 49 olay
 - `data/tarih/karakterler.json`: 12 kişi
 - `data/tarih/kaynaklar.json`: 6 kaynak
 
@@ -36,14 +36,14 @@ Olayların omurgası T.C. Kültür ve Turizm Bakanlığı'nın Atatürk kronoloj
 - **Mondros'un madde metinleri** birincil kaynaktan alınmadı.
 - Kaynak kronolojisinde bu döneme ait onlarca yerel cemiyet kuruluşu ve küçük işgal kaydı daha var; prototip için gerekli olanlar seçildi.
 
-## Kullanıcı kararı bekleyen hassas konular
+## Hassas konular
 
-Kaynak kronolojisinde yer alan ama **veriye bilerek alınmayan** kayıtlar:
+Kullanıcı kararı (11 Kasım 2026): hassas konular **kaynağın ifadesiyle olgu olarak** veriye alınır, `hassasKonuNotu` taşır, yorum ve hüküm eklenmez.
 
-- 30 Ocak 1919: İttihat ve Terakki'nin 27 üyesinin Divan-ı Harp'e sevk edilmesi.
-- 10 Nisan 1919: Boğazlıyan kaymakamının idam edilmesi.
+Bu kuralla eklenen kayıtlar:
 
-Bunlar 1915 olaylarıyla ilgili yargılamalara bağlıdır ve dönemin en tartışmalı konuları arasındadır. Nasıl ele alınacağına kullanıcı karar verecek.
+- 30 Ocak 1919: İttihat ve Terakki'nin 27 üyesinin Divan-ı Harp'e sevki.
+- 10 Nisan 1919: Boğazlıyan kaymakamının idamı.
 
 Dörtyol'un işgali kaydındaki "Fransız-Ermeni taburu" ifadesi kaynağın kendi ifadesidir ve olduğu gibi aktarıldı.
 

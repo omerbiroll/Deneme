@@ -44,6 +44,8 @@ export const OlaySemasi = z
     dogrulama: DogrulamaSemasi,
     tartismali: z.boolean(),
     tartismaNotu: z.string().optional(),
+    /** Hassas konu: olgu olarak aktarılır, arayüzde işaretlenir, oyun hüküm vermez. */
+    hassasKonuNotu: z.string().optional(),
   })
   .refine((o) => !o.tartismali || !!o.tartismaNotu, {
     message: "tartışmalı olay için tartışma notu zorunlu",
