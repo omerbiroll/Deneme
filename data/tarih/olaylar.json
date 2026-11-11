@@ -1,0 +1,827 @@
+[
+  {
+    "id": "mondros-imza",
+    "tarih": "1918-10-30",
+    "tarihKesinligi": "gun",
+    "ad": "Mondros Mütarekesi'nin imzalanması",
+    "aciklama": "Mütareke Limni Adası'nda imzalandı; Osmanlı Devleti için Birinci Dünya Savaşı sona erdi.",
+    "ilgiliKisiler": [
+      "rauf",
+      "calthorpe"
+    ],
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1918"
+      },
+      {
+        "kaynakId": "au-inkilap-mondros",
+        "not": "İmzacılar (Rauf Bey ve Amiral Calthorpe) bu kaynağın arama özetinden alındı; tam metin okunmadı."
+      }
+    ],
+    "dogrulama": "tam-metin",
+    "tartismali": false,
+    "yer": "Mondros, Limni"
+  },
+  {
+    "id": "yildirim-komutanligi",
+    "tarih": "1918-10-30",
+    "tarihKesinligi": "gun",
+    "ad": "Mustafa Kemal'in Yıldırım Orduları Grubu komutanlığı",
+    "aciklama": "Mustafa Kemal Paşa, Liman von Sanders'in ardından Yıldırım Orduları Grubu komutanı oldu.",
+    "ilgiliKisiler": [
+      "mustafa-kemal",
+      "liman-von-sanders"
+    ],
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1918"
+      }
+    ],
+    "dogrulama": "tam-metin",
+    "tartismali": true,
+    "yer": "Adana",
+    "tartismaNotu": "Resmî kronoloji 30 Ekim tarihini verir. Arama özetlerinde görülen başka çalışmalar devir teslimi 31 Ekim 1918 olarak gösterir."
+  },
+  {
+    "id": "mondros-yururluk",
+    "tarih": "1918-10-31",
+    "tarihKesinligi": "gun",
+    "ad": "Mondros Mütarekesi'nin yürürlüğe girmesi",
+    "aciklama": "Mütareke yürürlüğe girdi; Osmanlı Devleti savaştan yenik çıktı.",
+    "ilgiliKisiler": [],
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1918"
+      }
+    ],
+    "dogrulama": "tam-metin",
+    "tartismali": false
+  },
+  {
+    "id": "ittihatci-liderlerin-ayrilisi",
+    "tarih": "1918-11-02",
+    "tarihKesinligi": "gun",
+    "ad": "Enver, Talat ve Cemal paşaların ülkeden ayrılması",
+    "aciklama": "Enver, Talat ve Cemal paşalar yakınlarıyla birlikte bir Alman gemisiyle ülkeden ayrıldı.",
+    "ilgiliKisiler": [],
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1918"
+      }
+    ],
+    "dogrulama": "tam-metin",
+    "tartismali": false
+  },
+  {
+    "id": "iskenderun-itiraz",
+    "tarih": "1918-11-03",
+    "tarihKesinligi": "gun",
+    "ad": "İskenderun'a asker çıkarma bildirimi ve Mustafa Kemal'in itirazı",
+    "aciklama": "Bir İngiliz ve bir Fransız subayı İskenderun'a gelerek asker çıkarılacağını bildirdi. Mustafa Kemal Paşa itirazını bildirdi.",
+    "ilgiliKisiler": [
+      "mustafa-kemal"
+    ],
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1918"
+      }
+    ],
+    "dogrulama": "tam-metin",
+    "tartismali": false,
+    "yer": "İskenderun"
+  },
+  {
+    "id": "musul-isgali",
+    "tarih": "1918-11-03",
+    "tarihKesinligi": "gun",
+    "ad": "Musul'un işgali",
+    "aciklama": "Musul İngiliz kuvvetlerince işgal edildi.",
+    "ilgiliKisiler": [],
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1918"
+      }
+    ],
+    "dogrulama": "tam-metin",
+    "tartismali": false,
+    "yer": "Musul"
+  },
+  {
+    "id": "ittihat-terakki-feshi",
+    "tarih": "1918-11-05",
+    "tarihKesinligi": "gun",
+    "ad": "İttihat ve Terakki'nin kendini feshetmesi",
+    "aciklama": "İttihat ve Terakki Fırkası kendini feshetti.",
+    "ilgiliKisiler": [],
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1918"
+      }
+    ],
+    "dogrulama": "tam-metin",
+    "tartismali": false
+  },
+  {
+    "id": "mondros-gorus-raporu",
+    "tarih": "1918-11-05",
+    "tarihKesinligi": "gun",
+    "ad": "Mustafa Kemal'in mütareke hakkındaki görüşünü bildirmesi",
+    "aciklama": "Mustafa Kemal Paşa, Mondros Mütarekesi hakkındaki görüşlerini Başkomutanlığa bildirdi.",
+    "ilgiliKisiler": [
+      "mustafa-kemal"
+    ],
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1918"
+      }
+    ],
+    "dogrulama": "tam-metin",
+    "tartismali": false,
+    "yer": "Adana"
+  },
+  {
+    "id": "yildirim-lagvi",
+    "tarih": "1918-11-07",
+    "tarihKesinligi": "gun",
+    "ad": "Yıldırım Orduları Grubu'nun kaldırılması",
+    "aciklama": "Yıldırım Orduları Grubu kaldırıldı; Mustafa Kemal Paşa Harbiye Nezareti emrine verildi.",
+    "ilgiliKisiler": [
+      "mustafa-kemal"
+    ],
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1918"
+      }
+    ],
+    "dogrulama": "tam-metin",
+    "tartismali": true,
+    "tartismaNotu": "Resmî kronoloji 7 Kasım tarihini verir. Arama özetinde görülen bir akademik makale karargâhın kaldırılışını 4 Kasım 1918 olarak gösterir."
+  },
+  {
+    "id": "izzet-pasa-istifa",
+    "tarih": "1918-11-08",
+    "tarihKesinligi": "gun",
+    "ad": "Ahmet İzzet Paşa'nın istifası",
+    "aciklama": "Ahmet İzzet Paşa sadrazamlıktan istifa etti.",
+    "ilgiliKisiler": [
+      "ahmet-izzet-pasa"
+    ],
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1918"
+      }
+    ],
+    "dogrulama": "tam-metin",
+    "tartismali": false,
+    "yer": "İstanbul"
+  },
+  {
+    "id": "canakkale-isgali",
+    "tarih": "1918-11-09",
+    "tarihKesinligi": "gun",
+    "ad": "Çanakkale Boğazı'nın iki yakasının işgali",
+    "aciklama": "Çanakkale Boğazı'nın iki yakası İngiliz kuvvetlerince işgal edildi; bir İngiliz müfrezesi Çanakkale'ye çıktı.",
+    "ilgiliKisiler": [],
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1918"
+      }
+    ],
+    "dogrulama": "tam-metin",
+    "tartismali": false,
+    "yer": "Çanakkale"
+  },
+  {
+    "id": "iskenderun-cikarma",
+    "tarih": "1918-11-09",
+    "tarihKesinligi": "gun",
+    "ad": "İskenderun ve Antakya'ya İngiliz çıkarması",
+    "aciklama": "İngilizler İskenderun ve Antakya'ya asker çıkardı.",
+    "ilgiliKisiler": [],
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1918"
+      }
+    ],
+    "dogrulama": "tam-metin",
+    "tartismali": false,
+    "yer": "İskenderun"
+  },
+  {
+    "id": "adana-ayrilis",
+    "tarih": "1918-11-10",
+    "tarihKesinligi": "gun",
+    "ad": "Mustafa Kemal'in Adana'dan ayrılışı",
+    "aciklama": "Mustafa Kemal trenle Adana'dan İstanbul'a hareket etti.",
+    "ilgiliKisiler": [
+      "mustafa-kemal"
+    ],
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1918"
+      }
+    ],
+    "dogrulama": "tam-metin",
+    "tartismali": false,
+    "yer": "Adana"
+  },
+  {
+    "id": "tevfik-pasa-kabinesi",
+    "tarih": "1918-11-11",
+    "tarihKesinligi": "gun",
+    "ad": "Tevfik Paşa kabinesinin kurulması",
+    "aciklama": "Ahmet İzzet Paşa'nın istifasından sonra Tevfik Paşa yeni hükümeti kurdu.",
+    "ilgiliKisiler": [
+      "tevfik-pasa"
+    ],
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1918"
+      }
+    ],
+    "dogrulama": "tam-metin",
+    "tartismali": false,
+    "yer": "İstanbul"
+  },
+  {
+    "id": "itilaf-donanmasi-istanbul",
+    "tarih": "1918-11-13",
+    "tarihKesinligi": "gun",
+    "ad": "İtilaf donanmasının İstanbul'a gelişi",
+    "aciklama": "İtilaf Devletleri donanması ve Yunan savaş gemileri İstanbul sularına demirledi.",
+    "ilgiliKisiler": [],
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1918"
+      }
+    ],
+    "dogrulama": "tam-metin",
+    "tartismali": true,
+    "yer": "İstanbul",
+    "tartismaNotu": "Gemi sayısı kaynaklarda 55, 61 ve 77 gibi farklı rakamlarla verilir; sayı veriye alınmadı."
+  },
+  {
+    "id": "istanbul-varis",
+    "tarih": "1918-11-13",
+    "tarihKesinligi": "gun",
+    "ad": "Mustafa Kemal'in İstanbul'a varışı",
+    "aciklama": "Mustafa Kemal, Yıldırım Orduları Grubu komutanlığının kaldırılmasının ardından İstanbul'a geldi.",
+    "ilgiliKisiler": [
+      "mustafa-kemal"
+    ],
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1918"
+      }
+    ],
+    "dogrulama": "tam-metin",
+    "tartismali": false,
+    "yer": "İstanbul"
+  },
+  {
+    "id": "vahdettin-gorusme",
+    "tarih": "1918-11-15",
+    "tarihKesinligi": "gun",
+    "ad": "Mustafa Kemal'in Sultan Vahdettin'le görüşmesi",
+    "aciklama": "Mustafa Kemal, Sultan Vahdettin'le görüştü.",
+    "ilgiliKisiler": [
+      "mustafa-kemal",
+      "vahdettin"
+    ],
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1918"
+      },
+      {
+        "kaynakId": "bayur-1968",
+        "not": "23 Kasım tarihi arama özetinden; tam metinde doğrulanamadı."
+      }
+    ],
+    "dogrulama": "tam-metin",
+    "tartismali": true,
+    "yer": "İstanbul",
+    "tartismaNotu": "Resmî kronoloji 15 Kasım tarihini verir. Hikmet Bayur'un Belleten makalesine ait arama özetinde ilk kabul 23 Kasım 1918 olarak geçer. Görüşmelerin sayısı ve içeriği veriye alınmadı."
+  },
+  {
+    "id": "minber",
+    "tarih": "1918-11-21",
+    "tarihKesinligi": "ay",
+    "ad": "Minber gazetesi",
+    "aciklama": "Mustafa Kemal, Fethi Bey'le birlikte Minber gazetesini yayımladı.",
+    "ilgiliKisiler": [
+      "mustafa-kemal",
+      "fethi"
+    ],
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1918"
+      },
+      {
+        "kaynakId": "belleten-minber",
+        "not": "Arama özeti; tam metin okunmadı."
+      },
+      {
+        "kaynakId": "atam-minber",
+        "not": "Arama özeti; tam metin okunmadı."
+      }
+    ],
+    "dogrulama": "tam-metin",
+    "tartismali": true,
+    "yer": "İstanbul",
+    "tartismaNotu": "Resmî kronoloji 21 Kasım tarihini verir. Arama özetlerindeki akademik makalelere göre gazete 1 ya da 2 Kasım 1918'de yayına başlamış, Mustafa Kemal 13 Kasım'dan sonra ortak olmuş, 17 Kasım'da kendisiyle bir mülakat yayımlanmış ve gazete 21 ya da 22 Aralık 1918'de kapanmıştır."
+  },
+  {
+    "id": "kilis-isgali",
+    "tarih": "1918-12-06",
+    "tarihKesinligi": "gun",
+    "ad": "Kilis'in işgali",
+    "aciklama": "Kilis İngilizlerce işgal edildi.",
+    "ilgiliKisiler": [],
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1918"
+      }
+    ],
+    "dogrulama": "tam-metin",
+    "tartismali": false,
+    "yer": "Kilis"
+  },
+  {
+    "id": "antakya-isgali",
+    "tarih": "1918-12-07",
+    "tarihKesinligi": "gun",
+    "ad": "Antakya'nın işgali",
+    "aciklama": "Antakya Fransızlarca işgal edildi.",
+    "ilgiliKisiler": [],
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1918"
+      }
+    ],
+    "dogrulama": "tam-metin",
+    "tartismali": false,
+    "yer": "Antakya"
+  },
+  {
+    "id": "dortyol-isgali",
+    "tarih": "1918-12-11",
+    "tarihKesinligi": "gun",
+    "ad": "Dörtyol'un işgali",
+    "aciklama": "Dörtyol bir Fransız-Ermeni taburunca işgal edildi.",
+    "ilgiliKisiler": [],
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1918"
+      }
+    ],
+    "dogrulama": "tam-metin",
+    "tartismali": false,
+    "yer": "Dörtyol"
+  },
+  {
+    "id": "adana-isgali",
+    "tarih": "1918-12-17",
+    "tarihKesinligi": "gun",
+    "ad": "Tarsus, Ceyhan ve Adana'nın işgali",
+    "aciklama": "Tarsus, Ceyhan ve Adana Fransızlarca işgal edildi.",
+    "ilgiliKisiler": [],
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1918"
+      }
+    ],
+    "dogrulama": "tam-metin",
+    "tartismali": false,
+    "yer": "Adana"
+  },
+  {
+    "id": "dortyol-direnis",
+    "tarih": "1918-12-19",
+    "tarihKesinligi": "gun",
+    "ad": "Dörtyol'da ilk direniş",
+    "aciklama": "İşgal kuvvetlerine karşı ilk direniş Dörtyol'da başladı.",
+    "ilgiliKisiler": [],
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1918"
+      }
+    ],
+    "dogrulama": "tam-metin",
+    "tartismali": false,
+    "yer": "Dörtyol"
+  },
+  {
+    "id": "meclis-feshi",
+    "tarih": "1918-12-21",
+    "tarihKesinligi": "gun",
+    "ad": "Meclis-i Mebusan'ın feshi",
+    "aciklama": "Meclis padişah tarafından feshedildi.",
+    "ilgiliKisiler": [
+      "vahdettin"
+    ],
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1918"
+      }
+    ],
+    "dogrulama": "tam-metin",
+    "tartismali": false,
+    "yer": "İstanbul"
+  },
+  {
+    "id": "pozanti-isgali",
+    "tarih": "1918-12-27",
+    "tarihKesinligi": "gun",
+    "ad": "Pozantı'nın işgali",
+    "aciklama": "Pozantı işgal edildi.",
+    "ilgiliKisiler": [],
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1918"
+      }
+    ],
+    "dogrulama": "tam-metin",
+    "tartismali": false,
+    "yer": "Pozantı"
+  },
+  {
+    "id": "tevfik-pasa-ikinci-kabine",
+    "tarih": "1919-01-13",
+    "tarihKesinligi": "gun",
+    "ad": "İkinci Tevfik Paşa kabinesi",
+    "aciklama": "İstanbul'da ikinci Tevfik Paşa hükümeti kuruldu.",
+    "ilgiliKisiler": [
+      "tevfik-pasa"
+    ],
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1919"
+      }
+    ],
+    "dogrulama": "tam-metin",
+    "tartismali": false,
+    "yer": "İstanbul"
+  },
+  {
+    "id": "paris-konferansi",
+    "tarih": "1919-01-18",
+    "tarihKesinligi": "gun",
+    "ad": "Paris Barış Konferansı'nın toplanması",
+    "aciklama": "Barış Konferansı Paris'te toplandı.",
+    "ilgiliKisiler": [],
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1919"
+      }
+    ],
+    "dogrulama": "tam-metin",
+    "tartismali": false,
+    "yer": "Paris"
+  },
+  {
+    "id": "venizelos-talepleri",
+    "tarih": "1919-02-02",
+    "tarihKesinligi": "gun",
+    "ad": "Venizelos'un Paris'teki talepleri",
+    "aciklama": "Başbakan Venizelos, Barış Konferansı'nda Ege adalarının, Trakya'nın ve Batı Anadolu'nun Yunanistan'a verilmesini istedi.",
+    "ilgiliKisiler": [],
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1919"
+      }
+    ],
+    "dogrulama": "tam-metin",
+    "tartismali": false,
+    "yer": "Paris"
+  },
+  {
+    "id": "sansur",
+    "tarih": "1919-02-05",
+    "tarihKesinligi": "gun",
+    "ad": "İstanbul'da sansürün yeniden başlaması",
+    "aciklama": "1908'de kaldırılan sansür İstanbul'da yeniden yürürlüğe girdi.",
+    "ilgiliKisiler": [],
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1919"
+      }
+    ],
+    "dogrulama": "tam-metin",
+    "tartismali": false,
+    "yer": "İstanbul"
+  },
+  {
+    "id": "maras-isgali",
+    "tarih": "1919-02-22",
+    "tarihKesinligi": "gun",
+    "ad": "Maraş'ın işgali",
+    "aciklama": "Maraş İngilizlerce işgal edildi.",
+    "ilgiliKisiler": [],
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1919"
+      }
+    ],
+    "dogrulama": "tam-metin",
+    "tartismali": false,
+    "yer": "Maraş"
+  },
+  {
+    "id": "damat-ferit-kabinesi",
+    "tarih": "1919-03-04",
+    "tarihKesinligi": "gun",
+    "ad": "Damat Ferit Paşa kabinesi",
+    "aciklama": "Bir gün önce istifa eden Tevfik Paşa hükümetinin yerine Damat Ferit Paşa kabinesi kuruldu.",
+    "ilgiliKisiler": [
+      "damat-ferit-pasa",
+      "tevfik-pasa"
+    ],
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1919"
+      }
+    ],
+    "dogrulama": "tam-metin",
+    "tartismali": false,
+    "yer": "İstanbul"
+  },
+  {
+    "id": "karabekir-atama",
+    "tarih": "1919-03-13",
+    "tarihKesinligi": "gun",
+    "ad": "Kâzım Karabekir Paşa'nın 15. Kolordu komutanlığına atanması",
+    "aciklama": "Kâzım Karabekir Paşa Erzurum'daki 15. Kolordu komutanlığına atandı. Erzurum'a 3 Mayıs'ta vardı.",
+    "ilgiliKisiler": [
+      "kazim-karabekir"
+    ],
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1919"
+      }
+    ],
+    "dogrulama": "tam-metin",
+    "tartismali": false,
+    "yer": "Erzurum"
+  },
+  {
+    "id": "yunan-cikarma-plani",
+    "tarih": "1919-03-14",
+    "tarihKesinligi": "gun",
+    "ad": "Yunan çıkarma planının Paris'te kabulü",
+    "aciklama": "Lloyd George, Clemenceau, Orlando ve Wilson Paris'te Yunan çıkarma planını kabul etti.",
+    "ilgiliKisiler": [],
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1919"
+      }
+    ],
+    "dogrulama": "tam-metin",
+    "tartismali": true,
+    "yer": "Paris",
+    "tartismaNotu": "İzmir'in işgali kararının tarihi kaynaklarda farklı verilir; arama özetlerinde 6, 7 ve 12 Mayıs 1919 tarihleri de geçer."
+  },
+  {
+    "id": "erzurum-mektubu",
+    "tarih": "1919-03-19",
+    "tarihKesinligi": "gun",
+    "ad": "Mustafa Kemal'in Erzurum'a mektubu",
+    "aciklama": "Mustafa Kemal, nasıl örgütlenileceğini açıklayan bir mektubu Erzurum'a gönderdi.",
+    "ilgiliKisiler": [
+      "mustafa-kemal"
+    ],
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1919"
+      }
+    ],
+    "dogrulama": "tam-metin",
+    "tartismali": false
+  },
+  {
+    "id": "urfa-isgali",
+    "tarih": "1919-03-24",
+    "tarihKesinligi": "gun",
+    "ad": "Urfa'nın işgali",
+    "aciklama": "Urfa İngilizlerce işgal edildi.",
+    "ilgiliKisiler": [],
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1919"
+      }
+    ],
+    "dogrulama": "tam-metin",
+    "tartismali": false,
+    "yer": "Urfa"
+  },
+  {
+    "id": "antalya-isgali",
+    "tarih": "1919-03-28",
+    "tarihKesinligi": "gun",
+    "ad": "Antalya'nın işgali",
+    "aciklama": "Antalya İtalyanlarca işgal edildi.",
+    "ilgiliKisiler": [],
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1919"
+      }
+    ],
+    "dogrulama": "tam-metin",
+    "tartismali": false,
+    "yer": "Antalya"
+  },
+  {
+    "id": "kars-isgali",
+    "tarih": "1919-04-13",
+    "tarihKesinligi": "gun",
+    "ad": "Kars'ın işgali",
+    "aciklama": "Kars İngilizlerce işgal edildi.",
+    "ilgiliKisiler": [],
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1919"
+      }
+    ],
+    "dogrulama": "tam-metin",
+    "tartismali": false,
+    "yer": "Kars"
+  },
+  {
+    "id": "afyon-isgali",
+    "tarih": "1919-04-16",
+    "tarihKesinligi": "gun",
+    "ad": "Afyonkarahisar'ın işgali",
+    "aciklama": "Afyonkarahisar Fransızlarca işgal edildi.",
+    "ilgiliKisiler": [],
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1919"
+      }
+    ],
+    "dogrulama": "tam-metin",
+    "tartismali": false,
+    "yer": "Afyonkarahisar"
+  },
+  {
+    "id": "konya-italyan",
+    "tarih": "1919-04-24",
+    "tarihKesinligi": "gun",
+    "ad": "İtalyan birliklerinin Konya'ya girişi",
+    "aciklama": "İtalyan birlikleri Konya'ya girdi.",
+    "ilgiliKisiler": [],
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1919"
+      }
+    ],
+    "dogrulama": "tam-metin",
+    "tartismali": false,
+    "yer": "Konya"
+  },
+  {
+    "id": "mufettislik-atamasi",
+    "tarih": "1919-04-30",
+    "tarihKesinligi": "gun",
+    "ad": "Mustafa Kemal'in 9. Ordu Müfettişliği'ne atanması",
+    "aciklama": "Mustafa Kemal 9. Ordu Müfettişliği'ne atandı.",
+    "ilgiliKisiler": [
+      "mustafa-kemal"
+    ],
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1919"
+      }
+    ],
+    "dogrulama": "tam-metin",
+    "tartismali": false,
+    "yer": "İstanbul"
+  },
+  {
+    "id": "atama-takvimi-vekayi",
+    "tarih": "1919-05-05",
+    "tarihKesinligi": "gun",
+    "ad": "Atama kararının Takvim-i Vekâyi'de yayımlanması",
+    "aciklama": "Mustafa Kemal'in Samsun'a atanma kararı Takvim-i Vekâyi'de yayımlandı.",
+    "ilgiliKisiler": [
+      "mustafa-kemal"
+    ],
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1919"
+      }
+    ],
+    "dogrulama": "tam-metin",
+    "tartismali": false,
+    "yer": "İstanbul"
+  },
+  {
+    "id": "izmir-notasi",
+    "tarih": "1919-05-14",
+    "tarihKesinligi": "gun",
+    "ad": "İzmir'in işgali için nota",
+    "aciklama": "Amiral Calthorpe, İzmir'in işgali için nota verdi.",
+    "ilgiliKisiler": [
+      "calthorpe"
+    ],
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1919"
+      }
+    ],
+    "dogrulama": "tam-metin",
+    "tartismali": false,
+    "yer": "İzmir"
+  },
+  {
+    "id": "izmir-isgali",
+    "tarih": "1919-05-15",
+    "tarihKesinligi": "gun",
+    "ad": "İzmir'in işgali",
+    "aciklama": "İzmir işgal edildi. Aynı gün Denizli'de müftü Ahmed Hulusi Efendi başkanlığında bir millî heyet kuruldu.",
+    "ilgiliKisiler": [],
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1919"
+      },
+      {
+        "kaynakId": "au-inkilap-mondros",
+        "not": "Yunan kuvvetlerinin 15 Mayıs 1919'da İzmir'e çıktığı arama özetlerindeki akademik kaynaklarda da geçer."
+      }
+    ],
+    "dogrulama": "tam-metin",
+    "tartismali": false,
+    "yer": "İzmir"
+  },
+  {
+    "id": "istanbul-ayrilis",
+    "tarih": "1919-05-16",
+    "tarihKesinligi": "gun",
+    "ad": "Mustafa Kemal'in İstanbul'dan ayrılışı",
+    "aciklama": "Mustafa Kemal, 9. Ordu Müfettişi olarak Bandırma vapuruyla İstanbul'dan Samsun'a hareket etti.",
+    "ilgiliKisiler": [
+      "mustafa-kemal"
+    ],
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1919"
+      }
+    ],
+    "dogrulama": "tam-metin",
+    "tartismali": true,
+    "yer": "İstanbul",
+    "tartismaNotu": "Beraberindeki heyetin sayısı kaynaklarda 17 ve 19 gibi farklı rakamlarla verilir; sayı veriye alınmadı."
+  },
+  {
+    "id": "refet-atama",
+    "tarih": "1919-05-17",
+    "tarihKesinligi": "gun",
+    "ad": "Refet Bey'in 3. Kolordu komutanlığına atanması",
+    "aciklama": "Refet Bey Sivas'taki 3. Kolordu komutanlığına atandı.",
+    "ilgiliKisiler": [
+      "refet"
+    ],
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1919"
+      }
+    ],
+    "dogrulama": "tam-metin",
+    "tartismali": false,
+    "yer": "Sivas"
+  },
+  {
+    "id": "samsun",
+    "tarih": "1919-05-19",
+    "tarihKesinligi": "gun",
+    "ad": "Mustafa Kemal'in Samsun'a varışı",
+    "aciklama": "Mustafa Kemal Samsun'a vardı.",
+    "ilgiliKisiler": [
+      "mustafa-kemal"
+    ],
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1919"
+      }
+    ],
+    "dogrulama": "tam-metin",
+    "tartismali": false,
+    "yer": "Samsun"
+  },
+  {
+    "id": "damat-ferit-ikinci-kabine",
+    "tarih": "1919-05-19",
+    "tarihKesinligi": "gun",
+    "ad": "Damat Ferit Paşa'nın ikinci kabinesi",
+    "aciklama": "15-16 Mayıs'ta istifa eden Damat Ferit Paşa ikinci kabinesini kurdu.",
+    "ilgiliKisiler": [
+      "damat-ferit-pasa"
+    ],
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1919"
+      }
+    ],
+    "dogrulama": "tam-metin",
+    "tartismali": false,
+    "yer": "İstanbul"
+  }
+]

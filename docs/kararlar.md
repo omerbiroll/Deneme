@@ -53,17 +53,22 @@ Tarih: 11 Kasım 2026.
 ### Başlangıç yeri
 - Oyun 30 Ekim 1918'de İstanbul'da değil, Adana'da açılır (Yıldırım Orduları Grubu). Kaynakla doğrulanacak.
 
+## Onaylanan mimari
+
+- `docs/mimari.md` içindeki teknik mimari 11 Kasım 2026'da onaylandı.
+
 ## Henüz onay bekleyenler
 
-- **Teknik mimari** (`docs/mimari.md`): öneri hâlinde.
+- **Hassas konular:** `docs/veri-durumu.md` içindeki iki kaydın nasıl ele alınacağı.
+
 - **Metin üretimi:** Prototipte hazır yazılmış, duruma göre birleşen varyantlı metin; canlı yapay zekâ anlatımı sonraki aşamada. Kullanıcı koşullu kabul etti: metin tekrara düşmemeli, kısır döngü olmamalı.
 - **Hızlı mod kapsamı:** 30–60 dakikaya 1918'den ölüm sonrası 50 yıla kadar olan sürenin nasıl sığacağı ileride kararlaştırılacak.
 
 ## İlham
 
-Kullanıcı ilham kaynağı olarak "8 Milyarda 1" (1in8b.life) yaşam simülasyonunun yapım hikâyesi "Sekiz Satır"ı gösterdi ve metnini paylaştı. Hikâyeden bu projeye uyarlanan ilkeler aşağıda. **Öneri hâlindedir; kullanıcı onaylayana kadar karar sayılmaz.**
+Kullanıcı ilham kaynağı olarak "8 Milyarda 1" (1in8b.life) yaşam simülasyonunun yapım hikâyesi "Sekiz Satır"ı gösterdi ve metnini paylaştı. Hikâyeden bu projeye uyarlanan ilkeler aşağıda. **Kullanıcı 11 Kasım 2026'da onayladı.**
 
-### Uyarlanması önerilen ilkeler
+### Uyarlanan ilkeler
 
 1. **Dayanak yoksa koyma.** Akla yatkın olsa bile kaynağı olmayan olay, olasılık ya da ayrıntı eklenmez. (Mevcut tarihsel doğruluk kuralıyla aynı yönde.)
 2. **Puan ve sıralama yok.** "En iyi son" ya da başarı puanı gösterilmez. Her oyun bir alternatif tarih olarak anlatılır; başarısızlık da geçerli bir sonuçtur.

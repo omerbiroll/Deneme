@@ -1,4 +1,4 @@
-# Teknik Mimari (öneri, onay bekliyor)
+# Teknik Mimari (11 Kasım 2026'da onaylandı)
 
 ## Teknoloji
 

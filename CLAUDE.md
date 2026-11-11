@@ -5,10 +5,11 @@ Bu dosya her oturumda okunur. Buradaki kurallar bağlayıcıdır. Ayrıntı içi
 - `docs/kararlar.md`: kullanıcının verdiği kararların kaydı (tek doğru kaynak)
 - `docs/tasarim.md`: oyun tasarımı ve prototip kapsamı
 - `docs/mimari.md`: teknik mimari
+- `docs/veri-durumu.md`: tarihsel verinin doğrulama durumu, eksikler, bekleyen hassas konular
 
 ## Proje durumu
 
-Tasarım aşaması. Henüz kod yok. Mimari kullanıcı onayı bekliyor.
+Mimari ve tasarım ilkeleri onaylandı (11 Kasım 2026). 1. dönemin ilk tarihsel verisi ve veri şeması hazır (`docs/veri-durumu.md`). Sıradaki iş: zaman, olay ve karar motoru.
 
 ## Değişmez kurallar
 
@@ -35,4 +36,6 @@ Tasarım aşaması. Henüz kod yok. Mimari kullanıcı onayı bekliyor.
 ## Geliştirme
 
 - Çalışma dalı: `claude/ataturk-history-simulation-g882pk`
-- Bu bulut ortamında `mcp.context7.com` ağdan erişilemiyor; güncel doküman için web araması ve paketlerin kendi dosyaları kullanılır.
+- Testler: `npm test`. Tip denetimi: `npm run typecheck`.
+- Tarihsel veri yalnızca `data/tarih/` altında durur ve `src/data/sema.ts` şemasıyla doğrulanır.
+- Kaynak sitelerine erişim "Deneme" ortamında açık; ayrıntı `docs/veri-durumu.md` içinde.

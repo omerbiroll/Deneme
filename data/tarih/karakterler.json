@@ -1,0 +1,141 @@
+[
+  {
+    "id": "mustafa-kemal",
+    "ad": "Mustafa Kemal Paşa",
+    "donemdekiKonumu": "Yıldırım Orduları Grubu komutanı (Adana); Kasım 1918'den itibaren İstanbul'da Harbiye Nezareti emrinde; 30 Nisan 1919'dan itibaren 9. Ordu Müfettişi.",
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1918"
+      }
+    ],
+    "dogrulama": "tam-metin",
+    "soyadi": "Atatürk"
+  },
+  {
+    "id": "vahdettin",
+    "ad": "Sultan Vahdettin (VI. Mehmed)",
+    "donemdekiKonumu": "Osmanlı padişahı; 21 Aralık 1918'de Meclis'i feshetti.",
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1918"
+      }
+    ],
+    "dogrulama": "tam-metin"
+  },
+  {
+    "id": "ahmet-izzet-pasa",
+    "ad": "Ahmet İzzet Paşa",
+    "donemdekiKonumu": "Sadrazam; 8 Kasım 1918'de istifa etti.",
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1918"
+      }
+    ],
+    "dogrulama": "tam-metin"
+  },
+  {
+    "id": "tevfik-pasa",
+    "ad": "Tevfik Paşa",
+    "donemdekiKonumu": "Sadrazam; 11 Kasım 1918 ve 13 Ocak 1919'da hükümet kurdu, 3 Mart 1919'da istifa etti.",
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1919"
+      }
+    ],
+    "dogrulama": "tam-metin",
+    "soyadi": "Okday"
+  },
+  {
+    "id": "damat-ferit-pasa",
+    "ad": "Damat Ferit Paşa",
+    "donemdekiKonumu": "Sadrazam; 4 Mart 1919'da ilk, 19 Mayıs 1919'da ikinci kabinesini kurdu.",
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1919"
+      }
+    ],
+    "dogrulama": "tam-metin"
+  },
+  {
+    "id": "fethi",
+    "ad": "Fethi Bey",
+    "donemdekiKonumu": "Mustafa Kemal'le birlikte Minber gazetesini çıkardı.",
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1918"
+      }
+    ],
+    "dogrulama": "tam-metin",
+    "soyadi": "Okyar"
+  },
+  {
+    "id": "kazim-karabekir",
+    "ad": "Kâzım Karabekir Paşa",
+    "donemdekiKonumu": "13 Mart 1919'da Erzurum'daki 15. Kolordu komutanlığına atandı; 3 Mayıs 1919'da Erzurum'a vardı.",
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1919"
+      }
+    ],
+    "dogrulama": "tam-metin"
+  },
+  {
+    "id": "ali-fuat",
+    "ad": "Ali Fuat Paşa",
+    "donemdekiKonumu": "Mayıs 1919'da 20. Kolordu komutanı.",
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1919"
+      }
+    ],
+    "dogrulama": "tam-metin",
+    "soyadi": "Cebesoy"
+  },
+  {
+    "id": "refet",
+    "ad": "Refet Bey",
+    "donemdekiKonumu": "17 Mayıs 1919'da Sivas'taki 3. Kolordu komutanlığına atandı.",
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1919"
+      }
+    ],
+    "dogrulama": "tam-metin",
+    "soyadi": "Bele"
+  },
+  {
+    "id": "rauf",
+    "ad": "Rauf Bey",
+    "donemdekiKonumu": "Mondros Mütarekesi'ni Osmanlı Devleti adına imzalayan Bahriye Nazırı.",
+    "kaynaklar": [
+      {
+        "kaynakId": "au-inkilap-mondros",
+        "not": "Arama özetinden; tam metin okunmadı."
+      }
+    ],
+    "dogrulama": "arama-ozeti",
+    "soyadi": "Orbay"
+  },
+  {
+    "id": "liman-von-sanders",
+    "ad": "Liman von Sanders",
+    "donemdekiKonumu": "Mustafa Kemal'den önceki Yıldırım Orduları Grubu komutanı.",
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1918"
+      }
+    ],
+    "dogrulama": "tam-metin"
+  },
+  {
+    "id": "calthorpe",
+    "ad": "Amiral Calthorpe",
+    "donemdekiKonumu": "İngiliz amirali; 14 Mayıs 1919'da İzmir'in işgali için nota verdi.",
+    "kaynaklar": [
+      {
+        "kaynakId": "ktb-kronoloji-1919"
+      }
+    ],
+    "dogrulama": "tam-metin"
+  }
+]
