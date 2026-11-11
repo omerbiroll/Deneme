@@ -9,7 +9,7 @@ Bu dosya her oturumda okunur. Buradaki kurallar bağlayıcıdır. Ayrıntı içi
 
 ## Proje durumu
 
-Mimari ve tasarım ilkeleri onaylandı (11 Kasım 2026). 1. dönemin ilk tarihsel verisi ve veri şeması hazır (`docs/veri-durumu.md`). Zaman, olay, karar ve nedensellik motoru hazır (`src/engine/`, test senaryosuyla). 1. dönem senaryosu hazır (`src/senaryo/donem1.ts`). Sıradaki iş: arayüz iskeleti (beş sekme, harita) ve metin katmanı.
+Mimari ve tasarım ilkeleri onaylandı (11 Kasım 2026). 1. dönemin ilk tarihsel verisi ve veri şeması hazır (`docs/veri-durumu.md`). Zaman, olay, karar ve nedensellik motoru hazır (`src/engine/`, test senaryosuyla). 1. dönem senaryosu hazır (`src/senaryo/donem1.ts`). Arayüzün ilk sürümü hazır (`src/ui/`): beş sekme, harita, karar kartı, haber ayrıntısı, neden paneli, dönem sonu, cihazda otomatik kayıt. Sıradaki iş: kullanıcı geri bildirimi, metin varyantları, dallanan kayıt, denge.
 
 ## Değişmez kurallar
 
@@ -36,6 +36,8 @@ Mimari ve tasarım ilkeleri onaylandı (11 Kasım 2026). 1. dönemin ilk tarihse
 ## Geliştirme
 
 - Çalışma dalı: `claude/ataturk-history-simulation-g882pk`
-- Testler: `npm test`. Tip denetimi: `npm run typecheck`.
+- Testler: `npm test`. Tip denetimi: `npm run typecheck`. Geliştirme sunucusu: `npm run dev`. Derleme: `npm run build`.
+- Arayüz denemesi (telefon ve PC boyutunda baştan sona oynatır): `scripts/arayuz-denemesi.cjs`.
+- Harita kıyı çizgisi `npm run harita` ile üretilir (`land-50m`; `land-10m` kırpmada bozuluyor, kullanma).
 - Tarihsel veri yalnızca `data/tarih/` altında durur ve `src/data/sema.ts` şemasıyla doğrulanır.
 - Kaynak sitelerine erişim "Deneme" ortamında açık; ayrıntı `docs/veri-durumu.md` içinde.

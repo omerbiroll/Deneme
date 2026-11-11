@@ -52,7 +52,7 @@ Beş durma anı:
 |---|---|---|
 | 3 Kasım 1918 | İskenderun'a çıkarma bildirimi | hiçbir şey yapma / itirazını yaz, emre uy / karşı koymakta ısrar et |
 | 13 Kasım 1918 | İstanbul'a varış | hiçbir şey yapma / saray yolu / basın ve meclis yolu / ordu içinde çevre |
-| 5 Mart 1919 | Çözüm nerede? | hiçbir şey yapma / Anadolu için hazırlan / İstanbul'da görev ara |
+| 5 Mart 1919 | Çözüm arayışı | hiçbir şey yapma / Anadolu için hazırlan / İstanbul'da görev ara |
 | 30 Nisan 1919 | Müfettişlik teklifi | hiçbir şey yapma / olduğu gibi kabul / geniş yetki şartıyla kabul / reddet |
 | 15 Mayıs 1919 | İzmir haberi | hiçbir şey yapma / hemen yola çık / ertele, İstanbul'daki tepkiye katıl |
 

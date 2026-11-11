@@ -152,7 +152,7 @@ const simulasyonOlaylari: OlayTanimi[] = [
   },
   {
     id: "kart-cozum",
-    ad: "Çözüm nerede?",
+    ad: "Çözüm arayışı",
     aciklama:
       "Meclis feshedildi, işgaller yayılıyor. Yeni bir kabine kuruldu. Arkadaşlarından bazıları Anadolu'daki kolordulara atanıyor.",
     tarih: "1919-03-05",
