@@ -61,4 +61,23 @@ Tarih: 11 Kasım 2026.
 
 ## İlham
 
-- Kullanıcı ilham kaynağı olarak "8 Milyarda 1" sitesindeki "Sekiz Satır" hikâyesini gösterdi (`1in8b.life/tr/story/eight-lines/`). Sayfa bu ortamdan açılamadı; hikâyeden neyin örnek alınacağı kullanıcıdan öğrenilecek.
+Kullanıcı ilham kaynağı olarak "8 Milyarda 1" (1in8b.life) yaşam simülasyonunun yapım hikâyesi "Sekiz Satır"ı gösterdi ve metnini paylaştı. Hikâyeden bu projeye uyarlanan ilkeler aşağıda. **Öneri hâlindedir; kullanıcı onaylayana kadar karar sayılmaz.**
+
+### Uyarlanması önerilen ilkeler
+
+1. **Dayanak yoksa koyma.** Akla yatkın olsa bile kaynağı olmayan olay, olasılık ya da ayrıntı eklenmez. (Mevcut tarihsel doğruluk kuralıyla aynı yönde.)
+2. **Puan ve sıralama yok.** "En iyi son" ya da başarı puanı gösterilmez. Her oyun bir alternatif tarih olarak anlatılır; başarısızlık da geçerli bir sonuçtur.
+3. **Düğme çoğaltma, hikâyeye derinlik kat.** Yeni bir özellik eklenmeden önce üç soru sorulur:
+   - Kaynakla doğrulanıyor mu?
+   - Motorda kayıtlı bir nedene dayanıyor mu?
+   - İlk kez oynayan biri için oyunu ağırlaştırmıyor mu?
+4. **Görüş yolu ilk günden açık.** Prototipte "Görüş gönder" bulunur.
+5. **Yapay zekâyla yapıldığı gizlenmez.** Oyunun yapay zekâyla geliştirildiği açıkça yazılır.
+6. **Oyun tarayıcıda çalışır.** Simülasyon tamamen oyuncunun cihazında döner; sunucuya bağımlılık en azda tutulur. (Önerilen mimariyle aynı.)
+7. **Zor konular dışarıda bırakılmaz, hüküm de verilmez.** Dönemin ağır ve tartışmalı konuları kaynakların ölçüsünde, tartışmalı olduğu belirtilerek yer alır. Hangi konunun nasıl ele alınacağı, o konu veri katmanına girmeden önce kullanıcıya ayrıca sorulacak.
+8. **Hata kurala dönüşür.** Yapılan her hata `CLAUDE.md` ya da bu dosyaya bir kural olarak işlenir.
+
+### Bilerek alınmayanlar
+
+- "Seçilemez, bir kerelik hayat" ilkesi bu oyuna uymaz: burada amaç farklı kararları deneyip karşılaştırmaktır; dallanma ve yeniden oynama kullanıcının verdiği karardır.
+- Rastgele doğum ve istatistik temelli hayat üretimi yok; bu oyun belirli bir kişinin ve belgelenmiş bir dönemin simülasyonudur.
