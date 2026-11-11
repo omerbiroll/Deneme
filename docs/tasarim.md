@@ -38,41 +38,35 @@ Kullanıcı şartı: metin tekrara düşmemeli, kısır döngü olmamalı.
 
 Hedef 15–20 dakika, 2–3 anlamlı karar, 4–6 durma anı.
 
-### Aday olay omurgası
+### Olay omurgası
 
-**Bu liste taslaktır.** Her madde veri katmanına girmeden önce kaynakla doğrulanacak; tarih ve ayrıntılar doğrulamadan sonra kesinleşir.
+Tarihsel olaylar `data/tarih/olaylar.json` dosyasındadır (49 olay, kaynaklı). Doğrulama durumu ve kaynakların ayrıştığı noktalar için `docs/veri-durumu.md`.
 
-| Tarih | Olay |
-|---|---|
-| 30 Ekim 1918 | Mondros Mütarekesi |
-| 31 Ekim 1918 | Mustafa Kemal, Yıldırım Orduları Grubu komutanlığını Adana'da devralır |
-| Kasım 1918 başı | Ahmet İzzet Paşa kabinesinin istifası; Yıldırım Orduları Grubu'nun kaldırılması |
-| 13 Kasım 1918 | İstanbul'a varış; İtilaf donanmasının Boğaz'a girişi |
-| Kasım 1918 | Tevfik Paşa kabinesi ve güvenoyu süreci |
-| Kasım 1918 – | Minber gazetesi; padişahla görüşmeler; Şişli'deki evde görüşmeler |
-| 21 Aralık 1918 | Meclis-i Mebusan'ın feshi |
-| 1918 sonu – 1919 başı | Güneyde ve başka bölgelerde işgaller |
-| 4 Mart 1919 | Damat Ferit Paşa kabinesi |
-| 30 Nisan 1919 | 9. Ordu Kıtaatı Müfettişliği'ne atanma |
-| 15 Mayıs 1919 | İzmir'in işgali |
-| 16 Mayıs 1919 | İstanbul'dan ayrılış |
-| 19 Mayıs 1919 | Samsun |
+### Senaryo (kullanıcı 11 Kasım 2026'da onayladı)
 
-### Aday durma anları
+Kurallar `src/senaryo/donem1.ts` dosyasındadır. **Senaryo oyun kuralıdır, tarih değildir:** seçenekler, göstergeler, ilişki değerleri ve sonuçlar tasarımdır ve arayüzde simülasyon olarak sunulur.
 
-1. **Adana:** Mütareke hükümlerinin uygulanmasına ve İstanbul'a çağrıya karşı tutum.
-2. **İstanbul'a varış:** Siyasete girme biçimi (kabine çevreleri, basın, saray, geri planda kalma).
-3. **İstanbul ayları:** Bir yakın çevre kurma ve Anadolu için hazırlık mı, İstanbul'da çözüm arayışı mı.
-4. **Görev teklifi:** Müfettişlik görevini ve yetki kapsamını kabul etme biçimi.
-5. **Ayrılış öncesi:** İzmir'in işgali haberi karşısında tutum.
+Beş durma anı:
 
-Pasif kalan oyuncu için de dönem bir sonla kapanır: görev başkasına gider ya da hiç verilmez, işgaller ilerler ve oyun bunu alternatif tarih olarak anlatır.
+| Tarih | Kart | Seçenekler |
+|---|---|---|
+| 3 Kasım 1918 | İskenderun'a çıkarma bildirimi | hiçbir şey yapma / itirazını yaz, emre uy / karşı koymakta ısrar et |
+| 13 Kasım 1918 | İstanbul'a varış | hiçbir şey yapma / saray yolu / basın ve meclis yolu / ordu içinde çevre |
+| 5 Mart 1919 | Çözüm nerede? | hiçbir şey yapma / Anadolu için hazırlan / İstanbul'da görev ara |
+| 30 Nisan 1919 | Müfettişlik teklifi | hiçbir şey yapma / olduğu gibi kabul / geniş yetki şartıyla kabul / reddet |
+| 15 Mayıs 1919 | İzmir haberi | hiçbir şey yapma / hemen yola çık / ertele, İstanbul'daki tepkiye katıl |
 
-### Aday karakterler
+- Müfettişlik teklifi herkese gelmez: yeterli bağ kurulmuş olmalı ve oyuncu gözetim altında olmamalıdır. Bu bir tasarım tercihidir; Mustafa Kemal'in atanmasında kendi girişimlerinin payı tarihçiler arasında tartışmalıdır.
+- Mustafa Kemal'in kendi eylemi olan tarihsel olaylar (itiraz, padişahla görüşme, Minber, Erzurum mektubu, atama, ayrılış, Samsun) kendiliğinden gerçekleşmez; oyuncunun kararına bağlıdır.
+- "Geniş yetki" seçeneği arama özetlerine dayanır; atamadaki yetkilerin kapsamı tam metinden henüz doğrulanmadı.
 
-Rauf (Orbay), Ali Fuat (Cebesoy), Kâzım Karabekir, İsmet (İnönü), Fethi (Okyar), Refet (Bele), Ahmet İzzet Paşa, Tevfik Paşa, Damat Ferit Paşa, Sultan Vahdettin. Liste doğrulama sırasında daralabilir ya da genişleyebilir.
+Proaktif eylemler: Fethi Bey, Rauf Bey ve Kâzım Karabekir Paşa'yla görüşme, Minber'e demeç, Ali Fuat Paşa'ya mektup. Her biri bir kez yapılır; başarı ilişkiye ve tohumlu rastgeleliğe bağlıdır.
 
-Her karakter için ayrı izlenen boyutlar: sadakat, güven, kişisel yakınlık, siyasi uyum, rekabet ya da husumet, kişisel hedefler.
+Göstergeler (tasarım): ordu içindeki nüfuz, sarayın güveni, İtilaf'ın şüphesi, kamuoyunda tanınırlık.
+
+Kapanışlar: geniş yetkiyle Samsun / sınırlı yetkiyle ya da gecikmeli Samsun / İstanbul'da kalış / gözetim. Hiçbiri oyunu bitirmez.
+
+İlişkilerin başlangıç değerleri tasarımdır: hepsi nötr başlar, yalnızca Fethi Bey'in yakınlığı biraz yüksektir (Minber'i birlikte çıkarmaları kaynaklıdır, sayıya dökülmesi yorumdur). İsmet Bey kaynakla doğrulanınca eklenecek.
 
 ### Prototipte sade tutulanlar
 

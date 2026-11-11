@@ -40,6 +40,7 @@ export type Etki =
 export interface Secenek {
   id: string;
   ad: string;
+  aciklama?: string;
   etkiler: Etki[];
 }
 
@@ -57,6 +58,15 @@ export interface OlayTanimi {
   onem: "buyuk" | "siradan";
   /** Haberin oyuncuya ulaşması için geçen gün sayısı. */
   haberGecikmesiGun: number;
+  /**
+   * Bu olayın gerçekleşmesi için fırsat sunan karar kartları. Olay gerçekleşmezse ve oyuncu
+   * bu kartlarda "hiçbir şey yapma"yı seçmişse, o seçim kaçan fırsatın nedeni olarak kaydedilir.
+   */
+  firsatKartlari?: string[];
+  /** Oyuncuya gösterilecek kısa ad (tarihsel karşılığı olmayan olaylar için). */
+  ad?: string;
+  /** Kart metni: durumun kısa anlatımı. */
+  aciklama?: string;
   /** Varsa olay oyunu durdurur ve karar ister. "bekle" kimlikli seçenek zorunludur. */
   kart?: { secenekler: Secenek[] };
 }

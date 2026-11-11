@@ -88,9 +88,14 @@ function olayinNedenleri(d: Durum, o: OlayTanimi, gerceklesti: boolean): Neden[]
     // Gerçekleşmeyi engelleyen: var olmaması gereken bayraklar ve gerçekleşmiş olması istenmeyen olaylar.
     for (const b of k.bayrakYok ?? []) n.push(...(d.bayraklar[b]?.nedenler ?? []));
     for (const id of k.olayOlmadi ?? []) if (id in d.gerceklesen) n.push({ tur: "olay", id });
-    // Beklenen ama gerçekleşmemiş olaylar: onları engelleyen nedenler buraya taşınır.
+    // Beklenen ama gerçekleşmemiş olaylar: zincir o olay üzerinden sürer.
     for (const id of k.olayOldu ?? []) {
-      if (!(id in d.gerceklesen)) n.push(...(d.gerceklesmeyen[id]?.nedenler ?? []));
+      if (id in d.gerceklesmeyen) n.push({ tur: "olay", id });
+    }
+    // Kaçan fırsat: oyuncu ilgili kartta hiçbir şey yapmamayı seçtiyse bu seçim nedendir.
+    for (const kartId of o.firsatKartlari ?? []) {
+      const kararId = `${kartId}:${BEKLE}`;
+      if (d.kararlar.some((k) => k.id === kararId)) n.push({ tur: "karar", id: kararId });
     }
   }
   const sonuc = tekil(n.filter((x) => x.tur !== "tarihsel-akis"));

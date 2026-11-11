@@ -222,7 +222,7 @@ describe("nedensellik", () => {
   it("engellenen olayın ve ona bağlı gerçekleşmeyen olayın nedeni karardır", () => {
     const d = oyna(1, { teklif: "engelle" });
     expect(olayiEtkileyenKararlar(d, "toplanti").dogrudan).toEqual(["teklif:engelle"]);
-    expect(olayiEtkileyenKararlar(d, "dagilma").dogrudan).toEqual(["teklif:engelle"]);
+    expect(olayiEtkileyenKararlar(d, "dagilma")).toEqual({ dogrudan: [], dolayli: ["teklif:engelle"] });
   });
 
   it("geciken olayın nedeni geciktiren karardır", () => {
