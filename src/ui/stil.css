@@ -251,3 +251,19 @@ a { color: var(--murekkep-acik); }
   .katman-genis { max-width: 720px; }
   .cekmece-zemin { display: none; }
 }
+
+/* Terim açıklamaları, danışmanlar, kazanç ve bedel, karar sonrası tepki */
+.terim { padding: 0; border: 0; background: transparent; font: inherit; color: inherit; text-decoration: underline dotted; text-underline-offset: 4px; text-decoration-thickness: 2px; text-decoration-color: var(--murekkep-acik); }
+.terim[aria-expanded="true"] { background: var(--alternatif-zemin); }
+.terim-aciklama { padding: 10px 12px; border-radius: 10px; background: var(--zemin); font-size: 16px; }
+.katman-ic > .danismanlar { width: 100%; }
+.danismanlar { display: flex; flex-direction: column; gap: 8px; align-items: flex-start; padding: 12px 14px; border: 1.5px dashed var(--soluk); border-radius: 14px; }
+.danisman-baslik { font-family: var(--baslik); font-size: 19px; font-weight: 700; }
+.danismanlar ul { display: flex; flex-direction: column; gap: 10px; width: 100%; }
+.danismanlar li { display: flex; flex-direction: column; gap: 2px; }
+.danismanlar li p { font-family: var(--baslik); font-size: 18px; line-height: 1.45; }
+.secenek .kb { font-size: 15px; opacity: 1; }
+.secenek .kb b { font-weight: 700; }
+.tepki { display: flex; align-items: center; gap: 10px; margin: 0 auto 12px; max-width: 680px; padding: 10px 12px; border: 1.5px dashed var(--soluk); border-radius: 12px; background: var(--kagit); }
+.tepki p { flex: 1; font-family: var(--baslik); font-size: 18px; }
+.tepki-kapat { display: grid; place-items: center; width: 44px; height: 44px; border: 0; border-radius: 10px; background: transparent; }

@@ -66,20 +66,30 @@ function tarihselOlaylar(): OlayTanimi[] {
 const simulasyonOlaylari: OlayTanimi[] = [
   {
     id: "kart-iskenderun",
-    ad: "İskenderun'a çıkarma bildirimi",
+    ad: "İskenderun'a çıkarma",
     aciklama:
-      "Bir İngiliz ve bir Fransız subayı İskenderun'a asker çıkarılacağını bildirdi. Mütareke imzalanalı dört gün oldu; İstanbul uyulmasını istiyor.",
+      "Mondros Mütarekesi'nin üzerinden dört gün geçti. Bir İngiliz ve bir Fransız subayı İskenderun'a geldi: limana asker çıkaracaklarını bildirdiler. Yıldırım Orduları Grubu'nun komutanı sensin. İstanbul'un bu konuda ne düşündüğünü bilmiyorsun; telgrafın cevabı günler sürebilir.",
     tarih: "1918-11-03",
     etkiler: [],
     onem: "buyuk",
     haberGecikmesiGun: 0,
     kart: {
+      ikilem: true,
       secenekler: [
-        { id: BEKLE, ad: "Hiçbir şey yapma", aciklama: "Emre uy, görüş bildirme.", etkiler: [] },
+        {
+          id: BEKLE,
+          ad: "Hiçbir şey yapma",
+          aciklama: "Subaylara cevap verme, ne olacağını bekle.",
+          tepki: "Subaylar limandan ayrıldı. Sen hiçbir şey söylemedin.",
+          etkiler: [],
+        },
         {
           id: "itiraz",
-          ad: "İtirazını yaz, emre uy",
-          aciklama: "Görüşünü Başkomutanlığa bildir, ama silaha başvurma.",
+          ad: "Karşı çıkma, ama itirazını yaz",
+          aciklama: "Görüşünü yazılı olarak bildir, silaha başvurma.",
+          kazanc: "Görüşün kayda geçer, subayların sözüne değer verir.",
+          bedel: "İstanbul'daki hükümet bu çıkışı sevmeyebilir.",
+          tepki: "Mektubun şifreyle yola çıktı. Cevabın ne zaman geleceğini bilmiyorsun.",
           etkiler: [
             { tur: "bayrak", ad: "itiraz-edildi" },
             { tur: "gosterge", ad: "nufuz", delta: 5 },
@@ -88,8 +98,11 @@ const simulasyonOlaylari: OlayTanimi[] = [
         },
         {
           id: "diren",
-          ad: "Çıkarmaya karşı koymakta ısrar et",
-          aciklama: "İtirazını bildir ve birliklere karşı koyma emrini sürdür.",
+          ad: "Karşı koyma emrini sürdür",
+          aciklama: "İtirazını bildir, birliklere çıkarmaya karşı koymalarını söyle.",
+          kazanc: "Subaylar arasında itibarın hızla yükselir.",
+          bedel: "Hükümetin güveni sarsılır, İtilaf seni tehlikeli bulur.",
+          tepki: "Birliklere emir gitti. Limanda gerginlik başladı.",
           etkiler: [
             { tur: "bayrak", ad: "itiraz-edildi" },
             { tur: "bayrak", ad: "sert-cikis" },
@@ -105,7 +118,7 @@ const simulasyonOlaylari: OlayTanimi[] = [
     id: "kart-istanbul",
     ad: "İstanbul'a varış",
     aciklama:
-      "İstanbul'a vardığın gün İtilaf donanması da şehrin sularına demirledi. Yıldırım Orduları Grubu kaldırıldı; Harbiye Nezareti emrindesin, bir görevin yok.",
+      "İstanbul'a vardığın gün İtilaf gemileri Boğaz'da demirliydi. Yıldırım Orduları Grubu kaldırıldı; Harbiye Nezareti emrindesin ve elinde bir görev yok. Kimin yanında duracağını sen seçeceksin.",
     tarih: "1918-11-13",
     kosul: { olayOldu: ["istanbul-varis"] },
     kosulSaglanmazsa: "bekle",
@@ -114,36 +127,67 @@ const simulasyonOlaylari: OlayTanimi[] = [
     onem: "buyuk",
     haberGecikmesiGun: 0,
     kart: {
+      ikilem: true,
+      danismanlar: [
+        {
+          kisi: "fethi",
+          oneri: "basin",
+          gorus: "Gazete bizim elimizde. İstanbul'da herkes konuşuyor ama kimse ne yapacağını bilmiyor. Sesini duyurursan arkandan gelenler olur.",
+        },
+        {
+          kisi: "rauf",
+          oneri: "saray",
+          gorus: "Acele etme. Saray ve hükümet çevresiyle köprüleri yakarsan sonra kapıyı çalacak kimse kalmaz.",
+        },
+      ],
       secenekler: [
-        { id: BEKLE, ad: "Hiçbir şey yapma", aciklama: "Geri planda kal, gelişmeleri izle.", etkiler: [] },
+        {
+          id: BEKLE,
+          ad: "Hiçbir şey yapma",
+          aciklama: "Şehri ve gelişmeleri izle, kimseyle görüşme.",
+          tepki: "Bir gün boyunca şehri dolaştın, kimseyle konuşmadın.",
+          etkiler: [],
+        },
         {
           id: "saray",
-          ad: "Saray yolunu dene",
-          aciklama: "Padişah nezdinde girişimde bulun.",
+          ad: "Padişaha ulaşmaya çalış",
+          aciklama: "Saray çevresinde girişimde bulun.",
+          kazanc: "Sarayın güvenini kazanabilirsin.",
+          bedel: "Askerler arasında saray adamı diye anılırsın.",
+          tepki: "Saraya bir not gönderdin. Cevap bekliyorsun.",
           etkiler: [
             { tur: "bayrak", ad: "istanbulda-etkin" },
             { tur: "gosterge", ad: "sarayGuveni", delta: 12 },
+            { tur: "gosterge", ad: "nufuz", delta: -4 },
             { tur: "gosterge", ad: "baglanti", delta: 2 },
           ],
         },
         {
           id: "basin",
-          ad: "Basın ve meclis yolunu dene",
-          aciklama: "Minber'de sesini duyur, mebuslarla temas kur.",
+          ad: "Gazeteyle sesini duyur",
+          aciklama: "Minber'de görüşlerini yaz.",
+          kazanc: "Halk adını duyar, kamuoyunda tanınırsın.",
+          bedel: "İtilaf seni gözetmeye başlar, saray tedirgin olur.",
+          tepki: "Fethi Bey'e haber yolladın.",
           etkiler: [
             { tur: "bayrak", ad: "istanbulda-etkin" },
             { tur: "gosterge", ad: "taninirlik", delta: 12 },
             { tur: "gosterge", ad: "itilafSuphesi", delta: 8 },
+            { tur: "gosterge", ad: "sarayGuveni", delta: -4 },
             { tur: "gosterge", ad: "baglanti", delta: 2 },
           ],
         },
         {
           id: "ordu",
-          ad: "Ordu içinde çevre kur",
-          aciklama: "Güvendiğin komutanlarla sessizce bağ kur.",
+          ad: "Subaylarla sessizce çevre kur",
+          aciklama: "Güvendiğin komutanlarla bağ kur, ortaya çıkma.",
+          kazanc: "Ordu içinde sözünün geçtiği bir çevre oluşur.",
+          bedel: "Kamuoyunda ve sarayda adın duyulmaz.",
+          tepki: "Birkaç subaya haber saldın. Sessizce dönüşlerini bekliyorsun.",
           etkiler: [
             { tur: "bayrak", ad: "istanbulda-etkin" },
             { tur: "gosterge", ad: "nufuz", delta: 10 },
+            { tur: "gosterge", ad: "taninirlik", delta: -3 },
             { tur: "gosterge", ad: "baglanti", delta: 2 },
           ],
         },

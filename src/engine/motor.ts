@@ -22,6 +22,19 @@ export function senaryoyuDogrula(s: Senaryo): void {
     if (o.kart && !o.kart.secenekler.some((x) => x.id === BEKLE)) {
       throw new Error(`"${o.id}" kartında "hiçbir şey yapma" (${BEKLE}) seçeneği yok`);
     }
+    if (o.kart?.ikilem) {
+      for (const x of o.kart.secenekler.filter((y) => y.id !== BEKLE)) {
+        if (!x.kazanc || !x.bedel) throw new Error(`"${o.id}" ikilem kartında "${x.id}" seçeneğinin kazancı ya da bedeli yazılmamış`);
+        const deltalar = x.etkiler.flatMap((e) => (e.tur === "gosterge" || e.tur === "iliski" ? [e.delta] : []));
+        if (!deltalar.some((d) => d > 0) || !deltalar.some((d) => d < 0)) {
+          throw new Error(`"${o.id}" ikilem kartında "${x.id}" seçeneği hem kazandırıp hem kaybettirmiyor`);
+        }
+      }
+    }
+    for (const dn of o.kart?.danismanlar ?? []) {
+      if (!(dn.kisi in s.iliskiler)) throw new Error(`"${o.id}" kartındaki danışman "${dn.kisi}" ilişki tablosunda yok`);
+      if (!o.kart!.secenekler.some((x) => x.id === dn.oneri)) throw new Error(`"${o.id}" kartında "${dn.kisi}" var olmayan bir seçeneği öneriyor`);
+    }
     if (o.kosulSaglanmazsa === "bekle" && !o.sonTarih) {
       throw new Error(`"${o.id}" bekleyebilir ama son tarihi yok`);
     }
@@ -249,6 +262,13 @@ export function kararVer(durum: Durum, senaryo: Senaryo, secenekId: string): Dur
   const kararId = `${kartId}:${secenekId}`;
   d.kararlar.push({ id: kararId, tur: "kart", kaynakId: kartId, secenekId, tarih: d.tarih });
   etkileriUygula(d, secenek.etkiler, [{ tur: "karar", id: kararId }]);
+  // Çevrendekiler kararı görür: önerisini izleyene güven artar, izlemeyene azalır.
+  if (secenekId !== BEKLE) {
+    const tepkiler: Etki[] = (olay?.kart?.danismanlar ?? []).map((dn) => ({
+      tur: "iliski" as const, kisi: dn.kisi, alan: "guven" as const, delta: dn.oneri === secenekId ? 4 : -2,
+    }));
+    etkileriUygula(d, tepkiler, [{ tur: "karar", id: kararId }]);
+  }
   d.bekleyenKart = null;
   return d;
 }

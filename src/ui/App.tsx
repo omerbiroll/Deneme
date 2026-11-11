@@ -7,6 +7,7 @@ import {
 } from "./metin";
 import { olayiEtkileyenKararlar, kararinSonuclari } from "../engine/nedensellik";
 import { donem1Kapanisi } from "../senaryo/donem1";
+import { TerimliMetin } from "./terimli";
 import type { IliskiAlani, KararKaydi } from "../engine/tipler";
 
 type Sekme = "harita" | "haberler" | "yazismalar" | "durum" | "fazla";
@@ -98,7 +99,7 @@ function HaberDetayi({ oyun, haber, kapat }: { oyun: Oyun; haber: Haber; kapat: 
       <EtiketRozeti etiket={haber.etiket} />
       <h2 className="belge-baslik">{haber.baslik}</h2>
       <p className="belge-kunye">{[haber.yer, tarihYaz(haber.tarih)].filter(Boolean).join(", ")}</p>
-      <p className="belge-metin">{haber.metin}</p>
+      <TerimliMetin sinif="belge-metin" metin={haber.metin} />
       {haber.teslim !== haber.tarih && <p className="soluk">Haber sana {tarihYaz(haber.teslim)} günü ulaştı.</p>}
       {haber.tartismaNotu && <p className="not"><strong>Kaynaklar ayrışıyor.</strong> {haber.tartismaNotu}</p>}
       {haber.hassasKonu && <p className="not"><strong>Tartışmalı konu.</strong> Kaynağın ifadesiyle, yorum eklenmeden aktarılmıştır.</p>}
@@ -280,20 +281,38 @@ function FazlaSekmesi({ oyun }: { oyun: Oyun }) {
   );
 }
 
-function KararKarti({ oyun }: { oyun: Oyun }) {
+function KararKarti({ oyun, tepkiVer }: { oyun: Oyun; tepkiVer: (t: string | null) => void }) {
   const olay = oyun.senaryo.olaylar.find((o) => o.id === oyun.durum.bekleyenKart);
   if (!olay?.kart) return null;
   return (
     <Katman baslik={olay.ad ?? "Karar"} genis>
       <p className="karar-kunye">{tarihYaz(oyun.durum.tarih)} <EtiketRozeti etiket="simulasyon" /></p>
       <h2 className="belge-baslik">{olay.ad}</h2>
-      <p className="belge-metin">{olay.aciklama}</p>
+      <TerimliMetin sinif="belge-metin" metin={olay.aciklama ?? ""} />
+      {olay.kart.danismanlar && olay.kart.danismanlar.length > 0 && (
+        <section className="danismanlar" aria-label="Çevrendekilerin görüşü">
+          <h3 className="danisman-baslik">Çevrendekiler ne diyor?</h3>
+          <span className="rozet rozet-simulasyon">Simülasyon: kurgu diyalog</span>
+          <ul>
+            {olay.kart.danismanlar.map((dn) => (
+              <li key={dn.kisi}>
+                <strong>{KISILER[dn.kisi] ?? dn.kisi}</strong>
+                <p>«{dn.gorus}»</p>
+                <span className="soluk">Önerisi: {olay.kart!.secenekler.find((x) => x.id === dn.oneri)?.ad}</span>
+              </li>
+            ))}
+          </ul>
+          <p className="soluk">Birinin önerisini izlemek ya da izlememek, aranızdaki güveni etkiler.</p>
+        </section>
+      )}
       <ul className="secenekler">
         {olay.kart.secenekler.map((s) => (
           <li key={s.id}>
-            <button className="secenek" onClick={() => oyun.kararVer(s.id)}>
+            <button className="secenek" onClick={() => { oyun.kararVer(s.id); tepkiVer(s.tepki ?? null); }}>
               <strong>{s.ad}</strong>
               {s.aciklama && <span>{s.aciklama}</span>}
+              {s.kazanc && <span className="kb"><b>Kazanç:</b> {s.kazanc}</span>}
+              {s.bedel && <span className="kb"><b>Bedel:</b> {s.bedel}</span>}
             </button>
           </li>
         ))}
@@ -311,7 +330,7 @@ function DonemSonu({ oyun, liste }: { oyun: Oyun; liste: Haber[] }) {
     <Katman baslik="Dönemin sonu" genis>
       <p className="karar-kunye">{tarihYaz(d.tarih)} <EtiketRozeti etiket="simulasyon" /></p>
       <h2 className="belge-baslik">{kapanis.baslik}</h2>
-      <p className="belge-metin">{kapanis.metin}</p>
+      <TerimliMetin sinif="belge-metin" metin={kapanis.metin} />
 
       <h3 className="bolum-baslik">Gerçek tarihten sapmalar</h3>
       {sapmalar.length === 0 ? (
@@ -349,6 +368,7 @@ export function App() {
   const [sekme, setSekme] = useState<Sekme>("harita");
   const [acik, setAcik] = useState<Haber | null>(null);
   const [menu, setMenu] = useState(false);
+  const [tepki, setTepki] = useState<string | null>(null);
   const liste = haberler(oyun.durum, oyun.senaryo, oyun.veri);
   const d = oyun.durum;
 
@@ -395,6 +415,13 @@ export function App() {
       )}
 
       <main className="icerik">
+        {tepki && (
+          <div className="tepki" role="status">
+            <span className="rozet rozet-simulasyon">Simülasyon</span>
+            <p>{tepki}</p>
+            <button className="tepki-kapat" onClick={() => setTepki(null)} aria-label="Tepkiyi kapat"><Ikon><path d="M6 6l12 12M18 6 6 18" /></Ikon></button>
+          </div>
+        )}
         {sekme === "harita" && <HaritaSekmesi oyun={oyun} liste={liste} ac={setAcik} />}
         {sekme === "haberler" && (
           <div className="tek-sutun">
@@ -411,7 +438,7 @@ export function App() {
       </main>
 
       {acik && <HaberDetayi oyun={oyun} haber={acik} kapat={() => setAcik(null)} />}
-      {d.bekleyenKart && <KararKarti oyun={oyun} />}
+      {d.bekleyenKart && <KararKarti oyun={oyun} tepkiVer={setTepki} />}
       {d.bitti && <DonemSonu oyun={oyun} liste={liste} />}
     </div>
   );

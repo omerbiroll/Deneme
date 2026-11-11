@@ -41,7 +41,20 @@ export interface Secenek {
   id: string;
   ad: string;
   aciklama?: string;
+  /** Oyuncuya karar anında gösterilen kazanç ve bedel. İkilemli kartlarda zorunludur. */
+  kazanc?: string;
+  bedel?: string;
+  /** Karardan hemen sonra gösterilen kısa tepki (simülasyon metni). */
+  tepki?: string;
   etkiler: Etki[];
+}
+
+/** Karttaki bir kişinin görüşü. Kurgu diyalogdur; arayüzde her zaman "simülasyon" etiketi taşır. */
+export interface Danisman {
+  kisi: string;
+  gorus: string;
+  /** Bu kişinin önerdiği seçenek. Önerisini izlemek ya da izlememek aradaki güveni etkiler. */
+  oneri: string;
 }
 
 export interface OlayTanimi {
@@ -68,7 +81,12 @@ export interface OlayTanimi {
   /** Kart metni: durumun kısa anlatımı. */
   aciklama?: string;
   /** Varsa olay oyunu durdurur ve karar ister. "bekle" kimlikli seçenek zorunludur. */
-  kart?: { secenekler: Secenek[] };
+  kart?: {
+    secenekler: Secenek[];
+    danismanlar?: Danisman[];
+    /** İkilemli kartta hiçbir seçenek hem kazançsız hem bedelsiz olamaz; senaryo doğrulaması bunu denetler. */
+    ikilem?: boolean;
+  };
 }
 
 export interface EylemTanimi {

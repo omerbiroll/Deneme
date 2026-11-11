@@ -53,6 +53,17 @@ Tarih: 11 Kasım 2026.
 ### Başlangıç yeri
 - Oyun 30 Ekim 1918'de İstanbul'da değil, Adana'da açılır (Yıldırım Orduları Grubu). Kaynakla doğrulanacak.
 
+## Oyun hissi (kullanıcı geri bildirimi, 11 Kasım 2026)
+
+İlk denemede kullanıcı oyunu sıkıcı buldu: seçenekler barizdi, tarihe en yakın yol kendiliğinden seçiliyordu, dil terimsel ve herkese hitap etmeyen bir havadaydı. Kullanıcı şu yönü onayladı:
+
+1. **İkilemli kartlar.** Her seçeneğin görünür bir kazancı ve bedeli vardır; hiçbiri "doğru cevap" değildir. Senaryo doğrulaması bunu denetler.
+2. **Çevredekilerin çelişen görüşü.** Kartta gerçek, kaynaklı kişiler farklı seçenekleri önerir (kurgu diyalog, etiketli). Önerisini izlemek ya da izlememek aradaki güveni etkiler.
+3. **Sade, insan odaklı dil.** Zor terimler dokununca açıklanır. Hedef kitle: tarih bilmeyen genel okur; meraklıya derinlik opsiyonel.
+4. **Pasif kısım sahnelere dönüşür** (henüz yapılmadı).
+
+Kart metinlerinde yeni karakter uydurulmaz; yalnızca veride kaynaklı kişiler konuşur.
+
 ## Hassas konular
 
 - Kullanıcı kararı (11 Kasım 2026): hassas ve tartışmalı konular kaynağın ifadesiyle olgu olarak aktarılır, işaretlenir, oyun yorum ve hüküm eklemez. Dışarıda bırakılmaz.

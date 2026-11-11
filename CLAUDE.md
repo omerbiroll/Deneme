@@ -9,7 +9,7 @@ Bu dosya her oturumda okunur. Buradaki kurallar bağlayıcıdır. Ayrıntı içi
 
 ## Proje durumu
 
-Mimari ve tasarım ilkeleri onaylandı (11 Kasım 2026). 1. dönemin ilk tarihsel verisi ve veri şeması hazır (`docs/veri-durumu.md`). Zaman, olay, karar ve nedensellik motoru hazır (`src/engine/`, test senaryosuyla). 1. dönem senaryosu hazır (`src/senaryo/donem1.ts`). Arayüzün ilk sürümü hazır (`src/ui/`): beş sekme, harita, karar kartı, haber ayrıntısı, neden paneli, dönem sonu, cihazda otomatik kayıt. Sıradaki iş: kullanıcı geri bildirimi, metin varyantları, dallanan kayıt, denge.
+Mimari ve tasarım ilkeleri onaylandı (11 Kasım 2026). 1. dönemin ilk tarihsel verisi ve veri şeması hazır (`docs/veri-durumu.md`). Zaman, olay, karar ve nedensellik motoru hazır (`src/engine/`, test senaryosuyla). 1. dönem senaryosu hazır (`src/senaryo/donem1.ts`). Arayüzün ilk sürümü hazır (`src/ui/`): beş sekme, harita, karar kartı, haber ayrıntısı, neden paneli, dönem sonu, cihazda otomatik kayıt. Kullanıcı ilk denemede oyunu sıkıcı buldu (`docs/kararlar.md`, "Oyun hissi"). Yeniden yazım sürüyor: 1. ve 2. kart yeni tarzda (ikilem, çelişen sesler, sade dil, terim sözlüğü); 3., 4. ve 5. kart eski tarzda, pasif sahneler ve haber metinlerinin sadeleştirilmesi yapılmadı. Sıradaki iş: kalan kartları aynı tarza çevirmek, pasif sahneler.
 
 ## Değişmez kurallar
 
@@ -38,6 +38,7 @@ Mimari ve tasarım ilkeleri onaylandı (11 Kasım 2026). 1. dönemin ilk tarihse
 - Çalışma dalı: `claude/ataturk-history-simulation-g882pk`
 - Testler: `npm test`. Tip denetimi: `npm run typecheck`. Geliştirme sunucusu: `npm run dev`. Derleme: `npm run build`.
 - Arayüz denemesi (telefon ve PC boyutunda baştan sona oynatır): `scripts/arayuz-denemesi.cjs`.
+- Paylaşılabilir tek dosya önizleme: `npx vite build -c vite.tekdosya.config.ts && python3 -I scripts/onizleme-uret.py <çıktı.html>`.
 - Harita kıyı çizgisi `npm run harita` ile üretilir (`land-50m`; `land-10m` kırpmada bozuluyor, kullanma).
 - Tarihsel veri yalnızca `data/tarih/` altında durur ve `src/data/sema.ts` şemasıyla doğrulanır.
 - Kaynak sitelerine erişim "Deneme" ortamında açık; ayrıntı `docs/veri-durumu.md` içinde.
