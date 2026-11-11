@@ -27,6 +27,8 @@
 }
 
 * { box-sizing: border-box; }
+/* Telefonun üst güvenli alanı üst çubuğun rengiyle boyanır. */
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--murekkep); }
 html { -webkit-text-size-adjust: 100%; }
 body {
   margin: 0;
@@ -46,9 +48,9 @@ a { color: var(--murekkep-acik); }
 
 /* Üst çubuk */
 .ust {
-  position: sticky; top: 0; z-index: 20;
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
   display: flex; align-items: center; gap: 8px;
-  padding: calc(8px + env(safe-area-inset-top)) 12px 8px;
+  padding: 8px 12px;
   background: var(--murekkep); color: #fff;
 }
 .ust-tarih { flex: 1; display: flex; flex-direction: column; line-height: 1.15; }

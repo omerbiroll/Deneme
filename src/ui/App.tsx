@@ -387,7 +387,7 @@ export function App() {
       {menu && (
         <div className="cekmece-zemin" onClick={() => setMenu(false)}>
           <aside className="cekmece" onClick={(e) => e.stopPropagation()} aria-label="Yan menü">
-            <p className="cekmece-baslik">1918: Mondros'tan sonra</p>
+            <p className="cekmece-baslik">Mondros'tan Sonra</p>
             {SEKMELER.map((s) => <button key={s.id} className="cekmece-satir" onClick={() => git(s.id)}>{s.ad}</button>)}
             <p className="soluk">Deneme sürümü. 30 Ekim 1918 – Mayıs 1919.</p>
           </aside>
