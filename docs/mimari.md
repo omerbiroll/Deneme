@@ -12,7 +12,7 @@ Not: Oyunun konusu değişti (bkz. `docs/kararlar.md`); mimari aynı kaldı. Sen
 | Veri | Şemayla doğrulanan JSON dosyaları | Tarihsel veri koddan ve simülasyon durumundan ayrı |
 | Harita | Özel çizilmiş SVG | Dönem estetiği, küçük boyut, mobil performans |
 | Kayıt | Tarayıcıda IndexedDB | Sunucusuz; sonradan buluta taşınabilir arayüz |
-| Test | Vitest (motor), Playwright (arayüz) | Mobil ve PC boyutlarında ayrı ayrı |
+| Test | Vitest (motor), Playwright (arayüz) | Telefon boyutunda |
 | Yayın | Statik barındırma | Prototipte sunucu ve maliyet yok |
 
 ## Katmanlar
@@ -58,7 +58,7 @@ tests/       motor testleri, tarihsel doğruluk testleri, arayüz testleri (ayr�
 - İlişki değişimleri
 - Her durum değişikliğinin nedensellik kaydı taşıması
 - Kayıt, yükleme ve dalların birbirine karışmaması
-- Mobil ve PC'de kritik arayüz akışları
+- Telefonda kritik arayüz akışları
 - Tarihsel doğruluk testleri ayrı: her kayıtta kaynak var mı, tarihler tutarlı mı
 
 ## Geliştirme sırası
@@ -70,4 +70,4 @@ tests/       motor testleri, tarihsel doğruluk testleri, arayüz testleri (ayr�
 5. Arayüz iskeleti: beş sekme, harita
 6. Metin varyantları ve geri bildirim kanalları
 7. Kayıt ve dallanma
-8. Mobil ve PC testleri, denge, cila
+8. Telefon testleri, denge, cila
