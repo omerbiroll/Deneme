@@ -20,6 +20,7 @@ export type IliskiAlani = keyof Iliski;
 export type Neden =
   | { tur: "karar"; id: string }
   | { tur: "olay"; id: string }
+  | { tur: "oncelik"; id: string }
   | { tur: "tarihsel-akis" };
 
 export interface Kosul {
@@ -36,7 +37,9 @@ export type Etki =
   | { tur: "iliski"; kisi: string; alan: IliskiAlani; delta: number }
   | { tur: "bayrak"; ad: string }
   | { tur: "engelle"; olayId: string }
-  | { tur: "ertele"; olayId: string; gun: number };
+  | { tur: "ertele"; olayId: string; gun: number }
+  /** Geçici kriz: artı havuzunu `ay` ay boyunca `delta` kadar değiştirir. */
+  | { tur: "havuz"; delta: number; ay: number };
 
 export interface Secenek {
   id: string;
@@ -112,10 +115,26 @@ export interface EylemTanimi {
   tekSefer: boolean;
 }
 
+/** Öncelik sistemi: oyuncu alanlara artı/eksi verir; sınırlı bir artı havuzu vardır. */
+export interface OncelikAyari {
+  /** Öncelik verilebilen alanlar (gösterge adları). */
+  alanlar: string[];
+  baslangicHavuz: number;
+  havuzAralik: [number, number];
+  seviyeAralik: [number, number];
+  /** Her ay: seviye × çarpan kadar alan değişir. */
+  aylikCarpan: number;
+  /** Eşikler: yukarı geçince havuz +1, aşağı inince -1. Yukarı ve aşağı değer farklıdır (titreme olmasın). */
+  esikler: { yukari: number; asagi: number }[];
+}
+
 export interface Senaryo {
   id: string;
   baslangic: Tarih;
   bitis: Tarih;
+  /** Göstergelerin alabileceği değer aralığı; verilirse tüm değişimler buna sıkıştırılır. */
+  gostergeSiniri?: [number, number];
+  oncelik?: OncelikAyari;
   gostergeler: Record<string, number>;
   iliskiler: Record<string, Iliski>;
   olaylar: OlayTanimi[];
@@ -169,6 +188,16 @@ export interface Durum {
   kararlar: KararKaydi[];
   etkiler: EtkiKaydi[];
   bekleyenKart: string | null;
+  gostergeSiniri?: [number, number];
+  oncelik: {
+    /** Alan başına seviye (−2…+2). */
+    seviyeler: Record<string, number>;
+    /** Alan başına geçilmiş eşik sayısı. */
+    esikSayisi: Record<string, number>;
+    krizler: { bitis: Tarih; delta: number }[];
+    /** Son işlenen ay başı. */
+    sonTik: Tarih;
+  };
   /** Yolda olan haberler (oyuncu henüz bilmiyor). */
   yoldakiHaberler: Bildirim[];
   /** Oyuncuya ulaşmış haberler. */

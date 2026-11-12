@@ -27,17 +27,16 @@ Senaryo: `src/senaryo/sonrasi.ts` (oyun kuralı). Tarihsel zemin: `data/tarih/`.
 
 Pasif sahneler: kış haberi (halk ihmal edilirse), Çakmak'ın levazım notu (ordu ihmal edilirse), Çekoslovakya'nın işgali (gerçek dünya olayı).
 
-## Alanlar
+## Alanlar ve öncelikler
 
-Altı alan, 0–100. Başlangıç değerleri tasarımdır, ölçüme dayanmaz. Kartlar alanları değiştirir; bazı olaylar alanın düşük olmasına bağlıdır. Öncelik ve eşik sistemi henüz yok (bkz. kararlar).
+Altı alan, 0–100; başlangıç değerleri tasarımdır, ölçüme dayanmaz. Kartlar alanları değiştirir. Oyuncu alanlara artı ve eksi vererek öncelik belirler (kurallar için `docs/kararlar.md`, "Öncelik sistemi"). Ekranda: başlangıçta bir öncelik ekranı, sonradan Durum sekmesi; alan çubuklarında eşik çizgileri ve "Yeni aşamaya N kaldı" ipucu.
 
 ## Yapılanlar
 
-Motor, nedensellik, kayıt (otomatik, cihazda), açılış ekranları, kartlar, zamanlı anlar, sonuç kartı, yankı, şema, karşılaştırma, terim sözlüğü, beş sekmeli arayüz, telefon ve PC düzeni.
+Motor, nedensellik, kayıt (otomatik, cihazda), açılış ekranları, kartlar, zamanlı anlar, sonuç kartı, yankı, şema, karşılaştırma, terim sözlüğü, beş sekmeli telefon arayüzü, **öncelik sistemi** (seviyeler, havuz, aylık etki, eşikler, kriz, kapasite aşımı).
 
 ## Yapılmayanlar
 
-- Öncelik ekranı, havuz ve eşikler.
 - Dikkat ve etkinlikler (ilişki ve bilgi sahneleri).
 - İşlevsel harita (şu an yalnızca şehirler ve yer işareti).
 - Dallanan kayıt, karşılaştırma ekranı.

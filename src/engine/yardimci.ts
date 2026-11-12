@@ -16,3 +16,19 @@ export function rastgele(rng: number): [number, number] {
 }
 
 export const sikistir = (x: number, alt: number, ust: number) => Math.min(ust, Math.max(alt, x));
+
+const sonGun = (y: number, m: number) => new Date(Date.UTC(y, m, 0)).getUTCDate();
+
+/** Verilen günden sonraki ilk ay başı (YYYY-AA-01). */
+export function sonrakiAyBasi(tarih: Tarih): Tarih {
+  const [y, m] = tarih.split("-").map(Number) as [number, number];
+  return new Date(Date.UTC(y, m, 1)).toISOString().slice(0, 10);
+}
+
+/** Tarihe ay ekler; hedef ayın son gününü aşmaz. */
+export function ayEkle(tarih: Tarih, ay: number): Tarih {
+  const [y, m, g] = tarih.split("-").map(Number) as [number, number, number];
+  const hedef = new Date(Date.UTC(y, m - 1 + ay, 1));
+  const gun = Math.min(g, sonGun(hedef.getUTCFullYear(), hedef.getUTCMonth() + 1));
+  return new Date(Date.UTC(hedef.getUTCFullYear(), hedef.getUTCMonth(), gun)).toISOString().slice(0, 10);
+}

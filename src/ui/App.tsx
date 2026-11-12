@@ -104,7 +104,9 @@ function HaberDetayi({ oyun, haber, kapat }: { oyun: Oyun; haber: Haber; kapat: 
       {haber.kaynak && (
         <p className="kaynak">Kaynak: <a href={haber.kaynak.url} target="_blank" rel="noreferrer">{haber.kaynak.baslik}</a>, {haber.kaynak.yayin}</p>
       )}
-      {haber.etiket === "simulasyon" && (neden ? <NedenPaneli oyun={oyun} olayId={haber.olayId} /> : (
+      {haber.olayId.startsWith("esik:") ? (
+        <p className="neden-bos">Bu aşamaya geçişte alanına verdiğin öncelikler ve kararlarının toplam etkisi vardı.</p>
+      ) : haber.etiket === "simulasyon" && (neden ? <NedenPaneli oyun={oyun} olayId={haber.olayId} /> : (
         <button className="dugme dugme-ikincil" onClick={() => setNeden(true)}>Bu neden oldu?</button>
       ))}
     </Katman>
@@ -136,12 +138,12 @@ function ZamanDenetimi({ oyun }: { oyun: Oyun }) {
   );
 }
 
-function Gosterge({ baslik, deger, aciklama }: { baslik: string; deger: number; aciklama?: string }) {
+function Gosterge({ baslik, deger, aciklama, esikler }: { baslik: string; deger: number; aciklama?: string; esikler?: number[] }) {
   const d = Math.max(0, Math.min(100, deger));
   return (
     <div className="gosterge">
       <div className="gosterge-ust"><span>{baslik}</span><span className="gosterge-deger">{d}</span></div>
-      <div className="gosterge-cubuk" role="meter" aria-valuemin={0} aria-valuemax={100} aria-valuenow={d} aria-label={baslik}><span style={{ width: `${d}%` }} /></div>
+      <div className="gosterge-cubuk" role="meter" aria-valuemin={0} aria-valuemax={100} aria-valuenow={d} aria-label={baslik}><span style={{ width: `${d}%` }} />{esikler?.map((e) => <i key={e} className="notch" style={{ left: `${e}%` }} aria-hidden="true" />)}</div>
       {aciklama && <p className="soluk">{aciklama}</p>}
     </div>
   );
@@ -150,8 +152,80 @@ function Gosterge({ baslik, deger, aciklama }: { baslik: string; deger: number; 
 function Alanlar({ oyun, aciklama }: { oyun: Oyun; aciklama?: boolean }) {
   return (
     <div className="gosterge-izgara">
-      {ALANLAR.map((a) => <Gosterge key={a.ad} baslik={a.baslik} deger={oyun.durum.gostergeler[a.ad] ?? 0} aciklama={aciklama ? a.aciklama : undefined} />)}
+      {ALANLAR.map((a) => <Gosterge key={a.ad} baslik={a.baslik} deger={oyun.durum.gostergeler[a.ad] ?? 0} aciklama={aciklama ? a.aciklama : undefined} esikler={oyun.senaryo.oncelik?.esikler.map((e) => e.yukari)} />)}
     </div>
+  );
+}
+
+const SEVIYE_ADI: Record<number, string> = { [-2]: "−−", [-1]: "−", 0: "0", 1: "+", 2: "++" };
+
+/** Öncelikler: alanlara artı ve eksi ver. Artı hakkı sınırlıdır; eksi vermek yeni artı için yer açar. */
+function Oncelikler({ oyun }: { oyun: Oyun }) {
+  const o = oyun.senaryo.oncelik!;
+  return (
+    <div className="oncelik">
+      <p className="oncelik-havuz" aria-live="polite"><strong>Artı hakkın:</strong> {oyun.kullanilan} / {oyun.havuz} kullanıldı</p>
+      <ul>
+        {o.alanlar.map((ad) => {
+          const alan = ALANLAR.find((a) => a.ad === ad)!;
+          const seviye = oyun.durum.oncelik.seviyeler[ad] ?? 0;
+          const deger = oyun.durum.gostergeler[ad] ?? 0;
+          const sonraki = o.esikler[oyun.durum.oncelik.esikSayisi[ad] ?? 0]?.yukari;
+          const kalan = sonraki !== undefined ? sonraki - deger : undefined;
+          return (
+            <li key={ad} className="oncelik-satir">
+              <div className="oncelik-ad">
+                <strong>{alan.baslik}</strong>
+                <span className="soluk">{kalan !== undefined && kalan > 0 && kalan <= 8 ? `Yeni aşamaya ${kalan} kaldı` : alan.aciklama}</span>
+              </div>
+              <div className="oncelik-kontrol" role="group" aria-label={`${alan.baslik} önceliği`}>
+                <button className="adim" disabled={seviye <= o.seviyeAralik[0]} onClick={() => oyun.oncelikDegistir(ad, seviye - 1)} aria-label={`${alan.baslik}: azalt`}>−</button>
+                <span className="seviye" aria-live="polite">{SEVIYE_ADI[seviye]}</span>
+                <button className="adim" disabled={seviye >= o.seviyeAralik[1] || oyun.kullanilan >= oyun.havuz} onClick={() => oyun.oncelikDegistir(ad, seviye + 1)} aria-label={`${alan.baslik}: artır`}>+</button>
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+      <p className="soluk">Artılar alanı her ay biraz geliştirir, eksiler geriletir. Bir alan yeni bir aşamaya geçince artı hakkın artar. Başka bir alana eksi vermek, yeni bir artı için yer açar.</p>
+    </div>
+  );
+}
+
+function OncelikEkrani({ oyun }: { oyun: Oyun }) {
+  return (
+    <Katman baslik="Önceliklerin" genis>
+      <h2 className="belge-baslik">Önceliklerini belirle</h2>
+      <p className="belge-metin">Hangi alanlara önem vereceksin? Seçtiğin alanlar her ay gelişir, ihmal ettiklerin geriler. Sonradan Durum sekmesinden değiştirebilirsin.</p>
+      <Oncelikler oyun={oyun} />
+      <button className="dugme dugme-ana" onClick={oyun.oncelikBitti}>Başla</button>
+    </Katman>
+  );
+}
+
+/** Kapasite daralınca oyun durur: hangi alandan vazgeçeceksin? */
+function KapasiteKarti({ oyun }: { oyun: Oyun }) {
+  const o = oyun.senaryo.oncelik!;
+  const secilebilir = o.alanlar
+    .map((ad) => ({ ad, alan: ALANLAR.find((a) => a.ad === ad)!, seviye: oyun.durum.oncelik.seviyeler[ad] ?? 0 }))
+    .filter((x) => x.seviye > 0)
+    .sort((x, y) => y.seviye - x.seviye);
+  return (
+    <Katman baslik="Kapasite daraldı" genis>
+      <p className="karar-kunye">{tarihYaz(oyun.durum.tarih)} <EtiketRozeti etiket="simulasyon" /></p>
+      <h2 className="belge-baslik">Kapasite daraldı</h2>
+      <p className="belge-metin">Olağanüstü bir durum yüzünden devletin aynı anda üstlenebileceği iş azaldı. Artı hakkın {oyun.havuz}'e düştü, ama {oyun.kullanilan} artı dağıtmıştın. Hangi alandan vazgeçeceksin?</p>
+      <ul className="secenekler">
+        {secilebilir.map((x) => (
+          <li key={x.ad}>
+            <button className="secenek" onClick={() => oyun.oncelikDegistir(x.ad, x.seviye - 1)}>
+              <strong>{x.alan.baslik}</strong>
+              <span>{SEVIYE_ADI[x.seviye]} → {SEVIYE_ADI[x.seviye - 1]}</span>
+            </button>
+          </li>
+        ))}
+      </ul>
+    </Katman>
   );
 }
 
@@ -327,7 +401,7 @@ function DonemSonu({ oyun, liste }: { oyun: Oyun; liste: Haber[] }) {
   );
 }
 
-function HaritaSekmesi({ oyun, liste, ac }: { oyun: Oyun; liste: Haber[]; ac: (h: Haber) => void }) {
+function HaritaSekmesi({ oyun, liste, ac, onceliklereGit }: { oyun: Oyun; liste: Haber[]; ac: (h: Haber) => void; onceliklereGit: () => void }) {
   return (
     <div className="ana-izgara">
       <section className="harita-kutu" aria-label="Harita">
@@ -343,6 +417,7 @@ function HaritaSekmesi({ oyun, liste, ac }: { oyun: Oyun; liste: Haber[]; ac: (h
         )}
         <h2 className="bolum-baslik">Alanların</h2>
         <Alanlar oyun={oyun} />
+        <button className="dugme dugme-ikincil" onClick={onceliklereGit}>Önceliklerini ayarla ({oyun.kullanilan}/{oyun.havuz})</button>
       </section>
     </div>
   );
@@ -376,8 +451,10 @@ function YazismalarSekmesi({ oyun }: { oyun: Oyun }) {
 function DurumSekmesi({ oyun }: { oyun: Oyun }) {
   return (
     <div className="tek-sutun">
+      <h2 className="bolum-baslik">Önceliklerin</h2>
+      <Oncelikler oyun={oyun} />
       <h2 className="bolum-baslik">Alanların</h2>
-      <p className="soluk">Bu değerler simülasyonun kendi ölçüleridir; gerçek bir tarihsel ölçüme dayanmaz.</p>
+      <p className="soluk">Bu değerler simülasyonun kendi ölçüleridir; gerçek bir tarihsel ölçüme dayanmaz. Çizgiler yeni aşamanın eşiklerini gösterir.</p>
       <Alanlar oyun={oyun} aciklama />
       <h2 className="bolum-baslik">Kararların şeması</h2>
       <KararSemasi oyun={oyun} />
@@ -484,7 +561,7 @@ export function App() {
       )}
 
       <main className="icerik">
-        {sekme === "harita" && <HaritaSekmesi oyun={oyun} liste={liste} ac={setAcik} />}
+        {sekme === "harita" && <HaritaSekmesi oyun={oyun} liste={liste} ac={setAcik} onceliklereGit={() => git("durum")} />}
         {sekme === "haberler" && (
           <div className="tek-sutun">
             <h2 className="bolum-baslik">Haberler</h2>
@@ -501,7 +578,9 @@ export function App() {
 
       {acik && <HaberDetayi oyun={oyun} haber={acik} kapat={() => setAcik(null)} />}
       {sonuc && <SonucKarti oyun={oyun} sonuc={sonuc} kapat={() => setSonuc(null)} />}
-      {d.bekleyenKart && !sonuc && <KararKarti oyun={oyun} sonucAc={setSonuc} />}
+      {!oyun.oncelikGoruldu && <OncelikEkrani oyun={oyun} />}
+      {oyun.oncelikGoruldu && d.bekleyenKart && !sonuc && <KararKarti oyun={oyun} sonucAc={setSonuc} />}
+      {oyun.oncelikGoruldu && oyun.asim && !d.bekleyenKart && !sonuc && <KapasiteKarti oyun={oyun} />}
       {d.bitti && !d.bekleyenKart && !sonuc && <DonemSonu oyun={oyun} liste={liste} />}
     </div>
   );

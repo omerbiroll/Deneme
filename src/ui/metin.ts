@@ -40,7 +40,29 @@ export interface Veri {
   kaynaklar: Map<string, Kaynak>;
 }
 
+/** Eşik haberleri: bir alan yeni bir aşamaya geçince ya da geriye düşünce gelir. Tasarım metnidir (simülasyon). */
+const ESIK_METNI: Record<string, { yukari: string; asagi: string }> = {
+  ekonomi: { yukari: "Üretim ve ticaret haberleri olumlu; devlet aynı anda daha fazla işe girişebiliyor.", asagi: "Üretim ve ticarette gerileme var; devletin harcayabileceği para daraldı." },
+  ordu: { yukari: "Birliklerin donanımı ve hazırlığı gözle görülür biçimde düzeldi.", asagi: "Birliklerin donanımında ve hazırlığında eksikler belirginleşti." },
+  egitim: { yukari: "Okullar ve kültür kurumlarında yeni açılımlar konuşuluyor.", asagi: "Okullar ve kültür kurumları geri planda kaldı." },
+  disPolitika: { yukari: "Başkentler Ankara'nın sözünü daha çok dinliyor.", asagi: "Başkentler Ankara'nın tutumunu ciddiye almaz oldu." },
+  halk: { yukari: "Halkın devlete yakınlığı arttı; kasabalardan olumlu haberler geliyor.", asagi: "Köylerde ve kasabalarda devletten uzaklaşma hissediliyor." },
+  kurumlar: { yukari: "Meclis ve hukuk düzeni oturdu; devlet sensiz de ayakta kalacak gibi görünüyor.", asagi: "Kurumların zayıfladığı konuşuluyor." },
+};
+
+function esikHaberi(b: Bildirim): Haber {
+  const [, alan = "", , yon = "yukari"] = b.olayId.split(":");
+  const baslik = ALANLAR.find((a) => a.ad === alan)?.baslik ?? alan;
+  const yukari = yon === "yukari";
+  return {
+    anahtar: `${b.olayId}:gerceklesti`, olayId: b.olayId, tarih: b.olayTarihi, teslim: b.teslimTarihi, onemli: true, etiket: "simulasyon",
+    baslik: `${baslik}: ${yukari ? "yeni bir aşamaya geçtin" : "geriye düştün"}`,
+    metin: `${ESIK_METNI[alan]?.[yukari ? "yukari" : "asagi"] ?? ""} Artı hakkın ${yukari ? "1 arttı" : "1 azaldı"}.`,
+  };
+}
+
 export function haberYaz(b: Bildirim, senaryo: Senaryo, veri: Veri): Haber | null {
+  if (b.olayId.startsWith("esik:")) return esikHaberi(b);
   const tanim = senaryo.olaylar.find((o) => o.id === b.olayId);
   if (!tanim || b.durum === "gerceklesmedi") return null;
   const ortak = { anahtar: `${b.olayId}:${b.durum}`, olayId: b.olayId, tarih: b.olayTarihi, teslim: b.teslimTarihi, onemli: b.onem === "buyuk" };

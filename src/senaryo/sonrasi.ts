@@ -360,7 +360,11 @@ const notr = (): Iliski => ({ guven: 50, sadakat: 50, yakinlik: 50, siyasiUyum: 
 export function sonrasiSenaryosu(): Senaryo {
   const dunya: OlayTanimi[] = tarihselVeriyiYukle().olaylar
     .filter((o) => o.tur === "dunya")
-    .map((o) => ({ id: o.id, tarihselOlayId: o.id, tarih: o.tarih, etkiler: [], onem: "buyuk" as const, haberGecikmesiGun: 2 }));
+    .map((o) => ({
+      id: o.id, tarihselOlayId: o.id, tarih: o.tarih, onem: "buyuk" as const, haberGecikmesiGun: 2,
+      // Avrupa'daki işgal olağanüstü bir durum yaratır: devletin aynı anda üstlenebileceği iş üç ay daralır.
+      etkiler: o.id === "cekoslovakya" ? [{ tur: "havuz" as const, delta: -1, ay: 3 }] : [],
+    }));
   const olaylar = [...kartlar, ...dunya]
     .map((o, i) => ({ o, i }))
     .sort((a, b) => a.o.tarih.localeCompare(b.o.tarih) || a.i - b.i)
@@ -369,6 +373,16 @@ export function sonrasiSenaryosu(): Senaryo {
     id: "sonrasi-1938",
     baslangic: "1938-11-10",
     bitis: "1939-06-30",
+    gostergeSiniri: [0, 100],
+    /** Öncelik sistemi (tasarım parametreleri; denge oynayınca ayarlanır). */
+    oncelik: {
+      alanlar: ["ekonomi", "ordu", "egitim", "disPolitika", "halk", "kurumlar"],
+      baslangicHavuz: 3,
+      havuzAralik: [2, 6],
+      seviyeAralik: [-2, 2],
+      aylikCarpan: 2,
+      esikler: [{ yukari: 55, asagi: 50 }, { yukari: 70, asagi: 65 }, { yukari: 85, asagi: 80 }],
+    },
     /** Altı alan (0-100). Başlangıç değerleri tasarımdır; tarihsel bir ölçüme dayanmaz. */
     gostergeler: { ekonomi: 44, ordu: 48, egitim: 40, disPolitika: 46, halk: 38, kurumlar: 36 },
     iliskiler: { bayar: notr(), cakmak: notr(), inonu: notr() },

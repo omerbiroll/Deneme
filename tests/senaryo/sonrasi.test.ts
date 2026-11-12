@@ -4,7 +4,7 @@
  */
 import { describe, it, expect } from "vitest";
 import type { Durum } from "../../src/engine/tipler";
-import { baslat, ilerle, kararVer, senaryoyuDogrula, BEKLE } from "../../src/engine/motor";
+import { baslat, ilerle, kararVer, senaryoyuDogrula, oncelikAyarla, kapasiteAsimi, havuz, seviyeToplam, BEKLE } from "../../src/engine/motor";
 import { olayiEtkileyenKararlar } from "../../src/engine/nedensellik";
 import { sonucSatirlari } from "../../src/engine/sonuc";
 import { sonrasiSenaryosu } from "../../src/senaryo/sonrasi";
@@ -14,13 +14,22 @@ const senaryo = sonrasiSenaryosu();
 const kartlar = senaryo.olaylar.filter((o) => o.kart);
 const veri = tarihselVeriyiYukle();
 
-function oyna(secimler: Record<string, string> = {}, tohum = 1): Durum {
-  let d = ilerle(baslat(senaryo, tohum), senaryo);
+/** Oyunu baştan sona oynatır. Kapasite aşılırsa en yüksek artıdan bir adım vazgeçer. */
+function oyna(secimler: Record<string, string> = {}, tohum = 1, seviyeler: Record<string, number> = {}): Durum {
+  let d = baslat(senaryo, tohum);
+  for (const [alan, v] of Object.entries(seviyeler)) d = oncelikAyarla(d, senaryo, alan, v);
+  d = ilerle(d, senaryo);
   while (!d.bitti) {
     if (d.bekleyenKart) d = kararVer(d, senaryo, secimler[d.bekleyenKart] ?? BEKLE);
+    else if (kapasiteAsimi(d, senaryo)) d = vazgec(d);
     d = ilerle(d, senaryo);
   }
   return d;
+}
+
+function vazgec(d: Durum): Durum {
+  const [alan, v] = Object.entries(d.oncelik.seviyeler).sort((x, y) => y[1] - x[1])[0]!;
+  return oncelikAyarla(d, senaryo, alan, v - 1);
 }
 
 describe("senaryo yapısı", () => {
@@ -173,10 +182,66 @@ describe("dayanıklılık", () => {
         const sec = k.kart!.secenekler;
         secimler[k.id] = sec[Math.floor(sans() * sec.length)]!.id;
       }
-      const d = oyna(secimler, i);
+      const alanlar = senaryo.oncelik!.alanlar;
+      const seviyeler: Record<string, number> = {};
+      for (const alan of alanlar) {
+        const v = Math.floor(sans() * 5) - 2;
+        const toplam = Object.values(seviyeler).reduce((t, x) => t + x, 0);
+        if (v <= 0 || toplam + v <= 3) seviyeler[alan] = v;
+      }
+      const d = oyna(secimler, i, seviyeler);
       expect(d.bitti).toBe(true);
       for (const [ad, v] of Object.entries(d.gostergeler)) expect(v >= 0 && v <= 100, `${ad}=${v}`).toBe(true);
-      if (i < 5) expect(oyna(secimler, i)).toEqual(d);
+      if (i < 5) expect(oyna(secimler, i, seviyeler)).toEqual(d);
     }
+  });
+});
+
+describe("öncelik sistemi senaryoda", () => {
+  it("yapılandırma geçerlidir ve altı alanı kapsar", () => {
+    expect(senaryo.oncelik?.alanlar).toHaveLength(6);
+    expect(() => senaryoyuDogrula(senaryo)).not.toThrow();
+  });
+
+  it("öncelik verilen alan zamanla gelişir, verilmeyen aynı kalmaz ya da ihmal edilir", () => {
+    const hic = oyna();
+    const ekonomi = oyna({}, 1, { ekonomi: 2 });
+    expect(ekonomi.gostergeler.ekonomi!).toBeGreaterThan(hic.gostergeler.ekonomi! + 10);
+  });
+
+  it("eksi verilen alan geriler", () => {
+    const hic = oyna();
+    const eksi = oyna({}, 1, { egitim: -2 });
+    expect(eksi.gostergeler.egitim!).toBeLessThan(hic.gostergeler.egitim! - 10);
+  });
+
+  it("eşiği geçince haber gelir ve havuz büyür", () => {
+    const d = oyna({}, 1, { ekonomi: 2 });
+    expect(Object.keys(d.gerceklesen).some((id) => id.startsWith("esik:ekonomi:1:yukari"))).toBe(true);
+    expect(havuz(d, senaryo)).toBeGreaterThanOrEqual(4);
+  });
+
+  it("Çekoslovakya'nın işgali havuzu daraltır ve tüm artıları kullanan oyuncu vazgeçmek zorunda kalır", () => {
+    let d = oncelikAyarla(oncelikAyarla(baslat(senaryo, 1), senaryo, "halk", 2), senaryo, "egitim", 1);
+    d = ilerle(d, senaryo);
+    // Kartları sırayla geç; kapasite aşımında dur.
+    let asimTarihi: string | undefined;
+    while (!d.bitti && !asimTarihi) {
+      if (d.bekleyenKart) d = ilerle(kararVer(d, senaryo, BEKLE), senaryo, d.tarih);
+      else if (kapasiteAsimi(d, senaryo)) asimTarihi = d.tarih;
+      else d = ilerle(d, senaryo);
+    }
+    expect(asimTarihi).toBe("1939-03-15");
+    expect(seviyeToplam(d)).toBeGreaterThan(havuz(d, senaryo));
+    expect(() => ilerle(d, senaryo)).toThrow(/kapasite/);
+    d = vazgec(d);
+    expect(kapasiteAsimi(d, senaryo)).toBe(false);
+  });
+
+  it("öncelikler seçim yanılsaması dedektörünü bozmaz", () => {
+    const a = oyna({ "kart-iki-kapi": "ingiltere" }, 1, { disPolitika: 2 });
+    const b = oyna({ "kart-iki-kapi": "almanya" }, 1, { disPolitika: 2 });
+    expect(a.gerceklesen["kart-iki-kapi:ingiltere:0"]).toBeDefined();
+    expect(b.gerceklesen["kart-iki-kapi:ingiltere:0"]).toBeUndefined();
   });
 });

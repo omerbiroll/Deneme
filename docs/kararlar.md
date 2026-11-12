@@ -15,6 +15,11 @@ Tarih: 11–12 Kasım 2026.
 - Hedef kitle: genel okur. Tarih bilmeyen de oynayabilmeli; meraklıya derinlik opsiyonel.
 - Detroit: Become Human'ın mekaniklerinden esinlenilir (adı, karakterleri, görünümü alınmaz). Oyuncu yalnızca Atatürk'tür; birden fazla oynanabilir karakter eklenmez.
 
+## Platform (12 Kasım 2026)
+
+- **Yalnızca telefon.** PC ve geniş ekran için tasarım ve test yapılmaz. Geniş ekranda uygulama, telefon genişliğinde tek sütun olarak görünür.
+- Önceki "mobil ve PC ayrı test edilir" kararı bununla geçersizdir.
+
 ## Oyun hissi (onaylandı)
 
 1. **İkilemli kartlar.** Her seçeneğin görünür kazancı ve bedeli vardır; hiçbir seçenek "doğru cevap" değildir. "Hiçbir şey yapma" her kartta vardır.
@@ -29,10 +34,19 @@ Tarih: 11–12 Kasım 2026.
 7. **Bölüm sonu şeması:** seçtiğin ve seçmediğin yollar görünür. Şema motor kaydından çizilir.
 8. **Gerçek tarihle karşılaştırma:** "Atatürk'süz gerçek tarihte" olanlar, o günün tarihi geçince açılır.
 
+## Öncelik sistemi (onaylandı, 12 Kasım 2026'da yapıldı)
+
+- **Altı alan:** ekonomi, ordu, eğitim ve kültür, dış politika, halk ve köy, hukuk ve kurumlar.
+- Her alana −2 ile +2 arası seviye (`−−`, `−`, `0`, `+`, `++`). **Artı havuzu sınırlıdır:** seviyelerin toplamı havuzu aşamaz. Başka bir alana eksi vermek yeni artı için yer açar.
+- Her ay başında alan, seviye × 2 puan değişir. Artı alan gelişir, eksi alan geriler.
+- **Eşikler** (55, 70, 85; aşağı iniş 50, 65, 80): yukarı geçince havuz +1, aşağı inince −1. Yukarı ve aşağı değer farklı olduğu için titreme olmaz. Eşik geçişi haberle anlatılır.
+- Havuz 2 ile 6 arasındadır; başlangıçta 3.
+- **Kriz havuzu geçici daraltır** (şimdilik: Çekoslovakya'nın işgali, 3 ay, −1). Daralınca dağıtılmış artılar havuzu aşıyorsa oyun durur ve "Kapasite daraldı: hangi alandan vazgeçeceksin?" diye sorar.
+- Başlangıçta oyuncu önceliklerini belirler; sonradan Durum sekmesinden değiştirebilir.
+- Sayılar (çarpan, eşikler, havuz) ilk tahmindir; denge oynayınca ayarlanır.
+
 ## Onaylanmış, henüz yapılmamış (bkz. docs/tasarim.md)
 
-- **Altı alan ve öncelik sistemi:** ekonomi, ordu, eğitim ve kültür, dış politika, halk ve köy, hukuk ve kurumlar. Her alana −2 ile +2 arası seviye; sınırlı artı havuzu; fazla artı için başka alana eksi.
-- **Eşikler:** bir alan eşik geçince havuz +1, düşünce −1 (yukarı ve aşağı eşik farklı, titreme olmasın). Havuz 2–6. Kriz havuzu geçici daraltır. Daralınca oyun "hangi alandan vazgeçeceksin?" diye sorar. Eşik geçişi sahneyle anlatılır.
 - **Dikkat:** ayda sınırlı sayıda iş. **Etkinlikler:** sofra kur, fabrika açılışı, elçi kabulü, tavla masası, okul ziyareti, Anadolu uğrağı (küçük sahneler, belirsizlik içerir, aynı etkinlik art arda tekrar etmez, duruma göre açılır).
 
 ## Eski projeden devralınan, yeniden onay bekleyen

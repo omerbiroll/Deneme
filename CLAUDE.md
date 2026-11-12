@@ -11,7 +11,7 @@ Bu dosya her oturumda okunur. Buradaki kurallar bağlayıcıdır. Ayrıntı içi
 
 Önceki proje (1918, Mondros sonrası) kullanıcı tarafından iptal edildi; yeni oyun 11–12 Kasım 2026'da kâğıt üstünde tasarlanıp onaylandı. Motor, nedensellik ve kayıt altyapısı korundu; senaryo, veri, metin ve arayüz yeniden yazıldı.
 
-İlk oynanabilir dilim hazır: 10 Kasım 1938 – 30 Haziran 1939, 8 karar kartı (3'ü zamanlı), pasif aylar, yankı sahneleri, sonuç kartı, bölüm sonu şeması, gerçek tarihle (Atatürk'süz) karşılaştırma. Henüz yok: öncelik ekranı ve eşikler, dikkat ve etkinlikler, işlevsel harita, dallanan kayıt.
+İlk oynanabilir dilim hazır: 10 Kasım 1938 – 30 Haziran 1939, 8 karar kartı (3'ü zamanlı), pasif aylar, yankı sahneleri, sonuç kartı, bölüm sonu şeması, gerçek tarihle (Atatürk'süz) karşılaştırma ve **öncelik sistemi** (alanlara artı/eksi, havuz, eşikler, kriz, "kapasite daraldı" anı). Henüz yok: dikkat ve etkinlikler, işlevsel harita, dallanan kayıt.
 
 ## Değişmez kurallar
 
@@ -26,7 +26,7 @@ Bu dosya her oturumda okunur. Buradaki kurallar bağlayıcıdır. Ayrıntı içi
 9. **Karar kartı kuralları:** her kartta "Hiçbir şey yapma" bulunur. İkilemli kartta her seçeneğin kazancı ve bedeli yazılıdır ve hem kazandırıp hem kaybettirir (zamanlı anlarda kazanç ve bedel karardan sonra açılır). Her seçeneğin **yalnızca kendisine ait** bir sonucu olmalıdır; bunu `tests/senaryo/sonrasi.test.ts` içindeki "seçim yanılsaması dedektörü" denetler. Kart ekleyince dedektörün geçmesi şarttır.
 10. **Sonuç gösterimi:** en fazla dört satır, düz Türkçe, sayısız. Türleri: Kapı, Kişi, Alan. Sonuçlar üç aşamada gelir: hemen (tepki), haftalar sonra (haber), aylar sonra (yankı).
 11. **Hedef kitle genel okur.** Sade dil; zor terimler `src/ui/sozluk.ts` ile dokununca açıklanır. Dönemin atmosferi korunur, okunabilirlik öncelikli.
-12. **Mobil öncelikli, tek kod tabanı.** Mobil, PC'nin küçültülmüşü değildir; ikisi de ayrı test edilir.
+12. **Yalnızca telefon.** PC ve geniş ekran desteklenmez ve test edilmez; geniş ekranda telefon genişliğinde tek sütun görünür.
 13. **Test edilmeden "bitti" denmez.** Tarihsel doğruluk testleri ile yazılım testleri ayrı tutulur. Yeni bir kural testi yazınca, kuralı bozup testin gerçekten patladığını bir kez doğrula.
 14. **Hassas konular** (hastalık, ölüm, tartışmalı yargılamalar) kaynağın ifadesiyle, hüküm vermeden aktarılır. Atatürk'e dair yasal sınırlar için yayın öncesi uzman görüşü gerekir.
 15. Detroit: Become Human'dan yalnızca mekanikler (dallanan sahneler, zamanlı anlar, şema) alınır; adı, karakterleri ve görünümü alınmaz.
@@ -42,7 +42,7 @@ Bu dosya her oturumda okunur. Buradaki kurallar bağlayıcıdır. Ayrıntı içi
 
 - Çalışma dalı: `claude/ataturk-history-simulation-g882pk` (silme isteği GitHub tarafından reddedildi; dal durur).
 - Testler: `npm test`. Tip denetimi: `npm run typecheck`. Geliştirme: `npm run dev`. Derleme: `npm run build`.
-- Arayüz denemesi (telefon ve PC boyutunda baştan sona oynatır, süre dolmasını da dener): `scripts/arayuz-denemesi.cjs`.
+- Arayüz denemesi (telefon boyutunda baştan sona oynatır; öncelik ekranı, kapasite daraldı anı, süre dolması, kayıt): `scripts/arayuz-denemesi.cjs`. Düğme ararken `exact: true` kullan; "Durum" gibi adlar haber başlıklarıyla karışır.
 - Paylaşılabilir tek dosya önizleme: `npx vite build -c vite.tekdosya.config.ts && python3 -I scripts/onizleme-uret.py <çıktı.html>`.
 - Harita kıyı çizgisi `npm run harita` ile üretilir (`land-50m`; `land-10m` kırpmada bozuluyor, kullanma).
 - Kaynak sitelerine erişim "Deneme" ortamında açık; ktb.gov.tr bağlantısı zaman zaman kopar, tekrar dene. `www.ktb.gov.tr` yanıt vermez.

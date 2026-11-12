@@ -8,7 +8,7 @@
 import type {
   Durum, Senaryo, OlayTanimi, Kosul, Etki, Neden, Tarih, Bildirim,
 } from "./tipler";
-import { gunEkle, rastgele, sikistir } from "./yardimci";
+import { gunEkle, rastgele, sikistir, ayEkle, sonrakiAyBasi } from "./yardimci";
 
 export const BEKLE = "bekle";
 const AKIS: Neden = { tur: "tarihsel-akis" };
@@ -43,6 +43,15 @@ export function senaryoyuDogrula(s: Senaryo): void {
       throw new Error(`"${o.id}" bekleyebilir ama son tarihi yok`);
     }
   }
+  if (s.oncelik) {
+    const o = s.oncelik;
+    for (const a of o.alanlar) if (!(a in s.gostergeler)) throw new Error(`öncelik alanı "${a}" göstergeler arasında yok`);
+    if (o.baslangicHavuz < o.havuzAralik[0] || o.baslangicHavuz > o.havuzAralik[1]) throw new Error("başlangıç havuzu aralığın dışında");
+    o.esikler.forEach((e, i) => {
+      if (e.asagi >= e.yukari) throw new Error(`${i + 1}. eşikte aşağı değer yukarı değerden küçük olmalı (titremeyi önlemek için)`);
+      if (i > 0 && e.yukari <= o.esikler[i - 1]!.yukari) throw new Error("eşikler artan sırada olmalı");
+    });
+  }
   const eylemIdleri = new Set<string>();
   for (const e of s.eylemler) {
     if (eylemIdleri.has(e.id)) throw new Error(`yinelenen eylem kimliği: ${e.id}`);
@@ -66,6 +75,13 @@ export function baslat(senaryo: Senaryo, tohum: number): Durum {
     kararlar: [],
     etkiler: [],
     bekleyenKart: null,
+    gostergeSiniri: senaryo.gostergeSiniri,
+    oncelik: {
+      seviyeler: Object.fromEntries((senaryo.oncelik?.alanlar ?? []).map((a) => [a, 0])),
+      esikSayisi: {},
+      krizler: [],
+      sonTik: senaryo.baslangic,
+    },
     yoldakiHaberler: [],
     oyuncuBilgisi: [],
     bitti: false,
@@ -123,9 +139,15 @@ function olayinNedenleri(d: Durum, o: OlayTanimi, gerceklesti: boolean): Neden[]
 function etkileriUygula(d: Durum, etkiler: Etki[], nedenler: Neden[]): void {
   for (const e of etkiler) {
     switch (e.tur) {
-      case "gosterge":
-        d.gostergeler[e.ad] = (d.gostergeler[e.ad] ?? 0) + e.delta;
+      case "gosterge": {
+        const yeni = (d.gostergeler[e.ad] ?? 0) + e.delta;
+        d.gostergeler[e.ad] = d.gostergeSiniri ? sikistir(yeni, d.gostergeSiniri[0], d.gostergeSiniri[1]) : yeni;
         d.etkiler.push({ tarih: d.tarih, hedef: `gosterge:${e.ad}`, delta: e.delta, nedenler });
+        break;
+      }
+      case "havuz":
+        d.oncelik.krizler.push({ bitis: ayEkle(d.tarih, e.ay), delta: e.delta });
+        d.etkiler.push({ tarih: d.tarih, hedef: "havuz", delta: e.delta, nedenler });
         break;
       case "iliski": {
         const il = d.iliskiler[e.kisi];
@@ -215,6 +237,71 @@ function vadesiGeleniIsle(d: Durum, s: Senaryo): boolean {
   return false;
 }
 
+/** Öncelik sisteminin anlık durumu (artı havuzu, kullanılan artı, kapasite aşımı). */
+export function seviyeToplam(d: Durum): number {
+  return Object.values(d.oncelik.seviyeler).reduce((t, v) => t + v, 0);
+}
+
+export function havuz(d: Durum, s: Senaryo): number {
+  const o = s.oncelik;
+  if (!o) return 0;
+  const esik = Object.values(d.oncelik.esikSayisi).reduce((t, v) => t + v, 0);
+  const kriz = d.oncelik.krizler.filter((k) => k.bitis > d.tarih).reduce((t, k) => t + k.delta, 0);
+  return sikistir(o.baslangicHavuz + esik + kriz, o.havuzAralik[0], o.havuzAralik[1]);
+}
+
+/** Dağıtılmış artılar havuzu aşıyorsa oyuncu bir alandan vazgeçmeden zaman ilerlemez. */
+export const kapasiteAsimi = (d: Durum, s: Senaryo): boolean => !!s.oncelik && seviyeToplam(d) > havuz(d, s);
+
+/** Bir alanın öncelik seviyesini ayarlar. Artırmak yalnızca havuz yetiyorsa mümkündür. */
+export function oncelikAyarla(durum: Durum, senaryo: Senaryo, alan: string, seviye: number): Durum {
+  const o = senaryo.oncelik;
+  if (!o || !o.alanlar.includes(alan)) throw new Error(`"${alan}" öncelik verilebilen bir alan değil`);
+  if (!Number.isInteger(seviye) || seviye < o.seviyeAralik[0] || seviye > o.seviyeAralik[1]) throw new Error(`seviye ${o.seviyeAralik[0]} ile ${o.seviyeAralik[1]} arasında olmalı`);
+  const d = structuredClone(durum);
+  const onceki = d.oncelik.seviyeler[alan] ?? 0;
+  d.oncelik.seviyeler[alan] = seviye;
+  if (seviye > onceki && seviyeToplam(d) > havuz(d, senaryo)) throw new Error("artı hakkın yetmiyor; önce başka bir alana eksi ver ya da bir artıdan vazgeç");
+  return d;
+}
+
+function sonrakiTik(d: Durum, s: Senaryo): Tarih | undefined {
+  if (!s.oncelik) return undefined;
+  const t = sonrakiAyBasi(d.oncelik.sonTik);
+  return t <= s.bitis ? t : undefined;
+}
+
+function esikleriDegerlendir(d: Durum, s: Senaryo): void {
+  const o = s.oncelik!;
+  for (const alan of o.alanlar) {
+    const v = d.gostergeler[alan] ?? 0;
+    let k = d.oncelik.esikSayisi[alan] ?? 0;
+    const kaydet = (yon: "yukari" | "asagi", numara: number) => {
+      const id = `esik:${alan}:${numara}:${yon}:${d.tarih}`;
+      d.gerceklesen[id] = { tarih: d.tarih, nedenler: [{ tur: "oncelik", id: alan }], alternatif: false };
+      d.yoldakiHaberler.push({ olayId: id, olayTarihi: d.tarih, teslimTarihi: d.tarih, onem: "buyuk", durum: "gerceklesti", alternatif: false });
+    };
+    while (k < o.esikler.length && v >= o.esikler[k]!.yukari) { k++; kaydet("yukari", k); }
+    while (k > 0 && v < o.esikler[k - 1]!.asagi) { kaydet("asagi", k); k--; }
+    d.oncelik.esikSayisi[alan] = k;
+  }
+}
+
+/** Ay başı: öncelikler alanları değiştirir, krizler biter, eşikler değerlendirilir. */
+function tikIsle(d: Durum, s: Senaryo): boolean {
+  const t = sonrakiTik(d, s);
+  if (t === undefined || d.tarih < t) return false;
+  d.oncelik.sonTik = t;
+  const o = s.oncelik!;
+  for (const alan of o.alanlar) {
+    const seviye = d.oncelik.seviyeler[alan] ?? 0;
+    if (seviye !== 0) etkileriUygula(d, [{ tur: "gosterge", ad: alan, delta: seviye * o.aylikCarpan }], [{ tur: "oncelik", id: alan }]);
+  }
+  d.oncelik.krizler = d.oncelik.krizler.filter((k) => k.bitis > d.tarih);
+  esikleriDegerlendir(d, s);
+  return true;
+}
+
 /** Zamanın ileri gidebileceği bir sonraki an: yaklaşan olay, bekleyen olayın son tarihi ya da yoldaki haber. */
 function sonrakiAn(d: Durum, s: Senaryo): Tarih | undefined {
   const anlar: Tarih[] = [];
@@ -226,6 +313,8 @@ function sonrakiAn(d: Durum, s: Senaryo): Tarih | undefined {
     if (son !== undefined && son > d.tarih) anlar.push(son);
   }
   for (const h of d.yoldakiHaberler) if (h.teslimTarihi > d.tarih) anlar.push(h.teslimTarihi);
+  const tik = sonrakiTik(d, s);
+  if (tik !== undefined && tik > d.tarih) anlar.push(tik);
   return anlar.sort()[0];
 }
 
@@ -235,6 +324,7 @@ function sonrakiAn(d: Durum, s: Senaryo): Tarih | undefined {
  */
 export function ilerle(durum: Durum, senaryo: Senaryo, hedefTarih?: Tarih): Durum {
   if (durum.bekleyenKart) throw new Error("bekleyen karar kartı var; önce karar verilmeli");
+  if (kapasiteAsimi(durum, senaryo)) throw new Error("kapasite aşıldı; önce bir alandan vazgeçilmeli");
   if (durum.bitti) return durum;
   const d = structuredClone(durum);
   const hedef = hedefTarih && hedefTarih < senaryo.bitis ? hedefTarih : senaryo.bitis;
@@ -242,7 +332,11 @@ export function ilerle(durum: Durum, senaryo: Senaryo, hedefTarih?: Tarih): Duru
   for (;;) {
     haberleriTeslimEt(d);
     if (vadesiGeleniIsle(d, senaryo)) {
-      if (d.bekleyenKart) return d;
+      if (d.bekleyenKart || kapasiteAsimi(d, senaryo)) return d;
+      continue;
+    }
+    if (tikIsle(d, senaryo)) {
+      if (kapasiteAsimi(d, senaryo)) return d;
       continue;
     }
     const an = sonrakiAn(d, senaryo);

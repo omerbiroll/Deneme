@@ -1,7 +1,7 @@
 /** Oyun durumunu arayüze bağlar: motor çağrıları, otomatik kayıt, ayarlar. */
 import { useCallback, useEffect, useMemo, useState } from "react";
 import type { Durum, Tarih } from "../engine/tipler";
-import { baslat, ilerle, kararVer } from "../engine/motor";
+import { baslat, ilerle, kararVer, oncelikAyarla, havuz, seviyeToplam, kapasiteAsimi } from "../engine/motor";
 import { gunEkle } from "../engine/yardimci";
 import { sonrasiSenaryosu } from "../senaryo/sonrasi";
 import { tarihselVeriyiYukle } from "../data/yukle";
@@ -10,6 +10,7 @@ import type { Veri } from "./metin";
 const KAYIT = "ataturk-sim:kayit:v2";
 const ACILIS = "ataturk-sim:acilis:v2";
 const SURE = "ataturk-sim:sure:v2";
+const ONCELIK = "ataturk-sim:oncelik:v1";
 
 function oku(anahtar: string): string | null {
   try { return localStorage.getItem(anahtar); } catch { return null; }
@@ -23,7 +24,7 @@ interface Kayit { durum: Durum; okunan: number }
 function kayitOku(): Kayit | null {
   try {
     const k = JSON.parse(oku(KAYIT) ?? "null") as Kayit | null;
-    return k?.durum?.senaryoId === "sonrasi-1938" ? k : null;
+    return k?.durum?.senaryoId === "sonrasi-1938" && k.durum.oncelik ? k : null;
   } catch { return null; }
 }
 
@@ -39,8 +40,9 @@ export function useOyun() {
   /** Yeni oyun: başlangıç gününün olayları (ilk kart) hemen açılır. */
   const yeniDurum = useCallback(() => ilerle(baslat(senaryo, yeniTohum()), senaryo, senaryo.baslangic), [senaryo]);
   const [kayit, setKayit] = useState<Kayit>(() => kayitOku() ?? { durum: yeniDurum(), okunan: 0 });
-  const [acilisGoruldu, setAcilisGoruldu] = useState(() => oku(ACILIS) === "1" || kayitOku() !== null);
+  const [acilisGoruldu, setAcilisGoruldu] = useState(() => oku(ACILIS) === "1");
   const [sureAcik, setSureAcik] = useState(() => oku(SURE) !== "kapali");
+  const [oncelikGoruldu, setOncelikGoruldu] = useState(() => oku(ONCELIK) === "1");
   const { durum, okunan } = kayit;
 
   useEffect(() => { yaz(KAYIT, JSON.stringify(kayit)); }, [kayit]);
@@ -50,12 +52,19 @@ export function useOyun() {
   return {
     senaryo, veri, durum, acilisGoruldu, sureAcik,
     okunmamis: Math.max(0, durum.oyuncuBilgisi.length - okunan),
-    haftaIlerle: () => guncelle((d) => (d.bekleyenKart || d.bitti ? d : ilerle(d, senaryo, gunEkle(d.tarih, 7) as Tarih))),
-    kararaKadarIlerle: () => guncelle((d) => (d.bekleyenKart || d.bitti ? d : ilerle(d, senaryo))),
+    oncelikGoruldu,
+    havuz: havuz(durum, senaryo),
+    kullanilan: seviyeToplam(durum),
+    asim: kapasiteAsimi(durum, senaryo),
+    haftaIlerle: () => guncelle((d) => (d.bekleyenKart || d.bitti || kapasiteAsimi(d, senaryo) ? d : ilerle(d, senaryo, gunEkle(d.tarih, 7) as Tarih))),
+    kararaKadarIlerle: () => guncelle((d) => (d.bekleyenKart || d.bitti || kapasiteAsimi(d, senaryo) ? d : ilerle(d, senaryo))),
+    /** Alanın öncelik seviyesini değiştirir; havuz yetmiyorsa değişiklik yapılmaz. */
+    oncelikDegistir: (alan: string, seviye: number) => guncelle((d) => { try { return oncelikAyarla(d, senaryo, alan, seviye); } catch { return d; } }),
+    oncelikBitti: () => { yaz(ONCELIK, "1"); setOncelikGoruldu(true); },
     /** Karar verir; aynı gün sıradaki kart varsa hemen açar. */
     kararVer: (secenekId: string) => guncelle((d) => ilerle(kararVer(d, senaryo, secenekId), senaryo, d.tarih)),
     okunduIsaretle: () => setKayit((k) => ({ ...k, okunan: k.durum.oyuncuBilgisi.length })),
-    yeniOyun: () => { setKayit({ durum: yeniDurum(), okunan: 0 }); },
+    yeniOyun: () => { setKayit({ durum: yeniDurum(), okunan: 0 }); yaz(ONCELIK, "0"); setOncelikGoruldu(false); },
     acilisBitti: () => { yaz(ACILIS, "1"); setAcilisGoruldu(true); },
     sureDegistir: (acik: boolean) => { yaz(SURE, acik ? "acik" : "kapali"); setSureAcik(acik); },
   };
