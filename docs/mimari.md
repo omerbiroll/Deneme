@@ -1,4 +1,6 @@
-# Teknik Mimari (11 Kasım 2026'da onaylandı)
+# Teknik Mimari (11 Kasım 2026'da onaylandı; yeni oyun için de geçerli)
+
+Not: Oyunun konusu değişti (bkz. `docs/kararlar.md`); mimari aynı kaldı. Senaryo `src/senaryo/sonrasi.ts`, veri `data/tarih/`, sonuç sorguları `src/engine/sonuc.ts` ve `nedensellik.ts` içindedir.
 
 ## Teknoloji
 

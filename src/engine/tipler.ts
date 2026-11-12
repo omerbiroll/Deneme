@@ -28,6 +28,7 @@ export interface Kosul {
   olayOldu?: string[];
   olayOlmadi?: string[];
   gostergeEnAz?: Record<string, number>;
+  gostergeEnFazla?: Record<string, number>;
 }
 
 export type Etki =
@@ -46,6 +47,8 @@ export interface Secenek {
   bedel?: string;
   /** Karardan hemen sonra gösterilen kısa tepki (simülasyon metni). */
   tepki?: string;
+  /** Sonuç kartında "Kapı" olarak gösterilir: bu seçimle açılan ve kapanan imkânlar. */
+  kapi?: { acildi?: string[]; kapandi?: string[] };
   etkiler: Etki[];
 }
 
@@ -78,6 +81,8 @@ export interface OlayTanimi {
   firsatKartlari?: string[];
   /** Oyuncuya gösterilecek kısa ad (tarihsel karşılığı olmayan olaylar için). */
   ad?: string;
+  /** Yankı: bu olay, şu kararın (kartId:seçenekId) gecikmiş sonucudur. */
+  yanki?: string;
   /** Kart metni: durumun kısa anlatımı. */
   aciklama?: string;
   /** Varsa olay oyunu durdurur ve karar ister. "bekle" kimlikli seçenek zorunludur. */
@@ -86,6 +91,10 @@ export interface OlayTanimi {
     danismanlar?: Danisman[];
     /** İkilemli kartta hiçbir seçenek hem kazançsız hem bedelsiz olamaz; senaryo doğrulaması bunu denetler. */
     ikilem?: boolean;
+    /** Zamanlı an: saniye. Süre dolunca "hiçbir şey yapma" seçilir. */
+    sure?: number;
+    /** Zamanlı anlarda kazanç ve bedel karardan sonra açılır. */
+    gizliBedel?: boolean;
   };
 }
 

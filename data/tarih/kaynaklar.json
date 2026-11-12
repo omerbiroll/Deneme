@@ -1,45 +1,44 @@
 [
   {
-    "id": "ktb-kronoloji-1918",
-    "baslik": "Atatürk Kronolojisi: 1918",
+    "id": "ktb-kronoloji-1938",
+    "baslik": "Atatürk Kronolojisi: 1938",
     "yayin": "T.C. Kültür ve Turizm Bakanlığı",
     "tur": "resmi",
-    "url": "https://ktb.gov.tr/EN-103929/1918.html"
+    "url": "https://ktb.gov.tr/EN-103949/1938.html"
   },
   {
-    "id": "ktb-kronoloji-1919",
-    "baslik": "Atatürk Kronolojisi: 1919",
-    "yayin": "T.C. Kültür ve Turizm Bakanlığı",
+    "id": "msb-cakmak",
+    "baslik": "Mustafa Fevzi Çakmak",
+    "yayin": "T.C. Millî Savunma Bakanlığı",
     "tur": "resmi",
-    "url": "https://ktb.gov.tr/EN-103930/1919.html"
+    "url": "https://www.msb.gov.tr/DevletBuyuklerimizDetay/mustafa-fevzi-cakmak"
   },
   {
-    "id": "bayur-1968",
-    "baslik": "1918 Bırakışması Sırasındaki Tinsel Durum ve Mustafa Kemal'in İki Demeci",
-    "yazar": "Hikmet Bayur",
-    "yayin": "Belleten, c. 32, s. 128 (Ekim 1968), s. 479-497",
-    "tur": "akademik",
-    "url": "https://belleten.gov.tr/tam-metin/3453/tur"
+    "id": "hukumet-10",
+    "baslik": "10th government of Turkey",
+    "yayin": "Wikipedia",
+    "tur": "ansiklopedi",
+    "url": "https://en.wikipedia.org/wiki/10th_government_of_Turkey"
   },
   {
-    "id": "au-inkilap-mondros",
-    "baslik": "Mondros Mütarekesi ders notu",
-    "yayin": "Ankara Üniversitesi Türk İnkılap Tarihi Enstitüsü, Açık Ders",
-    "tur": "akademik",
-    "url": "https://acikders.ankara.edu.tr/mod/resource/view.php?id=174895"
+    "id": "hukumet-11",
+    "baslik": "11th government of Turkey",
+    "yayin": "Wikipedia",
+    "tur": "ansiklopedi",
+    "url": "https://en.wikipedia.org/wiki/11th_government_of_Turkey"
   },
   {
-    "id": "belleten-minber",
-    "baslik": "Minber gazetesi ve Mustafa Kemal üzerine makale",
-    "yayin": "Belleten (Türk Tarih Kurumu)",
-    "tur": "akademik",
-    "url": "https://www.belleten.gov.tr/eng/full-text/1731/tur"
+    "id": "history-cekoslovakya",
+    "baslik": "Nazis take Czechoslovakia",
+    "yayin": "HISTORY.com",
+    "tur": "ansiklopedi",
+    "url": "https://www.history.com/this-day-in-history/march-15/nazis-take-czechoslovakia"
   },
   {
-    "id": "atam-minber",
-    "baslik": "Mustafa Kemal'in Basınla ve Minber Gazetesiyle İlişkisi",
-    "yayin": "Atatürk Araştırma Merkezi Dergisi",
-    "tur": "akademik",
-    "url": "https://atamdergi.gov.tr/tam-metin-pdf/120/tur"
+    "id": "ata-ansiklopedisi-bildiri",
+    "baslik": "Türk-İngiliz Bildirisi (12 Mayıs 1939)",
+    "yayin": "Atatürk Ansiklopedisi",
+    "tur": "resmi",
+    "url": "https://ataturkansiklopedisi.gov.tr/bilgi/turk-ingiliz-bildirisi-12-mayis-1939/"
   }
 ]

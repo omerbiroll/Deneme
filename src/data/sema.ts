@@ -34,6 +34,12 @@ export const OlaySemasi = z
   .object({
     id: kimlik,
     tarih,
+    /**
+     * dunya: oyuncudan bağımsız gerçek dünya olayı, akışta görünür.
+     * karsilastirma: Atatürk'süz gerçek tarihte olan; tarihi geçince karşılaştırma için açılır.
+     * premise: oyunun başlangıç koşulu; yalnızca açılışta anlatılır.
+     */
+    tur: z.enum(["dunya", "karsilastirma", "premise"]),
     /** gun: tarih kesin. ay: yalnızca ay biliniyor, gün yaklaşık. */
     tarihKesinligi: z.enum(["gun", "ay"]),
     ad: z.string().min(3),

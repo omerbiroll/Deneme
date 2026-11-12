@@ -267,3 +267,32 @@ a { color: var(--murekkep-acik); }
 .tepki { display: flex; align-items: center; gap: 10px; margin: 0 auto 12px; max-width: 680px; padding: 10px 12px; border: 1.5px dashed var(--soluk); border-radius: 12px; background: var(--kagit); }
 .tepki p { flex: 1; font-family: var(--baslik); font-size: 18px; }
 .tepki-kapat { display: grid; place-items: center; width: 44px; height: 44px; border: 0; border-radius: 10px; background: transparent; }
+
+/* Yeni oyun: giriş, zamanlı anlar, sonuç kartı, şema, yankı */
+.rozet-karsilastirma { background: var(--kagit); color: var(--murekkep); border: 1.5px solid var(--murekkep); }
+.rozet-yanki { background: var(--alternatif-zemin); color: var(--alternatif); border: 1.5px solid var(--alternatif); }
+.haber-karsilastirma { border-left-color: var(--murekkep-acik); background: #f4f7f8; }
+.yanki { padding: 8px 12px; border-radius: 10px; background: var(--alternatif-zemin); font-size: 16px; }
+.acilis { position: fixed; inset: 0; z-index: 80; display: grid; place-items: center; padding: 24px; background: var(--murekkep); color: #fff; overflow-y: auto; }
+.acilis-ic { width: 100%; max-width: 560px; display: flex; flex-direction: column; gap: 16px; }
+.acilis-tarih { font-family: var(--baslik); font-size: 44px; font-weight: 700; line-height: 1.05; }
+.acilis-baslik { font-family: var(--baslik); font-size: 34px; font-weight: 700; }
+.acilis-metin { font-family: var(--baslik); font-size: 24px; line-height: 1.4; max-width: 34ch; }
+.acilis-not { color: #b9c8d6; }
+.acilis-liste { display: flex; flex-direction: column; gap: 12px; font-size: 18px; line-height: 1.4; }
+.acilis .dugme-ana { background: #fff; color: var(--murekkep); border-color: #fff; align-self: flex-start; }
+.sure { display: flex; align-items: center; gap: 10px; width: 100%; }
+.sure-cubuk { flex: 1; height: 10px; border-radius: 5px; background: var(--cizgi); overflow: hidden; }
+.sure-cubuk span { display: block; height: 100%; background: var(--al); transition: width 1s linear; }
+.sure-sayi { min-width: 44px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.sonuc { display: flex; flex-direction: column; gap: 8px; width: 100%; }
+.sonuc li { padding: 8px 12px; border-radius: 10px; background: var(--zemin); font-size: 17px; }
+.sema ol { display: flex; flex-direction: column; gap: 12px; }
+.sema-baslik { font-weight: 700; }
+.sema-baslik time { font-weight: 500; color: var(--soluk); margin-right: 6px; }
+.sema ul { margin-left: 8px; padding-left: 12px; border-left: 2px solid var(--cizgi); display: flex; flex-direction: column; gap: 4px; }
+.sema-secildi { font-weight: 700; }
+.sema-gorulmedi { color: var(--soluk); }
+.sema-not { font-size: 14px; font-weight: 400; }
+.onay-kutusu { display: flex; align-items: flex-start; gap: 10px; }
+.onay-kutusu input { width: 24px; height: 24px; margin-top: 2px; }

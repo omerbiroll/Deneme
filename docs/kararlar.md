@@ -1,102 +1,47 @@
 # Karar Kaydı
 
 Kullanıcının verdiği kararlar. Buradaki maddeler kullanıcıya sorulmadan değiştirilmez.
-Tarih: 11 Kasım 2026.
+Tarih: 11–12 Kasım 2026.
 
-## Zorunlu altı konu
+## Geçmiş
 
-### 1. İlk oynanabilir sürümün kapsamı
-- 1. dönemin tamamı: 30 Ekim 1918 (Adana) – 19 Mayıs 1919.
-- Hedef: 15–20 dakika, 2–3 anlamlı karar.
-- Final: Samsun'a çıkış ya da oyuncunun yarattığı alternatifi.
+İlk proje (30 Ekim 1918'den başlayan Millî Mücadele simülasyonu) kullanıcı tarafından iptal edildi: ilk denemede oyun sıkıcı bulundu (seçenekler barizdi, tarihe en yakın yol kendiliğinden seçiliyordu, dil terimseldi). Yeni fikir kâğıt üstünde denenip onaylandı. İlk projenin kararları, burada yeniden yazılmadıkça geçerli değildir.
 
-### 2. Oyun içi geri bildirim
-- **Zamanlama: karma.** Kararın hemen ardından küçük, doğal bir tepki; asıl sonuçlar dönemin haberleşme hızına uygun gecikmeyle gelir.
-- **Biçim: oyunun kendi kanalları.** Ayrı sonuç ekranı yok. Etkiler Haberler, Yazışmalar, Durum ve Harita sekmelerine düşer; sağ üstteki bildirim nereye bakılacağını gösterir.
-- **Neden gösterimi: istenirse.** İçerik nedeni kendiliğinden söylemez; oyuncu "Bu neden oldu?" diye açarsa kayıtlı karar zincirini görür. Büyük olaylarda ve oyun sonunda nedensellik paneli kendiliğinden açılır.
+## Temel fikir (onaylandı)
 
-### 3. Pasif kalma
-- **Süre:** Zaman, bir sonraki zorunlu karar kartına kadar kendiliğinden akar. Kart çıkınca oyun durur; oyuncu cevap vermeden ilerlemez. Kartta "hiçbir şey yapma" seçeneği bulunur.
-- **Durma anları:** Yalnızca Mustafa Kemal'i doğrudan ilgilendiren gelişmeler (görev teklifi, çağrı, talep, kaçmak üzere olan fırsat). 1. dönemde kabaca 4–6 durma anı.
-- **Yalnızca haber olanlar:** Oyuncunun elinde olmayan her gelişme; büyük olanlar öne çıkarılır, oyuncu isterse o an eyleme geçer.
-- **Geri dönüşü zor sonuçlar:** Açık "son şans" uyarısı yok. İşaretler dönemin diliyle sezdirilir (mektup, sertleşen haberler, telgraf). Kaçan fırsat sonradan nedensellik panelinde görünür.
+- Soru: **Atatürk 10 Kasım 1938'de ölmeseydi?** Oyuncu Atatürk'ü yönetir.
+- Oyun 10 Kasım 1938'de, İstanbul'da başlar. **Atatürk sağlıklıdır;** sağlık oyunun mekaniği değildir.
+- Açılışta ölüm **açıkça ve saygılı bir dille** yazılır; "bu oyun gerçeğin dışına bilerek çıkıyor" notu eklenir.
+- Hedef kitle: genel okur. Tarih bilmeyen de oynayabilmeli; meraklıya derinlik opsiyonel.
+- Detroit: Become Human'ın mekaniklerinden esinlenilir (adı, karakterleri, görünümü alınmaz). Oyuncu yalnızca Atatürk'tür; birden fazla oynanabilir karakter eklenmez.
 
-### 4. Kayıt sistemi
-- Sürekli otomatik kayıt.
-- Her önemli kararın öncesi ayrıca saklanır; o karara dönüp farklı seçim yapmak eski oyunu silmez, yeni bir zaman çizelgesi açar.
-- Zaman çizelgeleri isimlendirilebilir ve sonuçları karşılaştırılabilir.
-- **Yer:** Önce cihazda (tarayıcı), dışa ve içe aktarma ile. Kayıt katmanı buluta taşınabilir kurulur; hesap ve otomatik eşitleme sonraki aşamada eklenir.
+## Oyun hissi (onaylandı)
 
-### 5. İktidar kaybı ve başarısızlık
-- Güç kaybı (görevden alınma, tutuklanma, sürgün, destek kaybı) oyunu bitirmez; oyuncu daha az imkânla devam eder ve geri dönmeyi deneyebilir.
-- Oyun yalnızca ölümle ya da hiçbir etki imkânının kalmadığı kalıcı durumlarda biter; ardından sonraki 50 yıl simüle edilir.
-- Başarısızlık da bir alternatif tarih olarak anlatılır.
+1. **İkilemli kartlar.** Her seçeneğin görünür kazancı ve bedeli vardır; hiçbir seçenek "doğru cevap" değildir. "Hiçbir şey yapma" her kartta vardır.
+2. **Çevredekilerin çelişen görüşü.** Kartta gerçek, kaynaklı kişiler farklı seçenekleri önerir (etiketli kurgu diyalog). Önerisini izlemek ya da izlememek aradaki güveni etkiler.
+3. **Zamanlı anlar.** Süre dolunca "hiçbir şey yapma" seçilir. Kapatılabilir. Zamanlı anlarda kazanç ve bedel karardan sonra açılır.
+4. **Sade dil ve terim sözlüğü:** zor terimler dokununca açıklanır.
+5. **Sonuçlar anlaşılır ve gerçek:**
+   - En fazla üç-dört satır, düz Türkçe, sayı yok. Türler: **Kapı** (açıldı/kapandı), **Kişi**, **Alan**, **Dünya**.
+   - Üç aşama: hemen (tepki), haftalar sonra (haber), aylar sonra (**yankı**: "Hatırlıyor musun?").
+   - Her seçeneğin yalnızca kendisine ait bir sonucu olmalı; bu test ile denetlenir ("seçim yanılsaması dedektörü").
+6. **Pasif ay:** oyuncu bir şey yapmasa da dünya ilerler (gerçek dünya olayı, ihmal edilen alandan sessiz haberler, çelişen sonra netleşen bilgi). Ay, oyuncuyu doğrudan ilgilendiren bir kartla biter.
+7. **Bölüm sonu şeması:** seçtiğin ve seçmediğin yollar görünür. Şema motor kaydından çizilir.
+8. **Gerçek tarihle karşılaştırma:** "Atatürk'süz gerçek tarihte" olanlar, o günün tarihi geçince açılır.
 
-### 6. Sağlık ve yaşam süresi
-- Tarihsel sağlık geçmişi başlangıç değeridir.
-- Birkaç gösterge (genel sağlık, yıpranma, stres); yaş, iş yükü, yaşam koşulları, dinlenme ve tedaviyle değişir.
-- Krizler biriken riskten doğar, gerekçesiz rastlantıdan değil; her krizin nedeni nedensellik kaydında bulunur.
-- Ölüm tarihi 1938'e sabit değildir.
-- Gerçek sağlık kaydı ile simülasyon sonucu arayüzde ayrı gösterilir.
+## Onaylanmış, henüz yapılmamış (bkz. docs/tasarim.md)
 
-## Çelişki çözümleri
+- **Altı alan ve öncelik sistemi:** ekonomi, ordu, eğitim ve kültür, dış politika, halk ve köy, hukuk ve kurumlar. Her alana −2 ile +2 arası seviye; sınırlı artı havuzu; fazla artı için başka alana eksi.
+- **Eşikler:** bir alan eşik geçince havuz +1, düşünce −1 (yukarı ve aşağı eşik farklı, titreme olmasın). Havuz 2–6. Kriz havuzu geçici daraltır. Daralınca oyun "hangi alandan vazgeçeceksin?" diye sorar. Eşik geçişi sahneyle anlatılır.
+- **Dikkat:** ayda sınırlı sayıda iş. **Etkinlikler:** sofra kur, fabrika açılışı, elçi kabulü, tavla masası, okul ziyareti, Anadolu uğrağı (küçük sahneler, belirsizlik içerir, aynı etkinlik art arda tekrar etmez, duruma göre açılır).
 
-### Görüşmeler: etiketli doğrudan diyalog
-- Karakterler tırnak içinde konuşur; her konuşma açıkça "kurgu / simülasyon" olarak işaretlenir.
-- Bu, "uydurma tarihsel diyalog ekleme" kuralının kullanıcı tarafından daraltılmış hâlidir: yasak olan, kurgu diyaloğu **gerçek alıntı gibi sunmaktır**.
-- Uygulama gereği: etiket diyalog kartının parçasıdır, kapatılamaz ve kartla birlikte görünür (ekran görüntüsünde de kalır). Gerçek, kaynaklı alıntılar görsel olarak farklı gösterilir ve kaynağıyla verilir.
+## Eski projeden devralınan, yeniden onay bekleyen
 
-### Gerçek tarihle karşılaştırma: olayın tarihi geçince
-- Bir olayın gerçek tarihteki karşılığı, oyunda o tarih geçtikten sonra açılır.
-- Gelecekteki gerçek olaylar oyuncuya gösterilmez.
+- Kayıt: sürekli otomatik kayıt; kritik kararın öncesinde dallanma; önce cihazda sonra bulut. (Şu an yalnızca otomatik kayıt var.)
+- Hassas konular: kaynağın ifadesiyle olgu olarak aktarılır, hüküm verilmez.
+- Yapay zekâ sonuç belirlemez; metin katmanı yalnızca hesaplanmış olanı anlatır.
 
-### Başlangıç yeri
-- Oyun 30 Ekim 1918'de İstanbul'da değil, Adana'da açılır (Yıldırım Orduları Grubu). Kaynakla doğrulanacak.
+## Açık sorular
 
-## Oyun hissi (kullanıcı geri bildirimi, 11 Kasım 2026)
-
-İlk denemede kullanıcı oyunu sıkıcı buldu: seçenekler barizdi, tarihe en yakın yol kendiliğinden seçiliyordu, dil terimsel ve herkese hitap etmeyen bir havadaydı. Kullanıcı şu yönü onayladı:
-
-1. **İkilemli kartlar.** Her seçeneğin görünür bir kazancı ve bedeli vardır; hiçbiri "doğru cevap" değildir. Senaryo doğrulaması bunu denetler.
-2. **Çevredekilerin çelişen görüşü.** Kartta gerçek, kaynaklı kişiler farklı seçenekleri önerir (kurgu diyalog, etiketli). Önerisini izlemek ya da izlememek aradaki güveni etkiler.
-3. **Sade, insan odaklı dil.** Zor terimler dokununca açıklanır. Hedef kitle: tarih bilmeyen genel okur; meraklıya derinlik opsiyonel.
-4. **Pasif kısım sahnelere dönüşür** (henüz yapılmadı).
-
-Kart metinlerinde yeni karakter uydurulmaz; yalnızca veride kaynaklı kişiler konuşur.
-
-## Hassas konular
-
-- Kullanıcı kararı (11 Kasım 2026): hassas ve tartışmalı konular kaynağın ifadesiyle olgu olarak aktarılır, işaretlenir, oyun yorum ve hüküm eklemez. Dışarıda bırakılmaz.
-
-## Onaylanan mimari
-
-- `docs/mimari.md` içindeki teknik mimari 11 Kasım 2026'da onaylandı.
-
-## Henüz onay bekleyenler
-
-
-- **Metin üretimi:** Prototipte hazır yazılmış, duruma göre birleşen varyantlı metin; canlı yapay zekâ anlatımı sonraki aşamada. Kullanıcı koşullu kabul etti: metin tekrara düşmemeli, kısır döngü olmamalı.
-- **Hızlı mod kapsamı:** 30–60 dakikaya 1918'den ölüm sonrası 50 yıla kadar olan sürenin nasıl sığacağı ileride kararlaştırılacak.
-
-## İlham
-
-Kullanıcı ilham kaynağı olarak "8 Milyarda 1" (1in8b.life) yaşam simülasyonunun yapım hikâyesi "Sekiz Satır"ı gösterdi ve metnini paylaştı. Hikâyeden bu projeye uyarlanan ilkeler aşağıda. **Kullanıcı 11 Kasım 2026'da onayladı.**
-
-### Uyarlanan ilkeler
-
-1. **Dayanak yoksa koyma.** Akla yatkın olsa bile kaynağı olmayan olay, olasılık ya da ayrıntı eklenmez. (Mevcut tarihsel doğruluk kuralıyla aynı yönde.)
-2. **Puan ve sıralama yok.** "En iyi son" ya da başarı puanı gösterilmez. Her oyun bir alternatif tarih olarak anlatılır; başarısızlık da geçerli bir sonuçtur.
-3. **Düğme çoğaltma, hikâyeye derinlik kat.** Yeni bir özellik eklenmeden önce üç soru sorulur:
-   - Kaynakla doğrulanıyor mu?
-   - Motorda kayıtlı bir nedene dayanıyor mu?
-   - İlk kez oynayan biri için oyunu ağırlaştırmıyor mu?
-4. **Görüş yolu ilk günden açık.** Prototipte "Görüş gönder" bulunur.
-5. **Yapay zekâyla yapıldığı gizlenmez.** Oyunun yapay zekâyla geliştirildiği açıkça yazılır.
-6. **Oyun tarayıcıda çalışır.** Simülasyon tamamen oyuncunun cihazında döner; sunucuya bağımlılık en azda tutulur. (Önerilen mimariyle aynı.)
-7. **Zor konular dışarıda bırakılmaz, hüküm de verilmez.** Dönemin ağır ve tartışmalı konuları kaynakların ölçüsünde, tartışmalı olduğu belirtilerek yer alır. Hangi konunun nasıl ele alınacağı, o konu veri katmanına girmeden önce kullanıcıya ayrıca sorulacak.
-8. **Hata kurala dönüşür.** Yapılan her hata `CLAUDE.md` ya da bu dosyaya bir kural olarak işlenir.
-
-### Bilerek alınmayanlar
-
-- "Seçilemez, bir kerelik hayat" ilkesi bu oyuna uymaz: burada amaç farklı kararları deneyip karşılaştırmaktır; dallanma ve yeniden oynama kullanıcının verdiği karardır.
-- Rastgele doğum ve istatistik temelli hayat üretimi yok; bu oyun belirli bir kişinin ve belgelenmiş bir dönemin simülasyonudur.
+- Oyunun sonu ve sonraki bölümler (1939 sonrası: savaş, Hatay, seçimler) nasıl işlenecek?
+- Hata ayıklama için seçim yanılsaması dedektörü eşiği (şimdilik: her seçeneğin en az bir özgün sonucu).

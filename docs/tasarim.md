@@ -1,89 +1,49 @@
 # Oyun Tasarımı
 
-Kararların kaynağı `docs/kararlar.md`. Bu belge o kararların tasarıma dökülmüş hâlidir.
+Kararların kaynağı `docs/kararlar.md`.
 
 ## Temel döngü
 
-1. Zaman, olay ve dönem odaklı akar; gün gün mikro yönetim yok.
-2. Dünya kendi kendine ilerler: İstanbul Hükümeti, işgal güçleri ve karakterler kendi hedeflerine göre davranır.
-3. Gelişmeler oyuncuya dönemin kanallarından ulaşır: gazete, telgraf, mektup, rapor, görüşme. Bilgi gecikebilir, eksik ya da taraflı olabilir.
-4. Oyuncu istediği an proaktif eylem yapar: görüşme, toplantı, telgraf ya da mektup, ikna, destek arama, girişim başlatma, bir planı destekleme ya da engelleme.
-5. Mustafa Kemal'i doğrudan ilgilendiren bir gelişmede oyun durur ve karar kartı çıkar. Her kartta "hiçbir şey yapma" vardır.
-6. Karar ve eylemlerin etkisi önce küçük bir anlık tepkiyle, sonra gecikmeli olarak kanallara düşer.
-7. Oyuncu herhangi bir içerikte "Bu neden oldu?" diye sorup kayıtlı neden zincirini açabilir.
+1. Oyun 10 Kasım 1938'de açılır; ilk kart hemen çıkar.
+2. Zaman olaydan olaya akar (bir hafta ilerle ya da bir sonraki karara kadar bekle). Oyuncuyu doğrudan ilgilendiren bir gelişmede oyun durur ve karar kartı çıkar.
+3. Kart: kısa durum anlatımı, (varsa) çevredekilerin görüşü, seçenekler. Her seçenekte kazanç ve bedel görünür; zamanlı anlarda gizlidir.
+4. Karardan sonra **sonuç kartı** çıkar: tepki, açılan ve kapanan kapılar, değişen kişi ve alanlar.
+5. Haftalar sonra haberler, aylar sonra yankı sahneleri gelir.
+6. Her şey "Bu neden oldu?" ile sorgulanabilir.
+7. Bölüm sonunda şema ve gerçek tarihle karşılaştırma açılır.
 
-## Arayüz
+## İlk dilim: 10 Kasım 1938 – 30 Haziran 1939
 
-- Atatürk'ün şahsi telefonu hissi; modern, temiz, premium.
-- Alt menü: Harita, Haberler, Yazışmalar, Durum, Daha Fazla.
-- Sol yan menü, sağ üstte bildirimler, ana ekranda harita, tarih ve güncel gelişmeler.
-- PC'de aynı içerik geniş ekrana göre yeniden düzenlenir (örneğin harita ile akış yan yana); küçültülmüş mobil değildir.
-- Üç içerik türü görsel olarak ayrışır:
-  - **Gerçek belge:** kaynağıyla.
-  - **Simülasyon içeriği:** "simülasyon" etiketiyle (kurgu diyaloglar dahil).
-  - **Gerçek tarih karşılaştırması:** olayın tarihi geçtikten sonra açılır.
+Senaryo: `src/senaryo/sonrasi.ts` (oyun kuralı). Tarihsel zemin: `data/tarih/`.
 
-## Metin sistemi (tekrarı önleme)
-
-Kullanıcı şartı: metin tekrara düşmemeli, kısır döngü olmamalı.
-
-- Metin tek parça yazılmaz; simülasyon durumuna göre parçalardan kurulur (kim, nerede, sonuç, kamuoyu).
-- Her durum için birden fazla varyant; motor son kullanılanı tekrar seçmez.
-- Kaynağa göre ses değişir: İstanbul basını, Anadolu basını, yabancı rapor aynı gelişmeyi farklı anlatır.
-- Metin oyuncunun önceki kararlarına gönderme yapar.
-- Sıradan gelişmeler tek satır geçer; uzun metin önemli anlara ayrılır.
-- Varyant seçimi tohumlu rastgelelikle yapılır; belirlenimcilik bozulmaz.
-
-## Prototip: 1. dönem (30 Ekim 1918 – 19 Mayıs 1919)
-
-Hedef 15–20 dakika, 2–3 anlamlı karar, 4–6 durma anı.
-
-### Olay omurgası
-
-Tarihsel olaylar `data/tarih/olaylar.json` dosyasındadır (49 olay, kaynaklı). Doğrulama durumu ve kaynakların ayrıştığı noktalar için `docs/veri-durumu.md`.
-
-### Senaryo (kullanıcı 11 Kasım 2026'da onayladı)
-
-Kurallar `src/senaryo/donem1.ts` dosyasındadır. **Senaryo oyun kuralıdır, tarih değildir:** seçenekler, göstergeler, ilişki değerleri ve sonuçlar tasarımdır ve arayüzde simülasyon olarak sunulur.
-
-Beş durma anı:
-
-| Tarih | Kart | Seçenekler |
+| Tarih | Kart | Not |
 |---|---|---|
-| 3 Kasım 1918 | İskenderun'a çıkarma bildirimi | hiçbir şey yapma / itirazını yaz, emre uy / karşı koymakta ısrar et |
-| 13 Kasım 1918 | İstanbul'a varış | hiçbir şey yapma / saray yolu / basın ve meclis yolu / ordu içinde çevre |
-| 5 Mart 1919 | Çözüm arayışı | hiçbir şey yapma / Anadolu için hazırlan / İstanbul'da görev ara |
-| 30 Nisan 1919 | Müfettişlik teklifi | hiçbir şey yapma / olduğu gibi kabul / geniş yetki şartıyla kabul / reddet |
-| 15 Mayıs 1919 | İzmir haberi | hiçbir şey yapma / hemen yola çık / ertele, İstanbul'daki tepkiye katıl |
+| 10 Kasım 1938 | Sabah notları | Öğretici; Bayar ya da Çakmak |
+| 21 Kasım 1938 | İki kapı | İngiltere mi, Almanya mı; Bayar ve Çakmak çelişir |
+| 12 Aralık 1938 | Tek ses | Muhalefet; Bayar ve İnönü çelişir |
+| 16 Ocak 1939 | İki davet | Anadolu gezisi mi, kabine mi |
+| 17 Mart 1939 | Telgraflar (3 zamanlı hamle) | Çekoslovakya'nın işgalinin ardından |
+| 12 Haziran 1939 | Yankı | Mart'taki cevabın sonucu |
 
-- Müfettişlik teklifi herkese gelmez: yeterli bağ kurulmuş olmalı ve oyuncu gözetim altında olmamalıdır. Bu bir tasarım tercihidir; Mustafa Kemal'in atanmasında kendi girişimlerinin payı tarihçiler arasında tartışmalıdır.
-- Mustafa Kemal'in kendi eylemi olan tarihsel olaylar (itiraz, padişahla görüşme, Minber, Erzurum mektubu, atama, ayrılış, Samsun) kendiliğinden gerçekleşmez; oyuncunun kararına bağlıdır.
-- "Geniş yetki" seçeneği arama özetlerine dayanır; atamadaki yetkilerin kapsamı tam metinden henüz doğrulanmadı.
+Pasif sahneler: kış haberi (halk ihmal edilirse), Çakmak'ın levazım notu (ordu ihmal edilirse), Çekoslovakya'nın işgali (gerçek dünya olayı).
 
-Proaktif eylemler: Fethi Bey, Rauf Bey ve Kâzım Karabekir Paşa'yla görüşme, Minber'e demeç, Ali Fuat Paşa'ya mektup. Her biri bir kez yapılır; başarı ilişkiye ve tohumlu rastgeleliğe bağlıdır.
+## Alanlar
 
-Göstergeler (tasarım): ordu içindeki nüfuz, sarayın güveni, İtilaf'ın şüphesi, kamuoyunda tanınırlık.
+Altı alan, 0–100. Başlangıç değerleri tasarımdır, ölçüme dayanmaz. Kartlar alanları değiştirir; bazı olaylar alanın düşük olmasına bağlıdır. Öncelik ve eşik sistemi henüz yok (bkz. kararlar).
 
-Kapanışlar: geniş yetkiyle Samsun / sınırlı yetkiyle ya da gecikmeli Samsun / İstanbul'da kalış / gözetim. Hiçbiri oyunu bitirmez.
+## Yapılanlar
 
-İlişkilerin başlangıç değerleri tasarımdır: hepsi nötr başlar, yalnızca Fethi Bey'in yakınlığı biraz yüksektir (Minber'i birlikte çıkarmaları kaynaklıdır, sayıya dökülmesi yorumdur). İsmet Bey kaynakla doğrulanınca eklenecek.
+Motor, nedensellik, kayıt (otomatik, cihazda), açılış ekranları, kartlar, zamanlı anlar, sonuç kartı, yankı, şema, karşılaştırma, terim sözlüğü, beş sekmeli arayüz, telefon ve PC düzeni.
 
-### Prototipte sade tutulanlar
+## Yapılmayanlar
 
-- Ekonomi, ordu ve diplomasi birkaç göstergeyle.
-- Sağlık modeli kurulur ama bu dönemde belirgin rol oynamaz.
-- Ölüm sonrası 50 yıl simülasyonu prototipte yok.
-- Bulut kayıt yok; cihazda kayıt, dallanma ve dışa-içe aktarma var.
+- Öncelik ekranı, havuz ve eşikler.
+- Dikkat ve etkinlikler (ilişki ve bilgi sahneleri).
+- İşlevsel harita (şu an yalnızca şehirler ve yer işareti).
+- Dallanan kayıt, karşılaştırma ekranı.
+- Haber metinlerinin zenginleştirilmesi, kartlar arası kişilik tutarlılığı.
+- İsmet İnönü için ayrı sahneler; Hatay ve diğer 1939 olayları.
 
-## En kritik üç risk
+## Ton
 
-1. **Kapsam:** Prototip eğlenceli çıkmadan sistem eklenmez.
-2. **Tarihsel doğruluk:** Kritik kayıtlar kaynağıyla kullanıcıya gösterilir.
-3. **Pasif oyunun sıkıcılığı:** Prototipin asıl sınavı, hiçbir şey yapmayan oyuncunun da ilgiyle izlemesidir.
-
-## Kaynak yaklaşımı
-
-- **Birincil:** Nutuk, Atatürk'ün Bütün Eserleri, meclis zabıtları, antlaşma metinleri, Genelkurmay ATASE yayınları, dönem gazeteleri.
-- **Akademik:** Hakemli yayınlar ve alanın temel monografileri.
-- Her kayıtta kaynak ve güvenilirlik düzeyi tutulur. Tartışmalı konular işaretlenir.
-- Nutuk tek başına kesin kabul edilmez; olaylardan sonra yazılmış, taraflı bir anlatıdır ve mümkün olan yerde başka kaynakla karşılaştırılır.
+Atatürk saygı gören bir tarihî şahsiyettir. Oyun onu küçültmez; ikilemleri gerçek ve ciddidir. Hassas konular (hastalık, ölüm, tartışmalı yargılamalar) hüküm verilmeden, kaynağın ifadesiyle aktarılır.

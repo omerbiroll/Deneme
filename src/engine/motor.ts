@@ -31,6 +31,10 @@ export function senaryoyuDogrula(s: Senaryo): void {
         }
       }
     }
+    if (o.kart?.sure !== undefined && !(o.kart.sure > 0)) throw new Error(`"${o.id}" kartının süresi pozitif olmalı`);
+    if (o.yanki && !s.olaylar.some((x) => x.kart?.secenekler.some((sc) => `${x.id}:${sc.id}` === o.yanki))) {
+      throw new Error(`"${o.id}" olayının yankı kararı "${o.yanki}" bulunamadı`);
+    }
     for (const dn of o.kart?.danismanlar ?? []) {
       if (!(dn.kisi in s.iliskiler)) throw new Error(`"${o.id}" kartındaki danışman "${dn.kisi}" ilişki tablosunda yok`);
       if (!o.kart!.secenekler.some((x) => x.id === dn.oneri)) throw new Error(`"${o.id}" kartında "${dn.kisi}" var olmayan bir seçeneği öneriyor`);
@@ -75,7 +79,8 @@ function kosulSaglandi(d: Durum, k?: Kosul): boolean {
     (k.bayrakYok ?? []).every((b) => !(b in d.bayraklar)) &&
     (k.olayOldu ?? []).every((o) => o in d.gerceklesen) &&
     (k.olayOlmadi ?? []).every((o) => !(o in d.gerceklesen)) &&
-    Object.entries(k.gostergeEnAz ?? {}).every(([ad, enAz]) => (d.gostergeler[ad] ?? 0) >= enAz)
+    Object.entries(k.gostergeEnAz ?? {}).every(([ad, enAz]) => (d.gostergeler[ad] ?? 0) >= enAz) &&
+    Object.entries(k.gostergeEnFazla ?? {}).every(([ad, enFazla]) => (d.gostergeler[ad] ?? 0) <= enFazla)
   );
 }
 

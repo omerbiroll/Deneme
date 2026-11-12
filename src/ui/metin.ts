@@ -4,7 +4,6 @@
  */
 import type { Bildirim, Durum, KararKaydi, Senaryo, Tarih } from "../engine/tipler";
 import type { Olay, Kaynak } from "../data/sema";
-import type { Donem1Kapanisi } from "../senaryo/donem1";
 
 const AYLAR = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
 
@@ -12,14 +11,13 @@ export function tarihYaz(t: Tarih): string {
   const [y, a, g] = t.split("-").map(Number) as [number, number, number];
   return `${g} ${AYLAR[a - 1]} ${y}`;
 }
-
 export function kisaTarih(t: Tarih): string {
   const [, a, g] = t.split("-").map(Number) as [number, number, number];
   return `${g} ${AYLAR[a - 1]}`;
 }
 
 /** İçeriğin türü. Arayüz üçünü görsel olarak ayırır. */
-export type Etiket = "gercek" | "alternatif" | "simulasyon";
+export type Etiket = "gercek" | "karsilastirma" | "simulasyon";
 
 export interface Haber {
   anahtar: string;
@@ -30,11 +28,11 @@ export interface Haber {
   metin: string;
   etiket: Etiket;
   onemli: boolean;
-  kisisel: boolean;
-  yer?: string;
+  /** Bu haber şu kararın (kartId:seçenekId) gecikmiş sonucu. */
+  yanki?: string;
   kaynak?: Kaynak;
+  kaynakNotu?: string;
   tartismaNotu?: string;
-  hassasKonu: boolean;
 }
 
 export interface Veri {
@@ -42,157 +40,97 @@ export interface Veri {
   kaynaklar: Map<string, Kaynak>;
 }
 
-/** Bir bildirimi habere çevirir. Gösterilmeyecekse null döner. */
 export function haberYaz(b: Bildirim, senaryo: Senaryo, veri: Veri): Haber | null {
   const tanim = senaryo.olaylar.find((o) => o.id === b.olayId);
-  if (!tanim) return null;
-  const tarihsel = tanim.tarihselOlayId ? veri.olaylar.get(tanim.tarihselOlayId) : undefined;
+  if (!tanim || b.durum === "gerceklesmedi") return null;
   const ortak = { anahtar: `${b.olayId}:${b.durum}`, olayId: b.olayId, tarih: b.olayTarihi, teslim: b.teslimTarihi, onemli: b.onem === "buyuk" };
-
-  if (!tarihsel) {
-    // Simülasyona ait olay. Kartlar ayrıca gösterilir; gerçekleşmeyen iç olaylar haber olmaz.
-    if (tanim.kart || b.durum === "gerceklesmedi" || !tanim.ad) return null;
-    return { ...ortak, baslik: tanim.ad, metin: tanim.aciklama ?? "", etiket: "simulasyon", kisisel: true, hassasKonu: false };
-  }
-
-  const kaynak = veri.kaynaklar.get(tarihsel.kaynaklar[0]!.kaynakId);
-  const kisisel = tarihsel.ilgiliKisiler.includes("mustafa-kemal");
-  const ek = { yer: tarihsel.yer, kaynak, tartismaNotu: tarihsel.tartismaNotu, hassasKonu: !!tarihsel.hassasKonuNotu, kisisel };
-
-  if (b.durum === "gerceklesmedi") {
+  const tarihsel = tanim.tarihselOlayId ? veri.olaylar.get(tanim.tarihselOlayId) : undefined;
+  if (tarihsel) {
+    const atif = tarihsel.kaynaklar[0]!;
     return {
-      ...ortak, ...ek, etiket: "alternatif",
-      baslik: `Gerçekleşmedi: ${tarihsel.ad}`,
-      metin: `Gerçek tarihte ${tarihYaz(tarihsel.tarih)} günü: ${tarihsel.aciklama} Bu oyunda gerçekleşmedi.`,
+      ...ortak, etiket: "gercek", baslik: tarihsel.ad, metin: tarihsel.aciklama,
+      kaynak: veri.kaynaklar.get(atif.kaynakId), kaynakNotu: atif.not, tartismaNotu: tarihsel.tartismaNotu,
     };
   }
-  if (b.alternatif) {
-    return {
-      ...ortak, ...ek, etiket: "alternatif",
-      baslik: tarihsel.ad,
-      metin: `${tarihsel.aciklama} Gerçek tarihte ${tarihYaz(tarihsel.tarih)} günü olmuştu; bu oyunda ${tarihYaz(b.olayTarihi)} günü gerçekleşti.`,
-    };
-  }
-  return { ...ortak, ...ek, etiket: "gercek", baslik: tarihsel.ad, metin: tarihsel.aciklama };
+  if (tanim.kart || !tanim.ad) return null;
+  return { ...ortak, etiket: "simulasyon", baslik: tanim.ad, metin: tanim.aciklama ?? "", yanki: tanim.yanki };
+}
+
+/** Atatürk'süz gerçek tarihte olanlar: yalnızca o günün tarihi geçince açılır. */
+export function karsilastirmaHaberleri(d: Durum, veri: Veri): Haber[] {
+  return [...veri.olaylar.values()]
+    .filter((o) => o.tur === "karsilastirma" && o.tarih <= d.tarih)
+    .map((o) => {
+      const atif = o.kaynaklar[0]!;
+      return {
+        anahtar: `kars:${o.id}`, olayId: o.id, tarih: o.tarih, teslim: o.tarih, baslik: o.ad, metin: o.aciklama,
+        etiket: "karsilastirma" as const, onemli: true, kaynak: veri.kaynaklar.get(atif.kaynakId), kaynakNotu: atif.not,
+      };
+    });
 }
 
 export function haberler(d: Durum, senaryo: Senaryo, veri: Veri): Haber[] {
-  return d.oyuncuBilgisi
-    .map((b) => haberYaz(b, senaryo, veri))
-    .filter((h): h is Haber => h !== null)
-    .reverse();
+  const akis = d.oyuncuBilgisi.map((b) => haberYaz(b, senaryo, veri)).filter((h): h is Haber => h !== null);
+  return [...akis, ...karsilastirmaHaberleri(d, veri)].sort((a, b) => b.teslim.localeCompare(a.teslim) || b.tarih.localeCompare(a.tarih));
 }
 
 export function kararAdi(k: KararKaydi, senaryo: Senaryo): { baslik: string; secim: string } {
-  if (k.tur === "kart") {
-    const olay = senaryo.olaylar.find((o) => o.id === k.kaynakId);
-    const secenek = olay?.kart?.secenekler.find((s) => s.id === k.secenekId);
-    return { baslik: olay?.ad ?? k.kaynakId, secim: secenek?.ad ?? k.secenekId };
-  }
-  const eylem = senaryo.eylemler.find((e) => e.id === k.kaynakId);
-  return { baslik: eylem?.ad ?? k.kaynakId, secim: k.basarili ? "Olumlu sonuçlandı" : "Sonuç vermedi" };
+  const olay = senaryo.olaylar.find((o) => o.id === k.kaynakId);
+  const secenek = olay?.kart?.secenekler.find((s) => s.id === k.secenekId);
+  return { baslik: olay?.ad ?? k.kaynakId, secim: secenek?.ad ?? k.secenekId };
 }
 
-export const GOSTERGELER: { ad: string; baslik: string; aciklama: string }[] = [
-  { ad: "nufuz", baslik: "Ordu içindeki nüfuz", aciklama: "Komutanların ve subayların sözüne verdiği ağırlık." },
-  { ad: "sarayGuveni", baslik: "Sarayın güveni", aciklama: "Padişahın ve hükümetin sana duyduğu güven." },
-  { ad: "itilafSuphesi", baslik: "İtilaf'ın şüphesi", aciklama: "İşgal kuvvetlerinin seni ne kadar yakından izlediği." },
-  { ad: "taninirlik", baslik: "Kamuoyunda tanınırlık", aciklama: "Basında ve halk arasında adının ne kadar bilindiği." },
+export const ALANLAR: { ad: string; baslik: string; aciklama: string }[] = [
+  { ad: "ekonomi", baslik: "Ekonomi", aciklama: "Üretim, ticaret ve devletin mali gücü." },
+  { ad: "ordu", baslik: "Ordu", aciklama: "Birliklerin donanımı ve hazırlığı." },
+  { ad: "egitim", baslik: "Eğitim ve kültür", aciklama: "Okullar, bilim ve kültür kurumları." },
+  { ad: "disPolitika", baslik: "Dış politika", aciklama: "Diğer devletlerle ilişkiler ve güven." },
+  { ad: "halk", baslik: "Halk ve köy", aciklama: "Halkın geçimi ve devlete yakınlığı." },
+  { ad: "kurumlar", baslik: "Hukuk ve kurumlar", aciklama: "Meclis, hukuk ve devletin sensiz ayakta kalma gücü." },
 ];
 
-export const KISILER: Record<string, string> = {
-  fethi: "Fethi Bey",
-  rauf: "Rauf Bey",
-  "ali-fuat": "Ali Fuat Paşa",
-  "kazim-karabekir": "Kâzım Karabekir Paşa",
-};
+export const KISILER: Record<string, string> = { bayar: "Celal Bayar", cakmak: "Fevzi Çakmak", inonu: "İsmet İnönü" };
+const KISI_SAHIPLIK: Record<string, string> = { bayar: "Celal Bayar'ın", cakmak: "Fevzi Çakmak'ın", inonu: "İsmet İnönü'nün" };
+const ILISKI_ALANI: Record<string, string> = { guven: "güveni", sadakat: "sadakati", yakinlik: "yakınlığı", siyasiUyum: "siyasi uyumu" };
 
-export const ILISKI_ALANLARI: Record<string, string> = {
-  guven: "Güven", sadakat: "Sadakat", yakinlik: "Yakınlık", siyasiUyum: "Siyasi uyum",
-};
-
-/**
- * Görüşme ve yazışmaların sonuç metinleri. KURGUDUR: gerçek kişilere atfedilen bu sözler
- * hiçbir kaynağa dayanmaz ve arayüzde her zaman "kurgu diyalog" etiketiyle gösterilir.
- */
-export const EYLEM_METINLERI: Record<string, { basarili: string[]; basarisiz: string[] }> = {
-  "fethi-gorusme": {
-    basarili: [
-      "Fethi Bey seni dikkatle dinledi. «Gazete emrinizde, Paşam. Söyleyecek sözü olanın susacağı gün değil» dedi.",
-      "Uzun bir konuşma oldu. Fethi Bey, «İstanbul'da sizin gibi düşünen az değil; yalnızca birbirlerinden habersizler» dedi.",
-    ],
-    basarisiz: [
-      "Fethi Bey meşguldü, konuşma yarım kaldı. «Bir iki gün sonra daha etraflıca görüşelim» demekle yetindi.",
-      "Fethi Bey temkinliydi. «Şimdilik acele etmeyelim, ortalık biraz durulsun» dedi.",
-    ],
-  },
-  "rauf-gorusme": {
-    basarili: [
-      "Rauf Bey açık konuştu. «Mütarekeyi imzalarken umduğum bu değildi. Ne yapılacaksa birlikte düşünelim» dedi.",
-      "Rauf Bey sözünü sakınmadı. «Bu gidişe seyirci kalmak bana da ağır geliyor» dedi.",
-    ],
-    basarisiz: [
-      "Rauf Bey nazikti ama mesafeliydi. «Hükümete biraz zaman tanımak lazım» dedi.",
-      "Görüşme kısa sürdü. Rauf Bey, «Henüz bir şey söylemek için erken» diyerek sözü kapattı.",
-    ],
-  },
-  "karabekir-gorusme": {
-    basarili: [
-      "Kâzım Karabekir Paşa kararlıydı. «Çare İstanbul'da değil. Asker dağılmadan Anadolu'da bir şey yapılabilir» dedi.",
-      "Karabekir Paşa haritanın başından kalkmadı. «Doğu'daki kıtalar hâlâ ayakta; iş onlara sahip çıkmakta» dedi.",
-    ],
-    basarisiz: [
-      "Karabekir Paşa dinledi ama fikrini açmadı. «Her şeyin bir sırası var» demekle yetindi.",
-      "Paşa'nın aklı başka yerdeydi. «Bunu sonra konuşalım» dedi.",
-    ],
-  },
-  "minber-demec": {
-    basarili: [
-      "Demecin Minber'de yayımlandı. Ertesi gün birkaç gazete daha senden söz etti.",
-      "Minber sözlerine geniş yer verdi. Adın artık yalnızca askerî çevrelerde anılmıyor.",
-    ],
-    basarisiz: [],
-  },
-  "anadolu-mektup": {
-    basarili: [
-      "Ali Fuat Paşa'nın cevabı gecikmedi: «Buradaki vaziyet sizin tahmin ettiğiniz gibidir. Haberleşmeyi keselim demem.»",
-      "Cevap geldi. Ali Fuat Paşa, «Kıtalarım elimde. Mektuplarınızı bekleyeceğim» diye yazıyordu.",
-    ],
-    basarisiz: [
-      "Mektuba cevap gelmedi. Ulaşıp ulaşmadığından emin değilsin; postanın denetlendiği söyleniyor.",
-      "Haftalar geçti, cevap yok. Mektubun yolda başkalarının eline geçmiş olabileceğini düşünüyorsun.",
-    ],
-  },
-};
-
-/** Aynı metnin art arda gelmemesi için varyantı kararın sırasına göre seçer (belirlenimci). */
-export function eylemMetni(k: KararKaydi, sira: number): string {
-  const m = EYLEM_METINLERI[k.kaynakId];
-  const liste = k.basarili ? m?.basarili : m?.basarisiz;
-  if (!liste?.length) return "";
-  // Tohum negatif olabilir; kalan her zaman sıfır ya da pozitif olmalı.
-  return liste[((sira % liste.length) + liste.length) % liste.length]!;
+export function alanCumlesi(ad: string, delta: number): string {
+  const baslik = ALANLAR.find((a) => a.ad === ad)?.baslik ?? ad;
+  const guclu = Math.abs(delta) >= 6 ? "belirgin biçimde " : "";
+  return `${baslik} ${guclu}${delta > 0 ? "gelişti" : "geriledi"}`;
+}
+export function iliskiCumlesi(kisi: string, alan: string, delta: number): string {
+  return `${KISI_SAHIPLIK[kisi] ?? kisi} sana ${ILISKI_ALANI[alan] ?? alan} ${delta > 0 ? "arttı" : "azaldı"}`;
 }
 
-export const KAPANISLAR: Record<Donem1Kapanisi, { baslik: string; metin: string }> = {
-  "genis-yetkiyle-samsun": {
-    baslik: "Geniş yetkiyle Samsun'da",
-    metin:
-      "19 Mayıs 1919'da Samsun'a vardın. Elinde bir görev, arkanda İstanbul'da kurduğun bağlar var. Bu oyunda izlediğin yol, gerçek tarihin yoluna çok yakın.",
-  },
-  "sinirli-ya-da-gecikmeli-samsun": {
-    baslik: "Samsun'a çıktın, ama eksik",
-    metin:
-      "Anadolu'ya geçtin; ancak ya yetkin dar ya da yola geç çıktın. Önündeki aylar, gerçek tarihtekinden daha dar bir alanda başlıyor.",
-  },
-  "istanbulda-kalis": {
-    baslik: "İstanbul'da kaldın",
-    metin:
-      "Mayıs 1919 sona ererken İstanbul'dasın. İzmir işgal edildi, Anadolu'da işgaller yayılıyor. Samsun'a başka biri gitti ya da kimse gitmedi; sen olanları pencereden izliyorsun.",
-  },
-  gozetim: {
-    baslik: "Gözetim altındasın",
-    metin:
-      "Sert çıkışların işgal kuvvetlerinin dikkatini çekti. Adımların izleniyor, Anadolu'da bir görev almanın yolu kapandı. İstanbul'da hareket alanın daraldı.",
-  },
-};
+export interface SemaDugumu {
+  kartId: string;
+  kartAd: string;
+  tarih: Tarih;
+  secenekler: { id: string; ad: string; secildi: boolean }[];
+}
+
+/** Bölüm sonu şeması: oynadığın kartlar ve her kartta seçtiğin ve seçmediğin yol. */
+export function akisSemasi(d: Durum, senaryo: Senaryo) {
+  const oynanan: SemaDugumu[] = senaryo.olaylar
+    .filter((o) => o.kart && o.id in d.gerceklesen)
+    .map((o) => ({
+      kartId: o.id, kartAd: o.ad ?? o.id, tarih: d.gerceklesen[o.id]!.tarih,
+      secenekler: o.kart!.secenekler.map((s) => ({ id: s.id, ad: s.ad, secildi: d.kararlar.some((k) => k.id === `${o.id}:${s.id}`) })),
+    }));
+  return {
+    oynanan,
+    gorulmeyenKart: senaryo.olaylar.filter((o) => o.kart && !(o.id in d.gerceklesen)).length,
+    gorulmeyenSecenek: oynanan.reduce((t, n) => t + n.secenekler.filter((s) => !s.secildi).length, 0),
+  };
+}
+
+/** Altı ayın özeti: motorun hesapladığı değişimlerden, anlatım olmadan. */
+export function alanOzeti(d: Durum, senaryo: Senaryo): { artan?: string; azalan?: string } {
+  const fark = ALANLAR.map((a) => ({ baslik: a.baslik, delta: (d.gostergeler[a.ad] ?? 0) - (senaryo.gostergeler[a.ad] ?? 0) }));
+  const artan = [...fark].sort((x, y) => y.delta - x.delta)[0];
+  const azalan = [...fark].sort((x, y) => x.delta - y.delta)[0];
+  return {
+    artan: artan && artan.delta > 0 ? `${artan.baslik} (+${artan.delta})` : undefined,
+    azalan: azalan && azalan.delta < 0 ? `${azalan.baslik} (${azalan.delta})` : undefined,
+  };
+}

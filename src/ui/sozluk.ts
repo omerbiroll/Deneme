@@ -3,18 +3,16 @@
  * Açıklamalar bilinen, genel tanımlardır; tarihsel iddia taşımaz.
  */
 export const SOZLUK: Record<string, string> = {
-  "Mütareke": "Savaşı durduran ateşkes anlaşması. Mondros Mütarekesi, Osmanlı Devleti'nin Birinci Dünya Savaşı'nı bitirdi.",
-  "Yıldırım Orduları Grubu": "Osmanlı ordusunun Suriye cephesindeki orduları bir araya getiren komutanlık.",
-  "Harbiye Nezareti": "Savaş Bakanlığı.",
-  "Sadrazam": "Padişahın altındaki hükümet başkanı, yani başbakan.",
-  "İtilaf Devletleri": "Savaşı kazanan İngiltere, Fransa, İtalya ve müttefikleri.",
-  "İtilaf": "Savaşı kazanan İngiltere, Fransa, İtalya ve müttefikleri.",
-  "Meclis-i Mebusan": "Osmanlı'nın seçilmiş temsilcilerinden oluşan meclisi.",
-  "Müfettişlik": "Bir bölgedeki orduyu ve yönetimi denetleyen komutanlık görevi.",
-  "Takvim-i Vekâyi": "Osmanlı'nın resmî gazetesi.",
-  "Kolordu": "Birkaç tümenden oluşan büyük asker birliği.",
-  "Divan-ı Harp": "Askerî mahkeme.",
-  "Başkomutanlık": "Orduların en üst komuta makamı.",
+  "Genelkurmay Başkanı": "Ordunun en üst komutanı.",
+  "Kabine": "Başbakan ve bakanlardan oluşan, ülkeyi yöneten kurul.",
+  "Muhalefet": "Hükümete karşı duran siyasi grup ya da parti.",
+  "Mebus": "Meclis üyesi, yani milletvekili.",
+  "Kredi": "Geri ödenmek üzere alınan para.",
+  "Büyükelçi": "Bir devletin başka bir ülkedeki en üst temsilcisi.",
+  "Tarafsız": "Savaşta hiçbir tarafın yanında yer almayan.",
+  "Levazım": "Askerin yiyecek, giyecek ve araç gereç ihtiyacı.",
+  "Bütçe": "Devletin bir yıllık gelir ve gider planı.",
+  "Vali": "Bir ilin devlet tarafından atanan yöneticisi.",
 };
 
 const ilkKucuk = (t: string) => t.charAt(0).toLocaleLowerCase("tr") + t.slice(1);

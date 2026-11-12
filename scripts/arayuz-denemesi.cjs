@@ -1,63 +1,76 @@
-// Arayüzü telefon ve PC boyutunda baştan sona oynatır, ekran görüntüsü alır ve konsol hatalarını bildirir.
-// Kullanım: npm run build && npx vite preview --port 4173 &  sonra: node scripts/arayuz-denemesi.cjs <çıktı klasörü>
+// Arayüzü telefon ve PC boyutunda baştan sona oynatır, ekran görüntüsü alır, konsol hatalarını bildirir.
+// Kullanım: npm run build && npx vite preview --port 4173 &   sonra: node scripts/arayuz-denemesi.cjs <çıktı klasörü>
 const { chromium, devices } = require('playwright');
-const S = process.argv[2];
+const fs = require('fs');
+const S = process.argv[2] || '/tmp/arayuz';
+fs.mkdirSync(`${S}/shots`, { recursive: true });
 (async () => {
   const browser = await chromium.launch();
   const hatalar = [];
-  async function tur(ad, ctxOpts) {
+  async function tur(ad, ctxOpts, zamanAsimi) {
     const ctx = await browser.newContext(ctxOpts);
     const p = await ctx.newPage();
     p.on('console', m => m.type() === 'error' && hatalar.push(`${ad}: ${m.text()}`));
     p.on('pageerror', e => hatalar.push(`${ad}: ${e.message}`));
     await p.goto('http://localhost:4173/');
-    await p.waitForSelector('.harita');
-    await p.screenshot({ path: `${S}/shots/${ad}-1-acilis.png` });
-    await p.getByRole('button', { name: 'Bir hafta ilerle' }).click();
-    await p.waitForSelector('.secenek'); await p.waitForTimeout(400);
-    await p.waitForTimeout(400); await p.screenshot({ path: `${S}/shots/${ad}-2-karar.png` });
-    await p.getByRole('button', { name: /itirazını yaz/ }).click(); await p.screenshot({ path: `${S}/shots/${ad}-2b-tepki.png` });
-    await p.getByRole('button', { name: 'Bir sonraki karara kadar bekle' }).click(); await p.waitForSelector('.danismanlar'); await p.waitForTimeout(400); await p.screenshot({ path: `${S}/shots/${ad}-2c-istanbul.png` });
-    await p.getByRole('button', { name: /Padişaha ulaşmaya çalış/ }).click();
-    for (let i = 0; i < 3; i++) await p.getByRole('button', { name: 'Bir hafta ilerle' }).click();
-    await p.getByRole('button', { name: 'Yazışmalar' }).last().click();
-    await p.getByRole('button', { name: "Rauf Bey'le görüş" }).click();
-    await p.getByRole('button', { name: "Fethi Bey'le görüş" }).click(); await p.waitForTimeout(200);
-    await p.screenshot({ path: `${S}/shots/${ad}-3-yazismalar.png` });
-    await p.getByRole('button', { name: 'Harita' }).last().click();
-    await p.getByRole('button', { name: 'Bir sonraki karara kadar bekle' }).click();
-    await p.getByRole('button', { name: /Anadolu için hazırlan/ }).click(); await p.screenshot({ path: `${S}/shots/${ad}-4b-harita.png` });
-    await p.getByRole('button', { name: 'Bir sonraki karara kadar bekle' }).click();
-    const kart = await p.locator('.belge-baslik').first().textContent(); await p.waitForTimeout(400);
-    await p.screenshot({ path: `${S}/shots/${ad}-4-harita-mart.png` });
-    console.log(ad, 'kart:', kart);
-    if (/Müfettişlik/.test(kart)) {
-      await p.getByRole('button', { name: /Geniş yetki/ }).click();
+    await p.waitForSelector('.acilis');
+    await p.screenshot({ path: `${S}/shots/${ad}-1-kapak.png` });
+    await p.getByRole('button', { name: 'Devam', exact: true }).click();
+    await p.screenshot({ path: `${S}/shots/${ad}-2-nasil.png` });
+    await p.getByRole('button', { name: 'Başla' }).click();
+    await p.waitForSelector('.secenek');
+    await p.waitForTimeout(300);
+    await p.screenshot({ path: `${S}/shots/${ad}-3-ilk-kart.png` });
+    let kart = 0, sonucAlindi = false, zamanliAlindi = false, danismanAlindi = false;
+    for (let adim = 0; adim < 60; adim++) {
+      if (await p.locator('text=Bölümün sonu').count()) break;
+      if (await p.locator('.secenek').count()) {
+        const baslik = await p.locator('.katman .belge-baslik').first().textContent();
+        if (await p.locator('.sure').count() && !zamanliAlindi) { await p.screenshot({ path: `${S}/shots/${ad}-4-zamanli.png` }); zamanliAlindi = true; }
+        if (await p.locator('.danismanlar').count() && !danismanAlindi) { await p.waitForTimeout(200); await p.screenshot({ path: `${S}/shots/${ad}-5-danisman.png` }); danismanAlindi = true; }
+        const secenekler = p.locator('.secenek');
+        const n = await secenekler.count();
+        await secenekler.nth(n > 1 ? 1 : 0).click(); // ilk seçenek "hiçbir şey yapma"; ikincisini seç
+        kart++;
+        await p.waitForSelector('[aria-label="Kararın sonucu"]');
+        if (!sonucAlindi) { await p.waitForTimeout(200); await p.screenshot({ path: `${S}/shots/${ad}-6-sonuc.png` }); sonucAlindi = true; }
+        console.log(ad, 'kart', kart, ':', baslik);
+        await p.getByRole('button', { name: 'Devam', exact: true }).click();
+        continue;
+      }
       await p.getByRole('button', { name: 'Bir sonraki karara kadar bekle' }).click();
-      await p.getByRole('button', { name: /Hemen yola çık/ }).click();
     }
-    await p.getByRole('button', { name: 'Haberler' }).last().click();
-    await p.screenshot({ path: `${S}/shots/${ad}-5-haberler.png` });
-    await p.locator('.haber').first().click();
-    await p.getByRole('button', { name: 'Bu neden oldu?' }).click(); await p.waitForTimeout(400);
-    await p.screenshot({ path: `${S}/shots/${ad}-6-neden.png` });
-    await p.getByRole('button', { name: 'Kapat' }).click();
-    await p.getByRole('button', { name: 'Durum' }).last().click();
-    await p.screenshot({ path: `${S}/shots/${ad}-7-durum.png`, fullPage: true });
-    await p.getByRole('button', { name: 'Harita' }).last().click();
-    await p.getByRole('button', { name: 'Bir sonraki karara kadar bekle' }).click();
-    await p.waitForSelector('text=Gerçek tarihten sapmalar'); await p.waitForTimeout(500);
-    await p.screenshot({ path: `${S}/shots/${ad}-8-son.png` });
-    console.log(ad, 'kapanış:', await p.locator('.katman .belge-baslik').textContent());
+    await p.waitForSelector('text=Bölümün sonu');
+    await p.waitForTimeout(300);
+    await p.screenshot({ path: `${S}/shots/${ad}-7-bolum-sonu.png` });
     const tasma = await p.evaluate(() => document.documentElement.scrollWidth > window.innerWidth);
-    console.log(ad, 'yatay taşma:', tasma);
+    console.log(ad, 'oynanan kart:', kart, '· yatay taşma:', tasma);
     // Yeniden yükleme: otomatik kayıt korunuyor mu
-    await p.reload(); await p.waitForSelector('text=Gerçek tarihten sapmalar');
+    await p.reload(); await p.waitForSelector('text=Bölümün sonu');
     console.log(ad, 'yeniden yüklemede kayıt korundu');
+    await ctx.close();
+  }
+  async function sureTesti() {
+    const ctx = await browser.newContext({ ...devices['iPhone 13'] });
+    const p = await ctx.newPage();
+    p.on('pageerror', e => hatalar.push(`sure: ${e.message}`));
+    await p.goto('http://localhost:4173/'); await p.waitForSelector('.acilis');
+    await p.evaluate(() => { localStorage.setItem('ataturk-sim:acilis:v2', '1'); });
+    await p.reload(); await p.waitForSelector('.secenek');
+    // Telgraf kartına kadar hızlı ilerle: ilk üç kartı seç
+    for (let i = 0; i < 40 && !(await p.locator('.sure').count()); i++) {
+      if (await p.locator('.secenek').count()) { await p.locator('.secenek').nth(1).click(); await p.waitForSelector('[aria-label="Kararın sonucu"]'); await p.getByRole('button', { name: 'Devam', exact: true }).click(); }
+      else await p.getByRole('button', { name: 'Bir sonraki karara kadar bekle' }).click();
+    }
+    const ilkSure = await p.locator('.sure-sayi').textContent();
+    await p.waitForSelector('[aria-label="Kararın sonucu"]', { timeout: 20000 });
+    const sonuc = await p.locator('.katman .belge-baslik').first().textContent();
+    console.log('süre testi: başlangıç', ilkSure, '→ süre dolunca seçilen:', sonuc);
     await ctx.close();
   }
   await tur('mobil', { ...devices['iPhone 13'] });
   await tur('pc', { viewport: { width: 1366, height: 820 }, deviceScaleFactor: 1 });
+  await sureTesti();
   console.log('konsol hataları:', hatalar.length ? hatalar : 'yok');
   await browser.close();
-})().catch(e => { console.error('HATA', e.message.split('\n').slice(0,6).join('\n')); process.exit(1); });
+})().catch(e => { console.error('HATA', e.message.split('\n').slice(0, 8).join('\n')); process.exit(1); });

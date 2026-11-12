@@ -1,52 +1,37 @@
 # Tarihsel Veri Durumu
 
-Son güncelleme: 11 Kasım 2026. Kapsam: 1. dönem (30 Ekim 1918 – 19 Mayıs 1919).
+Son güncelleme: 12 Kasım 2026. Kapsam: 10 Kasım 1938 – 30 Haziran 1939.
 
 ## Veride olanlar
 
-- `data/tarih/olaylar.json`: 49 olay
-- `data/tarih/karakterler.json`: 12 kişi
+- `data/tarih/olaylar.json`: 5 olay (1 premise, 1 gerçek dünya olayı, 3 karşılaştırma)
+- `data/tarih/karakterler.json`: 4 kişi (Atatürk, Bayar, Çakmak, İnönü)
 - `data/tarih/kaynaklar.json`: 6 kaynak
-
-Olayların omurgası T.C. Kültür ve Turizm Bakanlığı'nın Atatürk kronolojisinden (1918 ve 1919 sayfaları) **tam metin okunarak** alındı. Açıklamalar kaynağın ifadesine sadık çevrildi; yorum eklenmedi.
 
 ## Doğrulama düzeyleri
 
-- **tam-metin:** Kaynağın kendisi okundu.
-- **arama-ozeti:** Yalnızca arama sonucundaki özet görüldü; tam metin henüz okunmadı. Bu bilgiler tartışma notlarında ve ek atıflarda açıkça belirtildi.
+- **tam-metin:** Kaynağın kendisi okundu. Şu an yalnızca resmî Atatürk kronolojisi (1938): Atatürk'ün 29 Ekim'de Dolmabahçe'de olması, 1 Kasım'da Bayar'ın Meclis'i açması, hastalığa dair bildirilerin başlaması, vefat tarihi.
+- **arama-ozeti:** Yalnızca arama sonucundaki özet görüldü; tam metin okunmadı. Bunlar kaynak notunda belirtildi.
 
-## Kaynakların ayrıştığı noktalar (veride "tartışmalı" işaretli)
+## Kaynakların ayrıştığı ya da doğrulanamayan noktalar
 
-| Konu | Resmî kronoloji | Diğer kaynaklar (arama özeti) |
-|---|---|---|
-| Yıldırım komutanlığının devri | 30 Ekim 1918 | 31 Ekim 1918 |
-| Yıldırım Orduları Grubu'nun kaldırılması | 7 Kasım 1918 | 4 Kasım 1918 |
-| Vahdettin'le görüşme | 15 Kasım 1918 | İlk kabul 23 Kasım 1918 (Bayur) |
-| Minber gazetesi | 21 Kasım 1918 | Yayın başlangıcı 1 ya da 2 Kasım; kapanış 21 ya da 22 Aralık |
-| İtilaf donanmasındaki gemi sayısı | verilmiyor | 55, 61, 77 |
-| İzmir'in işgali kararı | 14 Mart 1919 (plan kabulü) | 6, 7 ve 12 Mayıs 1919 |
-| Samsun'a giden heyetin sayısı | verilmiyor | 17, 19 |
+| Konu | Durum |
+|---|---|
+| Çakmak'ın Genelkurmay Başkanlığı başlangıcı | 5 Ağustos 1921 (MSB, bir liste) ya da 1924 (bir makale); bitiş 12 Ocak 1944 tutarlı. Veride başlangıç belirsiz yazıldı. |
+| Hatay'ın katılma tarihi | 23 Haziran 1939 Ankara antlaşması görüldü; 29 Haziran doğrulanamadı. Veriye alınmadı. |
+| İngiliz kredisi tutarı (1938) | Doğrulanamadı. Kartlarda tutar yok, yalnızca "kredi" deniyor. |
+| Almanya'nın ticaret payı | Bir DergiPark makalesine göre 1938 ithalatının yaklaşık yarısı Almanya'dandı (yaklaşık %47); makale adresi kaydedilmedi. Kartlarda "ticaretin en önemli ortaklarından biri" deniyor. |
+| Bayar'ın başbakanlık başlangıcı | Doğrulanamadı; veride yok. |
+| İnönü'nün 1937 istifası | Doğrulanmadı; kartlarda İnönü'ye unvan verilmedi. |
+| Bayar'ın istifa nedeni (25 Ocak 1939) | Tek bir kaynak uçak skandalını öne sürüyor, doğrulanmadı; veride yok. |
 
 ## Eksikler
 
-- **Tek kaynağa dayalı omurga.** Resmî kronoloji ikincil bir derlemedir. Kritik olaylar akademik yayınların tam metniyle ikinci kez doğrulanmalı.
-- **Karakterlerin kişilik, görüş ve ilişki verisi yok.** Yalnızca kimlik ve dönemdeki konum girildi. Doğum ve ölüm yılları kaynakla doğrulanmadığı için boş bırakıldı.
-- **İsmet Bey** henüz veride yok; bu dönemdeki konumu kaynakla doğrulanmadı.
-- **Mustafa Kemal'in İstanbul'daki görüşmeleri** (Şişli'deki ev, kabineyle ilgili girişimler) ayrıntılı girilmedi; tam metin kaynak gerekiyor.
-- **Mondros'un madde metinleri** birincil kaynaktan alınmadı.
-- Kaynak kronolojisinde bu döneme ait onlarca yerel cemiyet kuruluşu ve küçük işgal kaydı daha var; prototip için gerekli olanlar seçildi.
-
-## Hassas konular
-
-Kullanıcı kararı (11 Kasım 2026): hassas konular **kaynağın ifadesiyle olgu olarak** veriye alınır, `hassasKonuNotu` taşır, yorum ve hüküm eklenmez.
-
-Bu kuralla eklenen kayıtlar:
-
-- 30 Ocak 1919: İttihat ve Terakki'nin 27 üyesinin Divan-ı Harp'e sevki.
-- 10 Nisan 1919: Boğazlıyan kaymakamının idamı.
-
-Dörtyol'un işgali kaydındaki "Fransız-Ermeni taburu" ifadesi kaynağın kendi ifadesidir ve olduğu gibi aktarıldı.
+- Neredeyse her satır arama özetine dayanıyor; kritik olaylar akademik makalelerin tam metniyle ikinci kez doğrulanmalı (İnönü'nün seçilmesi, Saydam hükümeti, Türk-İngiliz bildirisi, Çekoslovakya).
+- 1938 sonu Türkiye siyaseti (parti içi dengeler, muhalefet tartışmaları) için kaynak yok; kart 2'nin zemini kâğıt üstünde tasarım.
+- Kartlardaki diplomatik temaslar (İngiliz teklifi, Alman ticareti) kurgudur; gerçek yazışmalara dayanmaz.
+- Varsayım: dünya olayları Atatürk'ün yaşamasından bağımsız aktığı kabul edilir. Bu varsayım oyunda ayrıca belirtilmedi.
 
 ## Ortam notu
 
-Kaynak sitelerine erişim için "Deneme" adlı ortam kuruldu (Belleten, DergiPark, Atatürk Ansiklopedisi, ATAM dergisi, TTK, TÜBA, ktb.gov.tr, Ankara Üniversitesi açık ders). `www.ktb.gov.tr` yanıt vermiyor; `ktb.gov.tr` çalışıyor ama bağlantı zaman zaman kopuyor, tekrar denemek gerekiyor.
+Kaynak sitelerine erişim "Deneme" ortamında açık (Belleten, DergiPark, Atatürk Ansiklopedisi, ATAM, TTK, TÜBA, ktb.gov.tr, Ankara Üniversitesi). `ktb.gov.tr` zaman zaman kopar; tekrar denemek gerekir.
